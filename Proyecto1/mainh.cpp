@@ -5,10 +5,27 @@
 #include "json.hpp"
 #include <time.h>
 using namespace std;
-using json = nlohmann ::json;
+using json = nlohmann::json;
 
+// funciones principales
 void mostrarDatos();
 void mostrarMenu();
+void cargarArchivo();
+
+//variables de lectura de archivo JSON
+json totalJSON;
+json nivelesJson;
+json paredesJson;
+json ventanasJson;
+json objetosJson;
+json puntosObjetosJson;
+
+//funciones para mostrar los datos del archivoJSON
+void mostrarNiveles(json j);
+void mostrarParedes(json j);
+void mostrarVentanas(json j);
+void mostrarObjetos(json j);
+void mostrarPuntosObjetos(json j);
 
 int main()
 {
@@ -59,7 +76,8 @@ void mostrarMenu()
 
             break;
         case 3:
-
+            cout << "\n Cargar archivo: "<<endl;
+            cargarArchivo();
             break;
         case 4:
 
@@ -74,7 +92,7 @@ void mostrarMenu()
             //system("clear");
             break;
         case 8:
-
+            exit(1);
             break;
 
         default:
@@ -84,4 +102,27 @@ void mostrarMenu()
         cin.get();
 
     } while (opcion != 7);
+}
+
+
+void cargarArchivo()
+{
+    string ruta;
+    cout << " Escribe la ruta del archivo: ";
+    cin.get();
+    getline(cin, ruta);
+
+    std::ifstream archivo(ruta);
+
+    if(archivo.fail())
+    {
+        cout << " El archivo no se ha encontrado. "<<endl;
+    }else{
+        //cout << " Archivo encontrado." <<endl;
+        archivo >> totalJSON;
+        nivelesJson = totalJSON["niveles"];
+    }
+    
+
+    
 }
