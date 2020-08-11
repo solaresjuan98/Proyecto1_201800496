@@ -10,7 +10,7 @@ using json = nlohmann::json;
 // funciones principales
 void mostrarDatos();
 void mostrarMenu();
-void cargarArchivo();
+void cargarArchivo(string);
 
 //variables de lectura de archivo JSON
 json totalJSON;
@@ -19,6 +19,8 @@ json paredesJson;
 json ventanasJson;
 json objetosJson;
 json puntosObjetosJson;
+
+string ruta;
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -76,8 +78,12 @@ void mostrarMenu()
 
             break;
         case 3:
-            cout << "\n Cargar archivo: "<<endl;
-            cargarArchivo();
+            cout << "\n Cargar archivo: " << endl;
+            cout << " Escribe la ruta del archivo: ";
+            cin.get();
+            getline(cin, ruta);
+            cargarArchivo(ruta);
+            system("pause");
             break;
         case 4:
 
@@ -104,25 +110,98 @@ void mostrarMenu()
     } while (opcion != 7);
 }
 
-
-void cargarArchivo()
+void cargarArchivo(string ruta)
 {
-    string ruta;
-    cout << " Escribe la ruta del archivo: ";
-    cin.get();
-    getline(cin, ruta);
-
     std::ifstream archivo(ruta);
 
-    if(archivo.fail())
+    if (archivo.fail())
     {
-        cout << " El archivo no se ha encontrado. "<<endl;
-    }else{
-        //cout << " Archivo encontrado." <<endl;
+        cout << " El archivo no existe.";
+    }
+    else
+    {
         archivo >> totalJSON;
         nivelesJson = totalJSON["niveles"];
+        mostrarNiveles(nivelesJson);
     }
-    
+}
 
-    
+void mostrarNiveles(json j)
+{
+    cout << " \nNiveles: \n";
+
+    for (const auto pos : j)
+    {
+        cout << " - Nivel " << pos["nivel"] << endl;
+
+        //Obtengo las pos. de las paredes
+        paredesJson = pos["paredes"];
+        mostrarParedes(paredesJson);
+
+        //Obtengo las pos. de las ventanas
+        ventanasJson = pos["ventanas"];
+        mostrarVentanas(ventanasJson);
+
+        //Obtengo los datos de los objetos
+        objetosJson = pos["objetos"];
+        mostrarObjetos(objetosJson);
+    }
+
+    cout << "\n";
+}
+
+void mostrarParedes(json j)
+{
+    cout << " \nParedes: \n";
+    for (const auto pos : j)
+    {
+        cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+    }
+
+    cout << "\n";
+}
+
+void mostrarVentanas(json j)
+{
+    cout << " \nVentanas: \n";
+
+    for (const auto pos : j)
+    {
+        cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+    }
+
+    cout << "\n";
+}
+
+void mostrarObjetos(json j)
+{
+    cout << " \nObjetos: \n";
+
+    for (const auto pos : j)
+    {
+        cout << " - Identificador: " << pos["identificador"] << endl;
+        cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
+        cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
+        cout << " - Color: " << pos["color"].get<std::string>() << endl;
+
+        // obtengo los puntos de los objetos
+        puntosObjetosJson = pos["puntos"];
+        mostrarPuntosObjetos(puntosObjetosJson);
+    }
+
+    cout << "\n";
+}
+
+void mostrarPuntosObjetos(json j)
+{
+    cout << " \nPuntos objetos: \n";
+
+    for (const auto pos : j)
+    {
+        cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+    }
+
+    cout << "\n";
+
+    mostrarMenu();
 }
