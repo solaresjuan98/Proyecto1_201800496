@@ -11,13 +11,19 @@ private:
 
 public:
     //Metodos
+    Proyecto();
     Proyecto(int id);
     ~Proyecto();
     int getIdProyecto();
-    //agregarNiveles(int n)
+    void agregarNivel(int n);
     //mostrarListaNiveles()
     //agregar a AVL de proyectos
 };
+
+Proyecto::Proyecto()
+{
+
+}
 
 Proyecto::Proyecto(int id)
 {
@@ -27,6 +33,12 @@ Proyecto::Proyecto(int id)
 int Proyecto::getIdProyecto()
 {
     return IDProyecto;
+}
+
+//Agregar niveles al proyecto
+void Proyecto::agregarNivel(int numeroNivel)
+{
+    cout << " agregando nivel " << numeroNivel << "..." << endl;
 }
 
 //Destructor

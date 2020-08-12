@@ -5,6 +5,7 @@ using namespace std;
 class NodoNivel
 {
 private:
+    int numero;
     //Matriz
     //ABB
 public:

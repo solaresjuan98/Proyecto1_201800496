@@ -36,6 +36,9 @@ void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
 
+// 
+Proyecto p;
+
 int main()
 {
     mostrarDatos();
@@ -121,7 +124,7 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-    //Proyecto p1 = Proyecto(1);
+    p = Proyecto(1);
     //cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
 
@@ -139,11 +142,15 @@ void cargarArchivo(string ruta)
 
 void mostrarNiveles(json j)
 {
+    int nivel;
+
     cout << " \nNiveles: \n";
 
     for (const auto pos : j)
     {
         cout << " - Nivel " << pos["nivel"] << endl;
+        nivel = pos["nivel"];
+        p.agregarNivel(nivel);
 
         //Obtengo las pos. de las paredes
         paredesJson = pos["paredes"];
