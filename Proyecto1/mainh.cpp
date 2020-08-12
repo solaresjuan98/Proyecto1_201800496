@@ -72,7 +72,8 @@ void mostrarMenu()
         switch (opcion)
         {
         case 1:
-
+            cout << "\n Proyectos existentes:"<<endl;
+            //imprimir arbol avl de proyectos existentes
             break;
         case 2:
 
@@ -83,7 +84,8 @@ void mostrarMenu()
             cin.get();
             getline(cin, ruta);
             cargarArchivo(ruta);
-            system("pause");
+            cin.get();
+            mostrarMenu();
             break;
         case 4:
 
@@ -203,5 +205,5 @@ void mostrarPuntosObjetos(json j)
 
     cout << "\n";
 
-    mostrarMenu();
+    //mostrarMenu();
 }
