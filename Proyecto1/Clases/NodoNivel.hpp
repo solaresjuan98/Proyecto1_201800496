@@ -1,21 +1,33 @@
 
 #include <iostream>
+#pragma once
 using namespace std;
 
 class NodoNivel
 {
-private:
-    int numero;
+public:
+    int id; // ID nivel
+    NodoNivel *siguiente;
+    NodoNivel *anterior;
     //Matriz
     //ABB
 public:
-    NodoNivel();
+    NodoNivel()
+    {
+        id = 0;
+        siguiente = NULL;
+        anterior = NULL ;
+    };
+
+    NodoNivel(int n)
+    {
+        id = n;
+    }
     ~NodoNivel();
     //mostrarMatriz
     //mostrarABB
-    
 };
-
+/*
 NodoNivel::NodoNivel()
 {
 }
@@ -23,3 +35,4 @@ NodoNivel::NodoNivel()
 NodoNivel::~NodoNivel()
 {
 }
+*/
