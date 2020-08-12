@@ -7,19 +7,26 @@ using namespace std;
 class Proyecto
 {
 private:
-    int numeroProyecto;
+    int IDProyecto;
 
 public:
     //Metodos
-    Proyecto();
+    Proyecto(int id);
     ~Proyecto();
+    int getIdProyecto();
     //agregarNiveles(int n)
     //mostrarListaNiveles()
     //agregar a AVL de proyectos
 };
 
-Proyecto::Proyecto()
+Proyecto::Proyecto(int id)
 {
+    this->IDProyecto = id;
+}
+
+int Proyecto::getIdProyecto()
+{
+    return IDProyecto;
 }
 
 //Destructor

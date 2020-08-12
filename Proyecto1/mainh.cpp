@@ -4,6 +4,9 @@
 #include <fstream>
 #include "json.hpp"
 #include <time.h>
+
+#include "Clases/Proyecto.hpp"
+
 using namespace std;
 using json = nlohmann::json;
 
@@ -20,7 +23,11 @@ json ventanasJson;
 json objetosJson;
 json puntosObjetosJson;
 
+// ruta de archivo a leer
 string ruta;
+
+// Variables de atributos de nivel
+int numeroNivel;
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -114,6 +121,8 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
+    //Proyecto p1 = Proyecto(1);
+    //cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
 
     if (archivo.fail())
