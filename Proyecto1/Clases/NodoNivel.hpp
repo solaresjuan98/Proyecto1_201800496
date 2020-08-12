@@ -11,7 +11,6 @@ public:
     NodoNivel *anterior;
     //Matriz
     //ABB
-public:
     NodoNivel()
     {
         id = 0;
@@ -23,7 +22,7 @@ public:
     {
         id = n;
     }
-    ~NodoNivel();
+    //~NodoNivel();
     //mostrarMatriz
     //mostrarABB
 };
