@@ -50,30 +50,24 @@ public:
     // Agregar el nivel a la lista
     void agregarNuevoNivel(NodoNivel *n)
     {
-        if (validarSiNodoExiste(n->id) != NULL)
+
+        if (cabeza == NULL)
         {
-            std::cout << " Nivel ya existente con el valor " << n->id << endl;
+            cabeza = n;
+            std::cout << " Nivel agregado como nodo cabeza" << endl;
         }
         else
         {
-            if (cabeza == NULL)
-            {
-                cabeza = n;
-                std::cout << " Nivel agregado como nodo cabeza" << endl;
-            }
-            else
-            {
-                NodoNivel *ptr = cabeza;
+            NodoNivel *ptr = cabeza;
 
-                while (ptr->siguiente != NULL)
-                {
-                    ptr = ptr->siguiente;
-                }
-
-                ptr->siguiente = n;
-                n->anterior = ptr;
-                cout << " Nivel agregado. " << endl;
+            while (ptr->siguiente != NULL)
+            {
+                ptr = ptr->siguiente;
             }
+
+            ptr->siguiente = n;
+            n->anterior = ptr;
+            cout << " Nivel agregado. " << endl;
         }
     }
 

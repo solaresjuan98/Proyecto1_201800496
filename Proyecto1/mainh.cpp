@@ -34,7 +34,7 @@ int numeroNivel;
 
 //
 ListaDobleNiveles lista;
-
+Proyecto p;
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -43,10 +43,6 @@ void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
 
-//
-Proyecto p;
-
-//
 
 int main()
 {
@@ -104,7 +100,7 @@ void mostrarMenu()
             getline(cin, ruta);
             cargarArchivo(ruta);
             cin.get();
-            lista.imprimirLista();
+            //lista.imprimirLista();
             //p.verNiveles();
             mostrarMenu();
             break;
@@ -135,7 +131,7 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-    p = Proyecto(1);
+    
     //cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
 
@@ -145,17 +141,22 @@ void cargarArchivo(string ruta)
     }
     else
     {
-        archivo >> totalJSON;
-        nivelesJson = totalJSON["niveles"];
-        mostrarNiveles(nivelesJson);
+        cout << " Archivo cargado"<<endl;
+        //archivo >> totalJSON;
+        //nivelesJson = totalJSON["niveles"];
+        //mostrarNiveles(nivelesJson);
     }
 }
 
 void mostrarNiveles(json j)
 {
     NodoNivel *nivelNuevo = new NodoNivel();
-    int nivel, aux;
+    int nivel;
     //p.verNiveles();
+    //Proyecto p;
+    p = Proyecto(1);
+    //p.verNiveles();
+
     cout << " \nNiveles: \n";
 
     for (const auto pos : j)
@@ -163,12 +164,8 @@ void mostrarNiveles(json j)
         cout << " - Nivel " << pos["nivel"] << endl;
         nivel = pos["nivel"];
         nivelNuevo->id = nivel;
-        lista.agregarNuevoNivel(nivelNuevo);
-        //aux = nivel;
-        //p.agregarNivel(1);
-        //cout << nivel << endl;
-        //p.agregarNivel(nivel);
-        //p.verNiveles();
+        //lista.agregarNuevoNivel(nivelNuevo);
+        
         //Obtengo las pos. de las paredes
         paredesJson = pos["paredes"];
         mostrarParedes(paredesJson);
@@ -180,10 +177,9 @@ void mostrarNiveles(json j)
         //Obtengo los datos de los objetos
         objetosJson = pos["objetos"];
         mostrarObjetos(objetosJson);
-    }
 
-    //p.agregarNivel(aux);
-    //p.verNiveles();
+        //lista.agregarNuevoNivel(nivelNuevo);
+    }
     cout << "\n";
 }
 
@@ -192,7 +188,7 @@ void mostrarParedes(json j)
     //cout << " \nParedes: \n";
     for (const auto pos : j)
     {
-        //cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+       // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
     }
 
     //cout << "\n";
@@ -204,7 +200,7 @@ void mostrarVentanas(json j)
 
     for (const auto pos : j)
     {
-        //cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+        // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
     }
 
     //cout << "\n";
@@ -216,7 +212,8 @@ void mostrarObjetos(json j)
 
     for (const auto pos : j)
     {
-        /*cout << " - Identificador: " << pos["identificador"] << endl;
+        /*
+        cout << " - Identificador: " << pos["identificador"] << endl;
         cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
         cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
         cout << " - Color: " << pos["color"].get<std::string>() << endl;
@@ -231,14 +228,12 @@ void mostrarObjetos(json j)
 
 void mostrarPuntosObjetos(json j)
 {
+    
     //cout << " \nPuntos objetos: \n";
 
     for (const auto pos : j)
     {
-        //cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+       // cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
     }
 
-    //cout << "\n";
-
-    //mostrarMenu();
 }
