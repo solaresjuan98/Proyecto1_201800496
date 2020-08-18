@@ -78,6 +78,7 @@ void mostrarMenu()
     cout << " 6. Cargar librerias" << endl;
     cout << " 7. Limpiar consola " << endl;
     cout << " 8. Salir de la aplicacion " << endl;
+    cout << " 9. Lista de prueba " << endl;
     cout << " Elige una opcion: ";
 
     cin >> opcion;
@@ -119,14 +120,28 @@ void mostrarMenu()
         case 8:
             exit(1);
             break;
+        case 9:
+            ListaDobleNiveles *l = new ListaDobleNiveles();
+            NodoNivel *n1 = new NodoNivel(1);
+            NodoNivel *n2 = new NodoNivel(2);
+            NodoNivel *n3 = new NodoNivel(3);
+            NodoNivel *n4 = new NodoNivel(4);
+            
+            l->agregarNuevoNivel(n1);
+            l->agregarNuevoNivel(n2);
+            l->agregarNuevoNivel(n3);
+            l->agregarNuevoNivel(n4);
 
-        default:
+            l->imprimirLista();
+
+            delete l;
             break;
+
         }
 
         cin.get();
 
-    } while (opcion != 7);
+    } while (opcion != 10);
 }
 
 void cargarArchivo(string ruta)
