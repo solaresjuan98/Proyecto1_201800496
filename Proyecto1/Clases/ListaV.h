@@ -33,7 +33,7 @@ ListaV::~ListaV()
 
 void ListaV::insertar(Objeto *obj)
 {
-    if (estaVacia())
+    /*if (estaVacia())
     {
         primero = ultimo = obj;
     }
@@ -54,6 +54,21 @@ void ListaV::insertar(Objeto *obj)
             // insercion en medio
             insertarMedio(obj);
         }
+    }*/
+
+    if(primero == NULL)
+    {
+        primero = obj;
+        std::cout << " Objeto agregado al principio.";
+
+    }else{
+        Objeto *ptr = primero;
+
+        while (ptr->getAbajo() != NULL)
+        {
+            ptr = ptr->getAbajo();
+        }
+        
     }
 }
 

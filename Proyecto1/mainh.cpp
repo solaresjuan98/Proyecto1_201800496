@@ -9,6 +9,10 @@
 #include "Clases/Proyecto.hpp"
 #include "Clases/NodoNivel.hpp"
 #include "Clases/ListaDobleNiveles.hpp"
+#include "Clases/ListaDobleVertical.h"
+#include "Clases/NodoObjeto.h"
+#include "Clases/Matriz.h"
+#include "Clases/NodoMatriz.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -42,7 +46,6 @@ void mostrarParedes(json j);
 void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
-
 
 int main()
 {
@@ -121,22 +124,34 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-            ListaDobleNiveles *l = new ListaDobleNiveles();
-            NodoNivel *n1 = new NodoNivel(1);
-            NodoNivel *n2 = new NodoNivel(2);
-            NodoNivel *n3 = new NodoNivel(3);
-            NodoNivel *n4 = new NodoNivel(4);
-            
-            l->agregarNuevoNivel(n1);
-            l->agregarNuevoNivel(n2);
-            l->agregarNuevoNivel(n3);
-            l->agregarNuevoNivel(n4);
+         
+            /*ListaDobleVertical *lista = new ListaDobleVertical();
+            NodoObjeto *obj1 = new NodoObjeto(0, 0, "Sillon");
+            NodoObjeto *obj2 = new NodoObjeto(0, 1, "Silla");
+            NodoObjeto *obj3 = new NodoObjeto(3, 1, "Mesa");
+            NodoObjeto *obj4 = new NodoObjeto(3, 4, "TV");
 
-            l->imprimirLista();
+            lista->agregarNuevoObjeto(obj1);
+            lista->agregarNuevoObjeto(obj2);
+            lista->agregarNuevoObjeto(obj3);
+            lista->agregarNuevoObjeto(obj4);
+            //lista->agregarNuevoObjeto(new NodoObjeto(0,2, "mesa"));
 
-            delete l;
+            lista->imprimirLista();
+
+            delete lista;*/
+
+            Matriz *m = new Matriz();
+            //NodoMatriz *n1 = new NodoMatriz(0,3, "Sillon");
+
+            m->agregar(new NodoMatriz(0, 3, "Objeto de la casa"));
+            m->agregar(new NodoMatriz(3, 4, "Sillón"));
+            m->agregar(new NodoMatriz(5, 2, "Sillón 2"));
+            //m->imprimirMatriz();
+
+            delete m;
+
             break;
-
         }
 
         cin.get();
@@ -146,7 +161,7 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-    
+
     //cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
 
@@ -156,7 +171,7 @@ void cargarArchivo(string ruta)
     }
     else
     {
-        cout << " Archivo cargado"<<endl;
+        cout << " Archivo cargado" << endl;
         //archivo >> totalJSON;
         //nivelesJson = totalJSON["niveles"];
         //mostrarNiveles(nivelesJson);
@@ -180,7 +195,7 @@ void mostrarNiveles(json j)
         nivel = pos["nivel"];
         nivelNuevo->id = nivel;
         //lista.agregarNuevoNivel(nivelNuevo);
-        
+
         //Obtengo las pos. de las paredes
         paredesJson = pos["paredes"];
         mostrarParedes(paredesJson);
@@ -203,7 +218,7 @@ void mostrarParedes(json j)
     //cout << " \nParedes: \n";
     for (const auto pos : j)
     {
-       // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+        // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
     }
 
     //cout << "\n";
@@ -243,12 +258,11 @@ void mostrarObjetos(json j)
 
 void mostrarPuntosObjetos(json j)
 {
-    
+
     //cout << " \nPuntos objetos: \n";
 
     for (const auto pos : j)
     {
-       // cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+        // cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
     }
-
 }

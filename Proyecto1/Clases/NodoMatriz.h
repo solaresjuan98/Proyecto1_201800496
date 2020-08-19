@@ -10,11 +10,14 @@ private:
     NodoMatriz *abajo;
     NodoMatriz *izquierda;
     NodoMatriz *derecha;
-
+    int x, y;
+    string nombreObj;
 
 public:
     NodoMatriz();
+    NodoMatriz(int x, int y, string nombre);
     ~NodoMatriz();
+    
     void setArriba(NodoMatriz *n);
     void setAbajo(NodoMatriz *n);
     void setIzquierda(NodoMatriz *n);
@@ -25,7 +28,10 @@ public:
     NodoMatriz *getDerecha();
     int getX();
     int getY();
+    string getNombreObj();
+
 };
+
 
 NodoMatriz::NodoMatriz()
 {
@@ -35,6 +41,13 @@ NodoMatriz::NodoMatriz()
     this->derecha = NULL;
 }
 
+NodoMatriz::NodoMatriz(int x, int y, string nombre)
+{
+    this->x = x;
+    this->y = y;
+    this->nombreObj = nombre;
+}
+
 NodoMatriz *NodoMatriz::getArriba()
 {
     return this->arriba;
@@ -42,7 +55,7 @@ NodoMatriz *NodoMatriz::getArriba()
 
 NodoMatriz *NodoMatriz::getAbajo()
 {
-    return this->abajo;
+    return this->abajo;//Aquí truena
 }
 
 NodoMatriz *NodoMatriz::getIzquierda()
@@ -55,7 +68,7 @@ NodoMatriz *NodoMatriz::getDerecha()
     return this->derecha;
 }
 
-/*
+
 int NodoMatriz::getX()
 {
     return this->x;
@@ -65,7 +78,12 @@ int NodoMatriz::getY()
 {
     return this->y;
 }
-*/
+
+string NodoMatriz::getNombreObj()
+{
+    return this->nombreObj;
+}
+
 void NodoMatriz::setArriba(NodoMatriz *n)
 {
     this->arriba = n;
