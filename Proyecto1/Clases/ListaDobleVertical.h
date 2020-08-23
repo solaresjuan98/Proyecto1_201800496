@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "NodoObjeto.h"
+//#include "NodoObjeto.h"
 #pragma once
 using namespace std;
 
@@ -8,7 +8,7 @@ class ListaDobleVertical
 {
 public:
     NodoObjeto *cabeza;
-
+    /*
     ListaDobleVertical()
     {
         cabeza = NULL;
@@ -88,7 +88,7 @@ public:
             }
 
         }
-    }
+    }/*
 };
 /*
 ListaDobleVertical::ListaDobleVertical()

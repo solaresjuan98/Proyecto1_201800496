@@ -6,7 +6,9 @@
 #include <time.h>
 
 //clases
-#include "Clases/ListaDobleVertical.h"
+//#include "Clases/ListaDobleVertical.h"
+#include "Clases/Matrix.h"
+
 
 
 using namespace std;
@@ -31,9 +33,6 @@ string ruta;
 // Variables de atributos de nivel
 int numeroNivel;
 
-//
-//ListaDobleNiveles lista;
-//Proyecto p;
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -99,8 +98,6 @@ void mostrarMenu()
             getline(cin, ruta);
             cargarArchivo(ruta);
             cin.get();
-            //lista.imprimirLista();
-            //p.verNiveles();
             mostrarMenu();
             break;
         case 4:
@@ -119,8 +116,14 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-         
+            Matrix *md = new Matrix();
 
+            md->add(10, "Mesa", 2, 1);
+            md->add(14, "Lampara", 6, 2);
+            md->add(12, "Sillon", 5, 4);
+            md->add(13, "Escritorio", 8, 3);
+
+            md->print_headers();
 
             break;
         }
