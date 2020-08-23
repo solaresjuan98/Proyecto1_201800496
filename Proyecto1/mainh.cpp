@@ -124,7 +124,8 @@ void mostrarMenu()
             md->add(13, "Escritorio", 8, 3);
 
             md->print_headers();
-
+            md->print_nodes_x();
+            md->print_nodes_y();
             break;
         }
 
