@@ -6,13 +6,8 @@
 #include <time.h>
 
 //clases
-#include "Clases/Proyecto.hpp"
-#include "Clases/NodoNivel.hpp"
-#include "Clases/ListaDobleNiveles.hpp"
 #include "Clases/ListaDobleVertical.h"
-#include "Clases/NodoObjeto.h"
-#include "Clases/Matriz.h"
-#include "Clases/NodoMatriz.h"
+
 
 using namespace std;
 using json = nlohmann::json;
@@ -37,8 +32,8 @@ string ruta;
 int numeroNivel;
 
 //
-ListaDobleNiveles lista;
-Proyecto p;
+//ListaDobleNiveles lista;
+//Proyecto p;
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -125,31 +120,7 @@ void mostrarMenu()
             break;
         case 9:
          
-            /*ListaDobleVertical *lista = new ListaDobleVertical();
-            NodoObjeto *obj1 = new NodoObjeto(0, 0, "Sillon");
-            NodoObjeto *obj2 = new NodoObjeto(0, 1, "Silla");
-            NodoObjeto *obj3 = new NodoObjeto(3, 1, "Mesa");
-            NodoObjeto *obj4 = new NodoObjeto(3, 4, "TV");
 
-            lista->agregarNuevoObjeto(obj1);
-            lista->agregarNuevoObjeto(obj2);
-            lista->agregarNuevoObjeto(obj3);
-            lista->agregarNuevoObjeto(obj4);
-            //lista->agregarNuevoObjeto(new NodoObjeto(0,2, "mesa"));
-
-            lista->imprimirLista();
-
-            delete lista;*/
-
-            Matriz *m = new Matriz();
-            //NodoMatriz *n1 = new NodoMatriz(0,3, "Sillon");
-
-            m->agregar(new NodoMatriz(0, 3, "Objeto de la casa"));
-            m->agregar(new NodoMatriz(3, 4, "Sillón"));
-            m->agregar(new NodoMatriz(5, 2, "Sillón 2"));
-            //m->imprimirMatriz();
-
-            delete m;
 
             break;
         }
@@ -180,11 +151,11 @@ void cargarArchivo(string ruta)
 
 void mostrarNiveles(json j)
 {
-    NodoNivel *nivelNuevo = new NodoNivel();
+    //NodoNivel *nivelNuevo = new NodoNivel();
     int nivel;
     //p.verNiveles();
     //Proyecto p;
-    p = Proyecto(1);
+    //p = Proyecto(1);
     //p.verNiveles();
 
     cout << " \nNiveles: \n";
@@ -193,7 +164,7 @@ void mostrarNiveles(json j)
     {
         cout << " - Nivel " << pos["nivel"] << endl;
         nivel = pos["nivel"];
-        nivelNuevo->id = nivel;
+        //nivelNuevo->id = nivel;
         //lista.agregarNuevoNivel(nivelNuevo);
 
         //Obtengo las pos. de las paredes
