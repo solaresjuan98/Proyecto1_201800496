@@ -6,8 +6,9 @@
 #include <time.h>
 
 //clases
-//#include "Clases/ListaDobleVertical.h"
 #include "Clases/Matrix.h"
+#include "Clases/ArbolAVL.h"
+
 
 using namespace std;
 using json = nlohmann::json;
@@ -113,6 +114,7 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
+        /*
             Matrix *md = new Matrix();
 
             md->add(10, "Mesa", 2, 1);
@@ -124,6 +126,22 @@ void mostrarMenu()
             md->print_headers();
             md->print_nodes_x();
             md->print_nodes_y();
+        */
+
+        ArbolAVL *arbol = new ArbolAVL();
+
+        arbol->insertar(1);
+        arbol->insertar(2);
+        arbol->insertar(3);
+        arbol->insertar(4);
+        arbol->insertar(5);
+        arbol->insertar(6);
+        arbol->insertar(7);
+
+        cout << "\n\n";
+        arbol->imprimir(arbol->getRaiz(), 0);
+
+        delete arbol;
             break;
         }
 
