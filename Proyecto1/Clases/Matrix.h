@@ -192,7 +192,7 @@ public:
         while (tmp->right != NULL)
         {
             cout << tmp->n;
-            cout << "->";
+            cout << "-> ";
 
             if (tmp->down != NULL)
             {
@@ -204,7 +204,7 @@ public:
         }
 
         cout << tmp->n;
-        cout << "->";
+        cout << "-> ";
 
         if (tmp->down != NULL)
         {
@@ -217,30 +217,46 @@ public:
     void print_nodes_y()
     {
         Node *tmp = head->down;
-
+        
+        
         while (tmp->down != NULL)
         {
+            cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
             cout << tmp->n;
             cout << " -> ";
 
             if (tmp->right != NULL)
             {
-                cout << tmp->right->data;
+                cout << tmp->right->data << endl;
+                //cout << "Arriba: " << aux->up->data << endl;
             }
 
             tmp = tmp->down;
+            
             cout << "\n";
         }
 
+        cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
         cout << tmp->n;
         cout << " -> ";
 
         if (tmp->right != NULL)
         {
-            cout << tmp->right->data;
+            cout << tmp->right->data << endl;
+            //cout << "Arriba: " << aux->up->data << endl;
         }
 
         cout << "\n";
+    }
+
+    void print_in_order()
+    {
+        Node *actual = head->down;
+
+        while (actual->right != NULL)
+        {
+            cout << actual->right->data;
+        }
     }
 };
 

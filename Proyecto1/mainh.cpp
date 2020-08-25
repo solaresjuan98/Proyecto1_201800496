@@ -9,8 +9,6 @@
 //#include "Clases/ListaDobleVertical.h"
 #include "Clases/Matrix.h"
 
-
-
 using namespace std;
 using json = nlohmann::json;
 
@@ -32,7 +30,6 @@ string ruta;
 
 // Variables de atributos de nivel
 int numeroNivel;
-
 
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
@@ -119,9 +116,10 @@ void mostrarMenu()
             Matrix *md = new Matrix();
 
             md->add(10, "Mesa", 2, 1);
-            md->add(14, "Lampara", 6, 2);
+            md->add(12, "TV", 3, 1);
+            md->add(14, "Lampara", 3, 2);
             md->add(12, "Sillon", 5, 4);
-            md->add(13, "Escritorio", 8, 3);
+            md->add(13, "Escritorio", 4, 3);
 
             md->print_headers();
             md->print_nodes_x();
@@ -147,9 +145,9 @@ void cargarArchivo(string ruta)
     else
     {
         cout << " Archivo cargado" << endl;
-        //archivo >> totalJSON;
-        //nivelesJson = totalJSON["niveles"];
-        //mostrarNiveles(nivelesJson);
+        archivo >> totalJSON;
+        nivelesJson = totalJSON["niveles"];
+        mostrarNiveles(nivelesJson);
     }
 }
 
@@ -172,7 +170,7 @@ void mostrarNiveles(json j)
         //lista.agregarNuevoNivel(nivelNuevo);
 
         //Obtengo las pos. de las paredes
-        paredesJson = pos["paredes"];
+        /*paredesJson = pos["paredes"];
         mostrarParedes(paredesJson);
 
         //Obtengo las pos. de las ventanas
@@ -181,7 +179,7 @@ void mostrarNiveles(json j)
 
         //Obtengo los datos de los objetos
         objetosJson = pos["objetos"];
-        mostrarObjetos(objetosJson);
+        mostrarObjetos(objetosJson);*/
 
         //lista.agregarNuevoNivel(nivelNuevo);
     }
