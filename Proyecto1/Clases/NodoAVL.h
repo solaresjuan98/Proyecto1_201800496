@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #pragma once
 using namespace std;
 
@@ -10,6 +11,7 @@ class NodoAVL
 private:
     int id;
     int fe; //factor de equilibrio
+    //fstream archivo;//archivo
     NodoAVL *izq;
     NodoAVL *der;
 
@@ -20,11 +22,16 @@ public:
     void setFE(int factor);
     void setIzq(NodoAVL *izq);
     void setDer(NodoAVL *der);
+    //void setArchivo(fstream archivo);
     //getters
+    //fstream getArchivo();
     NodoAVL *getDer();
     NodoAVL *getIzq();
     int getFE();
     int getID();
+    
+    //otros metodos
+    void leerArchivo();
 
     ~NodoAVL();
 };

@@ -9,7 +9,6 @@
 #include "Clases/Matrix.h"
 #include "Clases/ArbolAVL.h"
 
-
 using namespace std;
 using json = nlohmann::json;
 
@@ -28,17 +27,17 @@ json puntosObjetosJson;
 
 // ruta de archivo a leer
 string ruta;
-
+string cadena;
 // Variables de atributos de nivel
 int numeroNivel;
-
+int id = 0;
 //funciones para mostrar los datos del archivoJSON
 void mostrarNiveles(json j);
 void mostrarParedes(json j);
 void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
-
+int convertirASCII(string cadena);
 int main()
 {
     mostrarDatos();
@@ -87,6 +86,13 @@ void mostrarMenu()
             //imprimir arbol avl de proyectos existentes
             break;
         case 2:
+            /*
+            cout << "\nescribe algo \n";
+            cin.get();
+            getline(cin, cadena);
+            id = convertirASCII(cadena);
+            cout << " Valor ascii: " << id << endl;
+            */
 
             break;
         case 3:
@@ -94,8 +100,11 @@ void mostrarMenu()
             cout << " Escribe la ruta del archivo: ";
             cin.get();
             getline(cin, ruta);
+            //NodoAVL *nuevo = new NodoAVL()
             cargarArchivo(ruta);
             cin.get();
+            id = convertirASCII(ruta);
+            cout << " Ascii: " << id <<endl;
             mostrarMenu();
             break;
         case 4:
@@ -114,7 +123,7 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-        /*
+            /*
             Matrix *md = new Matrix();
 
             md->add(10, "Mesa", 2, 1);
@@ -127,7 +136,7 @@ void mostrarMenu()
             md->print_nodes_x();
             md->print_nodes_y();
         */
-
+            /*
         ArbolAVL *arbol = new ArbolAVL();
 
         arbol->insertar(1);
@@ -142,6 +151,7 @@ void mostrarMenu()
         arbol->imprimir(arbol->getRaiz(), 0);
 
         delete arbol;
+        */
             break;
         }
 
@@ -167,6 +177,18 @@ void cargarArchivo(string ruta)
         nivelesJson = totalJSON["niveles"];
         mostrarNiveles(nivelesJson);
     }
+}
+
+int convertirASCII(string s)
+{
+    int value = 0;
+    for (int i = 0; i < s.length(); i++)
+    {
+        char c = s.at(i);
+        value += int(c);
+    }
+
+    return value;
 }
 
 void mostrarNiveles(json j)
