@@ -83,7 +83,7 @@ public:
                 cout << "   ";
             }
 
-            cout << raiz->id << endl;
+            cout << "["<<raiz->id << " " <<raiz->letra << "]"<<endl;
             imprimirArbol(raiz->izq, cont + 1);
         }
     }

@@ -9,7 +9,7 @@ class NodoArbolGlobal
 public:
     int id;
     string nombre;
-    char letra;
+    string letra;
     string color;
     //puntos
     int x;
@@ -21,7 +21,7 @@ public:
     {
         id = 0;
         nombre = "";
-        letra = ' ';
+        letra = "";
         color = "";
         x = 0;
         y = 0;
@@ -30,7 +30,7 @@ public:
         padre = NULL;
     }
 
-    NodoArbolGlobal(int n, string _nombre, char _letra, string _color, int _x, int _y)
+    NodoArbolGlobal(int n, string _nombre, string _letra, string _color, int _x, int _y)
     {
         id = n;
         nombre = _nombre;

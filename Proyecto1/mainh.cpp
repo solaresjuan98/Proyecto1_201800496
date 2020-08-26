@@ -17,7 +17,6 @@ using json = nlohmann::json;
 // funciones principales
 void mostrarDatos();
 void mostrarMenu();
-void cargarArchivo(string);
 
 //variables de lectura de archivo JSON
 json totalJSON;
@@ -28,6 +27,14 @@ json objetosJson;
 json puntosObjetosJson;
 
 //variables de lectura de libreria JSON
+json libJSON;
+json idJson;
+json nombreJson;
+json letraJson;
+json colorJson;
+json puntos_lib;
+json x_json;
+json y_json;
 
 //Esctructuras
 ArbolBinario *abbGlobal = new ArbolBinario();
@@ -44,7 +51,8 @@ void mostrarParedes(json j);
 void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
-void cargarLibrerias();
+void cargarArchivo(string ruta);
+void cargarLibrerias(string ruta);
 int convertirASCII(string cadena);
 int main()
 {
@@ -123,8 +131,11 @@ void mostrarMenu()
             break;
         case 6:
             cout << "\n Cargar librerias\n";
-
-            cargarLibrerias();
+            cout << "\n Cargar libreria: " << endl;
+            cout << " Escribe la ruta del libreria: ";
+            cin.get();
+            getline(cin, ruta);
+            cargarLibrerias(ruta);
             /*for (int i = 0; i < 3; i++)
             {
                 abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
@@ -179,7 +190,6 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-
     //cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
 
@@ -196,16 +206,58 @@ void cargarArchivo(string ruta)
     }
 }
 
-void cargarLibrerias()
+void cargarLibrerias(string ruta)
 {
+    int id, x, y;
+    string nombre, letra, color;
+
+    ifstream libreria(ruta);
+
+    if (libreria.fail())
+    {
+        cout << " La libreria no existe";
+    }
+    else
+    {
+        libreria >> libJSON;
+        idJson = libJSON["Libreria"];
+
+        for (const auto pos : idJson)
+        {
+            /*cout << " - Identificador: " << pos["identificador"] << endl;
+            cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
+            cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
+            cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
+            
+            id = pos["identificador"];
+            nombre = pos["nombre"].get<std::string>();
+            letra  = pos["letra"].get<std::string>();
+            color = pos["color"].get<std::string>();
+
+            puntos_lib = pos["puntos"];
+
+            for (const auto pos : puntos_lib)
+            {
+                cout << "     x: " << pos["x"] << endl;
+                cout << "     y: " << pos["y"] << endl;
+
+                x = pos["x"];
+                y = pos["y"];
+                cout << "\n";
+
+                abbGlobal->insertarNodo(new NodoArbolGlobal(id, nombre, letra, color, x, y));
+            }
+            cout << " \n";
+        }
+    }
+
+    /*
     for (int i = 1; i < 4; i++)
     {
         abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
-        
-    }
+    }*/
 
     abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
-    
 }
 
 int convertirASCII(string s)
