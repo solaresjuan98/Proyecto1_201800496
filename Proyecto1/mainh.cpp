@@ -136,13 +136,6 @@ void mostrarMenu()
             cin.get();
             getline(cin, ruta);
             cargarLibrerias(ruta);
-            /*for (int i = 0; i < 3; i++)
-            {
-                abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
-            }
-            
-            abbGlobal->imprimirArbol(abbGlobal->raiz, 0);*/
-            //cin.get();
             break;
         case 7:
             //system("clear");
@@ -224,11 +217,6 @@ void cargarLibrerias(string ruta)
 
         for (const auto pos : idJson)
         {
-            /*cout << " - Identificador: " << pos["identificador"] << endl;
-            cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
-            cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
-            cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
-            
             id = pos["identificador"];
             nombre = pos["nombre"].get<std::string>();
             letra  = pos["letra"].get<std::string>();
@@ -250,12 +238,6 @@ void cargarLibrerias(string ruta)
             cout << " \n";
         }
     }
-
-    /*
-    for (int i = 1; i < 4; i++)
-    {
-        abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
-    }*/
 
     abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
 }
