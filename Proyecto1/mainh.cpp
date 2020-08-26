@@ -8,6 +8,8 @@
 //clases
 #include "Clases/Matrix.h"
 #include "Clases/ArbolAVL.h"
+#include "Clases/ArbolBinario.h"
+#include "Clases/NodoArbolGlobal.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -25,6 +27,11 @@ json ventanasJson;
 json objetosJson;
 json puntosObjetosJson;
 
+//variables de lectura de libreria JSON
+
+//Esctructuras
+ArbolBinario *abbGlobal = new ArbolBinario();
+
 // ruta de archivo a leer
 string ruta;
 string cadena;
@@ -37,6 +44,7 @@ void mostrarParedes(json j);
 void mostrarVentanas(json j);
 void mostrarObjetos(json j);
 void mostrarPuntosObjetos(json j);
+void cargarLibrerias();
 int convertirASCII(string cadena);
 int main()
 {
@@ -104,7 +112,7 @@ void mostrarMenu()
             cargarArchivo(ruta);
             cin.get();
             id = convertirASCII(ruta);
-            cout << " Ascii: " << id <<endl;
+            cout << " Ascii: " << id << endl;
             mostrarMenu();
             break;
         case 4:
@@ -114,7 +122,16 @@ void mostrarMenu()
 
             break;
         case 6:
+            cout << "\n Cargar librerias\n";
 
+            cargarLibrerias();
+            /*for (int i = 0; i < 3; i++)
+            {
+                abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
+            }
+            
+            abbGlobal->imprimirArbol(abbGlobal->raiz, 0);*/
+            //cin.get();
             break;
         case 7:
             //system("clear");
@@ -137,20 +154,20 @@ void mostrarMenu()
             md->print_nodes_y();
         */
             /*
-        ArbolAVL *arbol = new ArbolAVL();
+            ArbolAVL *arbol = new ArbolAVL();
 
-        arbol->insertar(1);
-        arbol->insertar(2);
-        arbol->insertar(3);
-        arbol->insertar(4);
-        arbol->insertar(5);
-        arbol->insertar(6);
-        arbol->insertar(7);
+            arbol->insertar(1);
+            arbol->insertar(2);
+            arbol->insertar(3);
+            arbol->insertar(4);
+            arbol->insertar(5);
+            arbol->insertar(6);
+            arbol->insertar(7);
 
-        cout << "\n\n";
-        arbol->imprimir(arbol->getRaiz(), 0);
+            cout << "\n\n";
+            arbol->imprimir(arbol->getRaiz(), 0);
 
-        delete arbol;
+            delete arbol;
         */
             break;
         }
@@ -177,6 +194,18 @@ void cargarArchivo(string ruta)
         nivelesJson = totalJSON["niveles"];
         mostrarNiveles(nivelesJson);
     }
+}
+
+void cargarLibrerias()
+{
+    for (int i = 1; i < 4; i++)
+    {
+        abbGlobal->insertarNodo(new NodoArbolGlobal(i, "Sofa", 'A', "Azul", 0, i));
+        
+    }
+
+    abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
+    
 }
 
 int convertirASCII(string s)
