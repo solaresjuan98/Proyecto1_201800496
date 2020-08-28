@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "NodoNivel.hpp"
+#include "NodoNivel.h"
 #pragma once
 using namespace std;
 

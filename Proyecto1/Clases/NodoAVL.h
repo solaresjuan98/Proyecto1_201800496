@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string.h>
 #include <fstream>
+#include "ListaDobleNiveles.h"
 #pragma once
 using namespace std;
 
@@ -10,10 +11,13 @@ class NodoAVL
 
 private:
     int id;
-    int fe; //factor de equilibrio
-    //fstream archivo;//archivo
+    int fe;
     NodoAVL *izq;
     NodoAVL *der;
+    // apuntar a Lista de niveles
+    ListaDobleNiveles *lista;
+
+
 
 public:
     NodoAVL(int _id);
@@ -22,9 +26,9 @@ public:
     void setFE(int factor);
     void setIzq(NodoAVL *izq);
     void setDer(NodoAVL *der);
-    //void setArchivo(fstream archivo);
+    void setLista(ListaDobleNiveles *lista);
+
     //getters
-    //fstream getArchivo();
     NodoAVL *getDer();
     NodoAVL *getIzq();
     int getFE();
@@ -67,6 +71,10 @@ void NodoAVL::setDer(NodoAVL *der)
     this->der = der;
 }
 
+void NodoAVL::setLista(ListaDobleNiveles *lista)
+{
+    this->lista = lista;
+}
 
 /*
     GETTERS
