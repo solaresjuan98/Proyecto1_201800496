@@ -217,8 +217,7 @@ public:
     void print_nodes_y()
     {
         Node *tmp = head->down;
-        
-        
+
         while (tmp->down != NULL)
         {
             cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
@@ -232,7 +231,7 @@ public:
             }
 
             tmp = tmp->down;
-            
+
             cout << "\n";
         }
 

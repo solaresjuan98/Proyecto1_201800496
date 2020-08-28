@@ -144,7 +144,7 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-            /*
+    
             Matrix *md = new Matrix();
 
             md->add(10, "Mesa", 2, 1);
@@ -156,7 +156,7 @@ void mostrarMenu()
             md->print_headers();
             md->print_nodes_x();
             md->print_nodes_y();
-        */
+
             /*
             ArbolAVL *arbol = new ArbolAVL();
 
@@ -219,15 +219,15 @@ void cargarLibrerias(string ruta)
         {
             id = pos["identificador"];
             nombre = pos["nombre"].get<std::string>();
-            letra  = pos["letra"].get<std::string>();
+            letra = pos["letra"].get<std::string>();
             color = pos["color"].get<std::string>();
 
             puntos_lib = pos["puntos"];
 
             for (const auto pos : puntos_lib)
             {
-                cout << "     x: " << pos["x"] << endl;
-                cout << "     y: " << pos["y"] << endl;
+                //cout << "     x: " << pos["x"] << endl;
+                //cout << "     y: " << pos["y"] << endl;
 
                 x = pos["x"];
                 y = pos["y"];
