@@ -10,7 +10,7 @@
 #include "Clases/ArbolAVL.h"
 #include "Clases/ArbolBinario.h"
 #include "Clases/NodoArbolGlobal.h"
-#include "Clases/ListaDobleNiveles.h"
+#include "Clases/ListaNiveles.h"
 #include "Clases/NodoNivel.h"
 
 using namespace std;
@@ -168,16 +168,15 @@ void mostrarMenu()
             md->print_nodes_y();
         */
 
-            ListaDobleNiveles *lista = new ListaDobleNiveles();
-
+            ListaNiveles *lista = new ListaNiveles();
+            /*
             for (int i = 1; i < 6; i++)
             {
                 lista->agregarNuevoNivel(new NodoNivel(i));
-            }
+            }*/
 
             lista->imprimirLista();
 
-            
             ArbolAVL *arbol = new ArbolAVL();
 
             arbol->insertar(1);
@@ -192,7 +191,7 @@ void mostrarMenu()
             arbol->imprimir(arbol->getRaiz(), 0);
 
             delete arbol;
-        
+
             break;
         }
 

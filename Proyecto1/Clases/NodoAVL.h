@@ -1,8 +1,7 @@
-
 #include <iostream>
 #include <string.h>
 #include <fstream>
-#include "ListaDobleNiveles.h"
+#include "ListaNiveles.h"
 #pragma once
 using namespace std;
 
@@ -15,9 +14,7 @@ private:
     NodoAVL *izq;
     NodoAVL *der;
     // apuntar a Lista de niveles
-    ListaDobleNiveles *lista;
-
-
+    //ListaNiveles *lista;
 
 public:
     NodoAVL(int _id);
@@ -26,7 +23,7 @@ public:
     void setFE(int factor);
     void setIzq(NodoAVL *izq);
     void setDer(NodoAVL *der);
-    void setLista(ListaDobleNiveles *lista);
+    //void setLista(ListaNiveles *lista);
 
     //getters
     NodoAVL *getDer();
@@ -70,16 +67,12 @@ void NodoAVL::setDer(NodoAVL *der)
 {
     this->der = der;
 }
-
-void NodoAVL::setLista(ListaDobleNiveles *lista)
+/*
+void NodoAVL::setLista(ListaNiveles *lista)
 {
     this->lista = lista;
 }
-
-/*
-    GETTERS
 */
-
 int NodoAVL::getFE()
 {
     return this->fe;
@@ -103,3 +96,4 @@ NodoAVL *NodoAVL::getDer()
 NodoAVL::~NodoAVL()
 {
 }
+

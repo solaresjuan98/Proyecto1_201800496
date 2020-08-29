@@ -4,17 +4,17 @@
 #pragma once
 using namespace std;
 
-class ListaDobleNiveles
+class ListaNiveles
 {
 public:
     NodoNivel *cabeza;
 
-    ListaDobleNiveles()
+    ListaNiveles()
     {
         cabeza = NULL;
     };
 
-    ListaDobleNiveles(NodoNivel *n)
+    ListaNiveles(NodoNivel *n)
     {
         cabeza = n;
     }
@@ -89,14 +89,14 @@ public:
             }
         }
     }
-    //~ListaDobleNiveles();
+    //~ListaNiveles();
 };
 /*
-ListaDobleNiveles::ListaDobleNiveles()
+ListaNiveles::ListaNiveles()
 {
 }
 
-ListaDobleNiveles::~ListaDobleNiveles()
+ListaNiveles::~ListaNiveles()
 {
 }
 */
