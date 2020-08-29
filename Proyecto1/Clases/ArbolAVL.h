@@ -20,7 +20,18 @@ public:
     NodoAVL *rotacionDerIzq(NodoAVL *n, NodoAVL *n1);
     NodoAVL *getRaiz();
     void setRaiz(NodoAVL *n);
+    //Recorridos
+    void inOrden(NodoAVL *n);
+    void postOrden(NodoAVL *n);
+    void preOrden(NodoAVL *n);
+    bool busqueda(NodoAVL *n, int id);
     void imprimir(NodoAVL *raiz, int cont);
+
+    // Listas en nodo
+    void crearListaNiveles(NodoAVL *raiz, int id);
+    void insertarNivel(NodoAVL *raiz, int id, int numeroNivel);
+
+    //
     void generar();
     void Delete(NodoAVL *raiz);
 };
@@ -249,13 +260,13 @@ void ArbolAVL::insertar(int valor)
 
 void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
 {
-    if(raiz == NULL)
+    if (raiz == NULL)
     {
         return;
     }
     else
     {
-        imprimir(raiz->getDer(), cont +1);
+        imprimir(raiz->getDer(), cont + 1);
 
         for (int i = 0; i < cont; i++)
         {
@@ -263,10 +274,62 @@ void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
         }
 
         cout << raiz->getID() << endl;
-        imprimir(raiz->getIzq(), cont +1);
-        
+        imprimir(raiz->getIzq(), cont + 1);
     }
-    
 }
 
+//Recorridos
+void ArbolAVL::inOrden(NodoAVL *actual)
+{
+    if (actual == NULL)
+    {
+        return;
+    }
+    else
+    {
+        inOrden(actual->getIzq());
+        cout << actual->getID() << " -- ";
+        inOrden(actual->getDer());
+    }
+}
 
+bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
+{
+    if (nodo == NULL)
+    {
+        return false;
+    }
+    else if (nodo->getID() == id)
+    {
+        return true;
+    }
+    else if (id < nodo->getID())
+    {
+        return busqueda(nodo->getIzq(), id);
+    }
+    else
+    {
+        return busqueda(nodo->getDer(), id);
+    }
+}
+
+/*
+    void crearLista(Nodo AVL *nodo, int, Lista *l)
+*/
+void ArbolAVL::crearListaNiveles(NodoAVL *nodo, int n)
+{
+    if (busqueda(nodo, n))
+    {
+        cout << " encontrado " << endl;
+        //ListaNiveles *l = new ListaNiveles();
+        nodo->setLista(new ListaNiveles());
+        cout << " lista creada" << endl;
+        cout << nodo->getLista()<<endl;
+    }
+    else
+    {
+        cout << " no encontrado " << endl;
+    }
+}
+
+//

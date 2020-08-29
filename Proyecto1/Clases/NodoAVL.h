@@ -14,7 +14,7 @@ private:
     NodoAVL *izq;
     NodoAVL *der;
     // apuntar a Lista de niveles
-    //ListaNiveles *lista;
+    ListaNiveles *lista;
 
 public:
     NodoAVL(int _id);
@@ -23,16 +23,16 @@ public:
     void setFE(int factor);
     void setIzq(NodoAVL *izq);
     void setDer(NodoAVL *der);
-    //void setLista(ListaNiveles *lista);
-
+    void setLista(ListaNiveles *lista);
+    void agregarNivel(NodoNivel *n);
     //getters
     NodoAVL *getDer();
     NodoAVL *getIzq();
     int getFE();
     int getID();
-    
+    ListaNiveles *getLista();
     //otros metodos
-    void leerArchivo();
+    void imprimirLista(ListaNiveles *lista);
 
     ~NodoAVL();
 };
@@ -67,12 +67,17 @@ void NodoAVL::setDer(NodoAVL *der)
 {
     this->der = der;
 }
-/*
+
 void NodoAVL::setLista(ListaNiveles *lista)
 {
     this->lista = lista;
 }
-*/
+
+ListaNiveles *NodoAVL::getLista()
+{
+    return this->lista;
+}
+
 int NodoAVL::getFE()
 {
     return this->fe;
@@ -93,7 +98,17 @@ NodoAVL *NodoAVL::getDer()
     return this->der;
 }
 
+void NodoAVL::imprimirLista(ListaNiveles *l)
+{
+    this->lista->imprimirLista();
+} 
+
+void NodoAVL::agregarNivel(NodoNivel *n)
+{
+    this->lista->agregarNuevoNivel(n);
+}
 NodoAVL::~NodoAVL()
 {
 }
+
 

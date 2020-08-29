@@ -96,6 +96,7 @@ void mostrarMenu()
     cout << " 7. Limpiar consola " << endl;
     cout << " 8. Salir de la aplicacion " << endl;
     cout << " 9. Lista de prueba " << endl;
+    cout << " 10. Buscar Proyecto " << endl;
     cout << " Elige una opcion: ";
 
     cin >> opcion;
@@ -107,7 +108,9 @@ void mostrarMenu()
         case 1:
             cout << "\n Proyectos existentes:" << endl;
             //imprimir arbol avl de proyectos existentes
-            avl->imprimir(avl->getRaiz(), 0);
+            //avl->imprimir(avl->getRaiz(), 0);
+            avl->inOrden(avl->getRaiz());
+            cout << "\n\n";
             cin.get();
             mostrarMenu();
             break;
@@ -166,33 +169,28 @@ void mostrarMenu()
             md->print_headers();
             md->print_nodes_x();
             md->print_nodes_y();
-        */
-
-            ListaNiveles *lista = new ListaNiveles();
-            /*
-            for (int i = 1; i < 6; i++)
-            {
-                lista->agregarNuevoNivel(new NodoNivel(i));
-            }*/
-
-            lista->imprimirLista();
-
-            ArbolAVL *arbol = new ArbolAVL();
-
-            arbol->insertar(1);
-            arbol->insertar(2);
-            arbol->insertar(3);
-            arbol->insertar(4);
-            arbol->insertar(5);
-            arbol->insertar(6);
-            arbol->insertar(7);
-
-            cout << "\n\n";
-            arbol->imprimir(arbol->getRaiz(), 0);
-
-            delete arbol;
+            */
 
             break;
+        case 10:
+            {
+                int num;
+                cout << " Ingresa el id que deseas buscar: ";
+                cin >> num;
+
+                if (avl->busqueda(avl->getRaiz(), num))
+                {
+                    cout << " Proyecto encontrado " << endl;
+                }
+                else
+                {
+                    cout << " Proyecto no encontrado " << endl;
+                }
+
+                cout << "\n";
+
+                break;
+            }
         }
 
         cin.get();
@@ -219,46 +217,50 @@ void cargarArchivo(string ruta)
         cout << totalJSON["nombre"].get<std::string>() << endl;
         id = convertirASCII(nombreProyectoJson);
         cout << " Valor ascii: " << id << endl;
+
         avl->insertar(id);
+        avl->crearListaNiveles(avl->getRaiz(), id);
+
         nivelesJson = totalJSON["niveles"];
         cout << "\n";
         for (const auto pos : nivelesJson)
         {
-            cout << "  Nivel: " << pos["nivel"] << endl;
+            //cout << "  Nivel: " << pos["nivel"] << endl;
+
             /*
                 Paredes
                 Ventanas
                 objetos
             */
             paredesJson = pos["paredes"];
-            cout << " Parades: " << endl;
+            //cout << " Parades: " << endl;
 
             for (const auto pos : paredesJson)
             {
-                cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+               // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
             }
 
             ventanasJson = pos["ventanas"];
 
             for (const auto pos : ventanasJson)
             {
-                cout << " ";
+                //cout << " ";
             }
 
             objetosJson = pos["objetos"];
 
             for (const auto pos : objetosJson)
             {
-                cout << " - Identificador: " << pos["identificador"] << endl;
+                /*cout << " - Identificador: " << pos["identificador"] << endl;
                 cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
                 cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
-                cout << " - Color: " << pos["color"].get<std::string>() << endl;
+                cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
 
                 puntosObjetosJson = pos["puntos"];
 
                 for (const auto pos : puntosObjetosJson)
                 {
-                    cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+                    //cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
                 }
             }
 
