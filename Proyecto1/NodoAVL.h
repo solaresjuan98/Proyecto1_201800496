@@ -37,6 +37,7 @@ public:
     ~NodoAVL();
 };
 
+
 NodoAVL::NodoAVL(int _id)
 {
     this->id = _id;
@@ -44,9 +45,6 @@ NodoAVL::NodoAVL(int _id)
     this->der = NULL;
 }
 
-/*
-    SETTERS
-*/
 
 void NodoAVL::setID(int id)
 {
@@ -107,6 +105,7 @@ void NodoAVL::agregarNivel(NodoNivel *n)
 {
     this->lista->agregarNuevoNivel(n);
 }
+
 NodoAVL::~NodoAVL()
 {
 }

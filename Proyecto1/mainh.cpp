@@ -6,12 +6,12 @@
 #include <time.h>
 
 //clases
-#include "Clases/Matrix.h"
-#include "Clases/ArbolAVL.h"
-#include "Clases/ArbolBinario.h"
-#include "Clases/NodoArbolGlobal.h"
-#include "Clases/ListaNiveles.h"
-#include "Clases/NodoNivel.h"
+#include "Matrix.h"
+#include "ArbolAVL.h"
+#include "ArbolBinario.h"
+#include "NodoArbolGlobal.h"
+#include "ListaNiveles.h"
+#include "NodoNivel.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -43,7 +43,6 @@ json y_json;
  * ESTRUCTURAS
  * 
 */
-
 // Arbol donde se van a almacenar todos los proyectos
 ArbolAVL *avl = new ArbolAVL();
 // Arbol del listado de objetos
@@ -86,6 +85,8 @@ void mostrarDatos()
 void mostrarMenu()
 {
     int opcion = 0;
+
+    string r1, r2, r3;
 
     std::cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
     std::cout << " Elige una opcion: " << endl;
@@ -145,7 +146,7 @@ void mostrarMenu()
 
                 std::cout << "Elige un proyecto (por id): ";
                 cin >> sel_proyecto;
-                
+
                 getListaNivelesNodo(sel_proyecto);
                 //avl->obtenerListaNodo(avl->getRaiz(), sel_proyecto);
                 //std::cout << "** Lista de niveles **"<<endl;
@@ -167,9 +168,15 @@ void mostrarMenu()
         case 3:
             std::cout << "\n Cargar archivo: " << endl;
             std::cout << " Escribe la ruta del archivo: ";
-            cin.get();
-            getline(cin, ruta);
-            cargarArchivo(ruta);
+            //cin.get();
+            r1 = "Archivos/ejemplo1.json";
+            r2 = "Archivos/ejemplo2.json";
+            r3 = "Archivos/ejemplo3.json";
+            
+            //getline(cin, ruta);
+            cargarArchivo(r1);
+            cargarArchivo(r2);
+            cargarArchivo(r3);
             cin.get();
             mostrarMenu();
             break;
@@ -196,13 +203,14 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-
+            /*
             for (int i = 0; i < 6; i++)
             {
                 ln1->agregarNuevoNivel(new NodoNivel(i));
             }
+            */
 
-            ln1->imprimirLista();
+            //ln1->imprimirLista();
 
             /*
             Matrix *md = new Matrix();
@@ -267,13 +275,12 @@ void cargarArchivo(string ruta)
 
         avl->insertar(id);
         avl->crearListaNiveles(avl->getRaiz(), id);
-
+        
         nivelesJson = totalJSON["niveles"];
         std::cout << "\n";
         for (const auto pos : nivelesJson)
         {
-            //std::cout << "  Nivel: " << pos["nivel"] << endl;
-
+            
             n_nivel = pos["nivel"];
             avl->insertarNivel(avl->getRaiz(), id, n_nivel);
             /*
@@ -304,6 +311,8 @@ void cargarArchivo(string ruta)
                 std::cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
                 std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
                 std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
+
+                //Agregar objetos al abb
 
                 puntosObjetosJson = pos["puntos"];
 

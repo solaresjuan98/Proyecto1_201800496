@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include "ArbolBinario.h"
 #pragma once
 using namespace std;
 
@@ -8,7 +9,7 @@ class NodoNivel
 public:
     int id; // ID nivel
     NodoNivel *siguiente;
-
+    ArbolBinario *arbolObjetos;
     //Matriz
     //ABB de objetos
     /*
