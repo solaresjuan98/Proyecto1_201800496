@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string.h>
 #include "NodoNivel.h"
 #pragma once
 using namespace std;
@@ -50,24 +49,30 @@ public:
     // Agregar el nivel a la lista
     void agregarNuevoNivel(NodoNivel *n)
     {
-
-        if (cabeza == NULL)
+        if (validarSiNodoExiste(n->id) != NULL)
         {
-            cabeza = n;
-            std::cout << " Nivel agregado como nodo cabeza" << endl;
         }
         else
         {
-            NodoNivel *ptr = cabeza;
-
-            while (ptr->siguiente != NULL)
+            if (cabeza == NULL)
             {
-                ptr = ptr->siguiente;
+                cabeza = n;
+                std::cout << " Nivel agregado como nodo cabeza" << endl;
+                std::cout << n->id << endl;
             }
+            else
+            {
+                NodoNivel *ptr = cabeza;
 
-            ptr->siguiente = n;
-            n->anterior = ptr;
-            cout << " Nivel agregado. " << endl;
+                while (ptr->siguiente != NULL)
+                {
+                    ptr = ptr->siguiente;
+                }
+
+                ptr->siguiente = n;
+                cout << " Nivel agregado. " << endl;
+                std::cout << n->id << endl;
+            }
         }
     }
 
@@ -84,7 +89,8 @@ public:
 
             while (temp != NULL)
             {
-                cout << " Nivel " << temp->id << endl;
+                cout.flush();
+                cout << "    >> Nivel " << temp->id << endl;
                 temp = temp->siguiente;
             }
         }

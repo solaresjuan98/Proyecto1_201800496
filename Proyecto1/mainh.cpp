@@ -48,7 +48,7 @@ json y_json;
 ArbolAVL *avl = new ArbolAVL();
 // Arbol del listado de objetos
 ArbolBinario *abbGlobal = new ArbolBinario();
-
+ListaNiveles *ln1 = new ListaNiveles();
 // ruta de archivo a leer
 string ruta;
 string cadena;
@@ -58,9 +58,11 @@ int id = 0;
 //funciones para mostrar los datos del archivoJSON
 void cargarArchivo(string ruta);
 void cargarLibrerias(string ruta);
-
 // obtener el equivalente en ascii
 int convertirASCII(string cadena);
+
+void getListaNivelesNodo(int id);
+
 int main()
 {
     mostrarDatos();
@@ -72,32 +74,32 @@ int main()
 
 void mostrarDatos()
 {
-    cout << " ************************************************** " << endl;
-    cout << " * USAC                                           * " << endl;
-    cout << " * Estructuras de Datos                           * " << endl;
-    cout << " * Seccion A                                      * " << endl;
-    cout << " * Juan Antonio Solares Samayoa                   * " << endl;
-    cout << " * 201800496                                      * " << endl;
-    cout << " ************************************************** " << endl;
+    std::cout << " ************************************************** " << endl;
+    std::cout << " * USAC                                           * " << endl;
+    std::cout << " * Estructuras de Datos                           * " << endl;
+    std::cout << " * Seccion A                                      * " << endl;
+    std::cout << " * Juan Antonio Solares Samayoa                   * " << endl;
+    std::cout << " * 201800496                                      * " << endl;
+    std::cout << " ************************************************** " << endl;
 }
 
 void mostrarMenu()
 {
     int opcion = 0;
 
-    cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
-    cout << " Elige una opcion: " << endl;
-    cout << " 1. Ver proyectos " << endl;
-    cout << " 2. Editar proyectos " << endl;
-    cout << " 3. Cargar proyecto" << endl;
-    cout << " 4. Graficar proyectos" << endl;
-    cout << " 5. Guardar proyectos" << endl;
-    cout << " 6. Cargar librerias" << endl;
-    cout << " 7. Limpiar consola " << endl;
-    cout << " 8. Salir de la aplicacion " << endl;
-    cout << " 9. Lista de prueba " << endl;
-    cout << " 10. Buscar Proyecto " << endl;
-    cout << " Elige una opcion: ";
+    std::cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
+    std::cout << " Elige una opcion: " << endl;
+    std::cout << " 1. Ver proyectos " << endl;
+    std::cout << " 2. Editar proyectos " << endl;
+    std::cout << " 3. Cargar proyecto" << endl;
+    std::cout << " 4. Graficar proyectos" << endl;
+    std::cout << " 5. Guardar proyectos" << endl;
+    std::cout << " 6. Cargar librerias" << endl;
+    std::cout << " 7. Limpiar consola " << endl;
+    std::cout << " 8. Salir de la aplicacion " << endl;
+    std::cout << " 9. Lista de prueba " << endl;
+    std::cout << " 10. Buscar Proyecto " << endl;
+    std::cout << " Elige una opcion: ";
 
     cin >> opcion;
 
@@ -106,27 +108,65 @@ void mostrarMenu()
         switch (opcion)
         {
         case 1:
-            cout << "\n Proyectos existentes:" << endl;
+            std::cout << "\n Proyectos existentes:" << endl;
             //imprimir arbol avl de proyectos existentes
-            //avl->imprimir(avl->getRaiz(), 0);
+
+            // los imprime en la notación inOrden
             avl->inOrden(avl->getRaiz());
-            cout << "\n\n";
+            std::cout << "\n\n";
             cin.get();
             mostrarMenu();
             break;
         case 2:
-            /*
-            cout << "\nescribe algo \n";
-            cin.get();
-            getline(cin, cadena);
-            id = convertirASCII(cadena);
-            cout << " Valor ascii: " << id << endl;
-            */
+            std::cout << " \t:: Editar proyectos \n"
+                      << endl;
+            std::cout << " 1. Agregar Nivel" << endl;
+            std::cout << " 2. Editar Nivel" << endl;
+            std::cout << " 3. ELimnar Nivel" << endl;
+            std::cout << " 4. Eliminar Proyecto" << endl;
+            std::cout << " 5. salir " << endl;
+            std::cout << " Elige una opción " << endl;
+            int opcion_editar;
+            cin >> opcion_editar;
+            switch (opcion_editar)
+            {
+            case 1:
+                break;
+            case 2:
+
+                int sel_proyecto;
+                std::cout << "\n Proyectos existentes:" << endl;
+                //imprimir arbol avl de proyectos existentes
+
+                // los imprime en la notación inOrden
+                avl->inOrden(avl->getRaiz());
+                std::cout << endl;
+                cin.get();
+
+                std::cout << "Elige un proyecto (por id): ";
+                cin >> sel_proyecto;
+                
+                getListaNivelesNodo(sel_proyecto);
+                //avl->obtenerListaNodo(avl->getRaiz(), sel_proyecto);
+                //std::cout << "** Lista de niveles **"<<endl;
+                //llamar funcion
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                system("clear");
+                mostrarMenu();
+                break;
+            default:
+                break;
+            }
 
             break;
         case 3:
-            cout << "\n Cargar archivo: " << endl;
-            cout << " Escribe la ruta del archivo: ";
+            std::cout << "\n Cargar archivo: " << endl;
+            std::cout << " Escribe la ruta del archivo: ";
             cin.get();
             getline(cin, ruta);
             cargarArchivo(ruta);
@@ -140,9 +180,9 @@ void mostrarMenu()
 
             break;
         case 6:
-            cout << "\n Cargar librerias\n";
-            cout << "\n Cargar libreria: " << endl;
-            cout << " Escribe la ruta del libreria: ";
+            std::cout << "\n Cargar librerias\n";
+            std::cout << "\n Cargar libreria: " << endl;
+            std::cout << " Escribe la ruta del libreria: ";
             cin.get();
             getline(cin, ruta);
             cargarLibrerias(ruta);
@@ -156,6 +196,13 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
+
+            for (int i = 0; i < 6; i++)
+            {
+                ln1->agregarNuevoNivel(new NodoNivel(i));
+            }
+
+            ln1->imprimirLista();
 
             /*
             Matrix *md = new Matrix();
@@ -173,24 +220,24 @@ void mostrarMenu()
 
             break;
         case 10:
+        {
+            int num;
+            std::cout << " Ingresa el id que deseas buscar: ";
+            cin >> num;
+
+            if (avl->busqueda(avl->getRaiz(), num))
             {
-                int num;
-                cout << " Ingresa el id que deseas buscar: ";
-                cin >> num;
-
-                if (avl->busqueda(avl->getRaiz(), num))
-                {
-                    cout << " Proyecto encontrado " << endl;
-                }
-                else
-                {
-                    cout << " Proyecto no encontrado " << endl;
-                }
-
-                cout << "\n";
-
-                break;
+                std::cout << " Proyecto encontrado " << endl;
             }
+            else
+            {
+                std::cout << " Proyecto no encontrado " << endl;
+            }
+
+            std::cout << "\n";
+
+            break;
+        }
         }
 
         cin.get();
@@ -200,71 +247,73 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-    //cout << p1.getIdProyecto() << endl;
+    //std::cout << p1.getIdProyecto() << endl;
     std::ifstream archivo(ruta);
-
+    int n_nivel;
     if (archivo.fail())
     {
-        cout << " El archivo no existe.";
+        std::cout << " El archivo no existe.";
     }
     else
     {
-        cout << " Archivo cargado" << endl;
+        std::cout << " Archivo cargado" << endl;
         archivo >> totalJSON;
         nombreProyectoJson = totalJSON["nombre"];
         string nombreP;
 
-        cout << totalJSON["nombre"].get<std::string>() << endl;
+        std::cout << totalJSON["nombre"].get<std::string>() << endl;
         id = convertirASCII(nombreProyectoJson);
-        cout << " Valor ascii: " << id << endl;
+        std::cout << " Valor ascii: " << id << endl;
 
         avl->insertar(id);
         avl->crearListaNiveles(avl->getRaiz(), id);
 
         nivelesJson = totalJSON["niveles"];
-        cout << "\n";
+        std::cout << "\n";
         for (const auto pos : nivelesJson)
         {
-            //cout << "  Nivel: " << pos["nivel"] << endl;
+            //std::cout << "  Nivel: " << pos["nivel"] << endl;
 
+            n_nivel = pos["nivel"];
+            avl->insertarNivel(avl->getRaiz(), id, n_nivel);
             /*
                 Paredes
                 Ventanas
                 objetos
             */
             paredesJson = pos["paredes"];
-            //cout << " Parades: " << endl;
+            //std::cout << " Parades: " << endl;
 
             for (const auto pos : paredesJson)
             {
-               // cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+                // std::cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
             }
 
             ventanasJson = pos["ventanas"];
 
             for (const auto pos : ventanasJson)
             {
-                //cout << " ";
+                //std::cout << " ";
             }
 
             objetosJson = pos["objetos"];
 
             for (const auto pos : objetosJson)
             {
-                /*cout << " - Identificador: " << pos["identificador"] << endl;
-                cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
-                cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
-                cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
+                /*std::cout << " - Identificador: " << pos["identificador"] << endl;
+                std::cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
+                std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
+                std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
 
                 puntosObjetosJson = pos["puntos"];
 
                 for (const auto pos : puntosObjetosJson)
                 {
-                    //cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+                    //std::cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
                 }
             }
 
-            cout << "\n";
+            std::cout << "\n";
         }
 
         //mostrarNiveles(nivelesJson);
@@ -280,7 +329,7 @@ void cargarLibrerias(string ruta)
 
     if (libreria.fail())
     {
-        cout << " La libreria no existe";
+        std::cout << " La libreria no existe";
     }
     else
     {
@@ -298,16 +347,16 @@ void cargarLibrerias(string ruta)
 
             for (const auto pos : puntos_lib)
             {
-                //cout << "     x: " << pos["x"] << endl;
-                //cout << "     y: " << pos["y"] << endl;
+                //std::cout << "     x: " << pos["x"] << endl;
+                //std::cout << "     y: " << pos["y"] << endl;
 
                 x = pos["x"];
                 y = pos["y"];
-                cout << "\n";
+                std::cout << "\n";
 
                 abbGlobal->insertarNodo(new NodoArbolGlobal(id, nombre, letra, color, x, y));
             }
-            cout << " \n";
+            std::cout << " \n";
         }
     }
 
@@ -324,4 +373,9 @@ int convertirASCII(string s)
     }
 
     return value;
+}
+
+void getListaNivelesNodo(int id)
+{
+    avl->obtenerListaNodo(avl->getRaiz(), id);
 }

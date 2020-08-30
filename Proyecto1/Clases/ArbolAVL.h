@@ -30,7 +30,7 @@ public:
     // Listas en nodo
     void crearListaNiveles(NodoAVL *raiz, int id);
     void insertarNivel(NodoAVL *raiz, int id, int numeroNivel);
-
+    void obtenerListaNodo(NodoAVL *raiz, int id);
     //
     void generar();
     void Delete(NodoAVL *raiz);
@@ -270,15 +270,15 @@ void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
 
         for (int i = 0; i < cont; i++)
         {
-            cout << "  ";
+            std::cout << "  ";
         }
 
-        cout << raiz->getID() << endl;
+        std::cout << raiz->getID() << endl;
         imprimir(raiz->getIzq(), cont + 1);
     }
 }
 
-//Recorridos
+
 void ArbolAVL::inOrden(NodoAVL *actual)
 {
     if (actual == NULL)
@@ -288,7 +288,7 @@ void ArbolAVL::inOrden(NodoAVL *actual)
     else
     {
         inOrden(actual->getIzq());
-        cout << actual->getID() << " -- ";
+        std::cout << " Proyecto: " << actual->getID() << endl;
         inOrden(actual->getDer());
     }
 }
@@ -313,23 +313,44 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
     }
 }
 
-/*
-    void crearLista(Nodo AVL *nodo, int, Lista *l)
-*/
+
 void ArbolAVL::crearListaNiveles(NodoAVL *nodo, int n)
 {
     if (busqueda(nodo, n))
     {
-        cout << " encontrado " << endl;
+        std::cout << " encontrado " << endl;
         //ListaNiveles *l = new ListaNiveles();
         nodo->setLista(new ListaNiveles());
-        cout << " lista creada" << endl;
-        cout << nodo->getLista()<<endl;
+        //std::cout << " lista creada" << endl;
+        std::cout << nodo->getLista() << endl;
     }
     else
     {
-        cout << " no encontrado " << endl;
+        std::cout << " no encontrado " << endl;
     }
 }
 
-//
+void ArbolAVL::insertarNivel(NodoAVL *nodo, int id, int numeroNivel)
+{
+    if (busqueda(nodo, id))
+    {
+        nodo->getLista()->agregarNuevoNivel(new NodoNivel(numeroNivel));
+    }
+    else
+    {
+        std::cout << " no encontrado " << endl;
+    }
+}
+
+void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
+{
+    if(busqueda(nodo, id))
+    {
+        nodo->getLista()->imprimirLista();
+    }
+    else
+    {
+        std::cout << " no encontrado " << endl;
+    }
+    
+}
