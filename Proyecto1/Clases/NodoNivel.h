@@ -11,11 +11,12 @@ public:
 
     //Matriz
     //ABB de objetos
+    /*
     NodoNivel()
     {
         id = 0;
         siguiente = NULL;
-    };
+    };*/
 
     NodoNivel(int n)
     {

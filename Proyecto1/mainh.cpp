@@ -118,7 +118,7 @@ void mostrarMenu()
             mostrarMenu();
             break;
         case 2:
-            std::cout << " \t:: Editar proyectos \n"
+            std::cout << "\n\t:: Editar proyectos \n"
                       << endl;
             std::cout << " 1. Agregar Nivel" << endl;
             std::cout << " 2. Editar Nivel" << endl;
