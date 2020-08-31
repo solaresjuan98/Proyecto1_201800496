@@ -257,7 +257,7 @@ void ArbolAVL::insertar(int valor)
 {
     bool b = false;
     bool *a = &b;
-
+    cout << " --"<<endl;
     this->raiz = insertar(this->raiz, valor, *a);
 }
 
@@ -292,6 +292,9 @@ void ArbolAVL::inOrden(NodoAVL *actual)
     {
         inOrden(actual->getIzq());
         std::cout << " Proyecto: " << actual->getID() << endl;
+        std::cout << " Lista : " << actual->getLista() << endl;
+        //actual->getLista()->imprimirLista();
+
         inOrden(actual->getDer());
     }
 }
@@ -347,6 +350,7 @@ void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
 {
     if(busqueda(nodo, id))
     {
+        cout << nodo->getLista();
         nodo->getLista()->imprimirLista();
     }
     else

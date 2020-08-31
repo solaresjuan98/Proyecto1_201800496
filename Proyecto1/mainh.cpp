@@ -45,6 +45,7 @@ json y_json;
 */
 // Arbol donde se van a almacenar todos los proyectos
 ArbolAVL *avl = new ArbolAVL();
+ArbolAVL *pr = new ArbolAVL();
 // Arbol del listado de objetos
 ArbolBinario *abbGlobal = new ArbolBinario();
 ListaNiveles *ln1 = new ListaNiveles();
@@ -64,6 +65,15 @@ void getListaNivelesNodo(int id);
 
 int main()
 {
+    /*
+    for (int i = 1; i < 8; i++)
+    {
+        pr->insertar(i);
+    }
+
+    //pr->inOrden(pr->getRaiz());
+    pr->imprimir(pr->getRaiz(), 0);
+    */
     mostrarDatos();
     mostrarMenu();
 
@@ -86,7 +96,7 @@ void mostrarMenu()
 {
     int opcion = 0;
 
-    string r1, r2, r3;
+    string r1, r2, r3, r4;
 
     std::cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
     std::cout << " Elige una opcion: " << endl;
@@ -111,9 +121,9 @@ void mostrarMenu()
         case 1:
             std::cout << "\n Proyectos existentes:" << endl;
             //imprimir arbol avl de proyectos existentes
-
+            avl->imprimir(avl->getRaiz(), 0);
             // los imprime en la notación inOrden
-            avl->inOrden(avl->getRaiz());
+            //avl->inOrden(avl->getRaiz());
             std::cout << "\n\n";
             cin.get();
             mostrarMenu();
@@ -124,7 +134,7 @@ void mostrarMenu()
                       << endl;
             std::cout << " 1. Agregar Nivel" << endl;
             std::cout << " 2. Editar Nivel" << endl;
-            std::cout << " 3. ELimnar Nivel" << endl;
+            std::cout << " 3. Eliminar Nivel" << endl;
             std::cout << " 4. Eliminar Proyecto" << endl;
             std::cout << " 5. salir " << endl;
             std::cout << " Elige una opción " << endl;
@@ -168,16 +178,19 @@ void mostrarMenu()
             break;
         case 3:
             std::cout << "\n Cargar archivo: " << endl;
-            std::cout << " Escribe la ruta del archivo: ";
+            //std::cout << " Escribe la ruta del archivo: ";
             //cin.get();
             r1 = "Archivos/ejemplo1.json";
             r2 = "Archivos/ejemplo2.json";
-            r3 = "Archivos/ejemplo3.json";
-            
+            //r3 = "Archivos/ejemplo3.json";
+            //r4 = "Archivos/ejemplo4.json";
+
             //getline(cin, ruta);
+            //cargarArchivo(ruta);
             cargarArchivo(r1);
             cargarArchivo(r2);
-            cargarArchivo(r3);
+            //cargarArchivo(r3);
+            //cargarArchivo(r4);
             cin.get();
             //system("clear");
             mostrarMenu();
@@ -205,14 +218,6 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-            /*
-            for (int i = 0; i < 6; i++)
-            {
-                ln1->agregarNuevoNivel(new NodoNivel(i));
-            }
-            */
-
-            //ln1->imprimirLista();
 
             /*
             Matrix *md = new Matrix();
@@ -276,7 +281,7 @@ void cargarArchivo(string ruta)
         std::cout << " Valor ascii: " << id << endl;
 
         avl->insertar(id);
-        avl->crearListaNiveles(avl->getRaiz(), id);
+        //avl->crearListaNiveles(avl->getRaiz(), id);
         //avl->crearABB(avl->getRaiz(), id)
         nivelesJson = totalJSON["niveles"];
         std::cout << "\n";
@@ -284,8 +289,8 @@ void cargarArchivo(string ruta)
         {
 
             n_nivel = pos["nivel"];
-            avl->insertarNivel(avl->getRaiz(), id, n_nivel);
-            avl->crearABBObjetos(avl->getRaiz(), id, n_nivel);
+            //avl->insertarNivel(avl->getRaiz(), id, n_nivel);
+            //avl->crearABBObjetos(avl->getRaiz(), id, n_nivel);
             /*
                 Paredes
                 Ventanas
