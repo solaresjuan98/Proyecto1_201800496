@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "NodoArbolGlobal.h"
+#include "NodoArbol.h"
 #define SPACE 10
 #pragma once
 using namespace std;
@@ -8,7 +8,7 @@ using namespace std;
 class ArbolBinario
 {
 public:
-    NodoArbolGlobal *raiz;
+    NodoArbol *raiz;
     ArbolBinario();
 
     bool estaVacio()
@@ -23,7 +23,7 @@ public:
         }
     }
 
-    void insertarNodo(NodoArbolGlobal *nuevo_nodo)
+    void insertarNodo(NodoArbol *nuevo_nodo)
     {
         if (raiz == NULL)
         {
@@ -32,7 +32,7 @@ public:
         }
         else
         {
-            NodoArbolGlobal *temp = raiz;
+            NodoArbol *temp = raiz;
 
             while (temp != NULL)
             {
@@ -68,7 +68,7 @@ public:
         }
     }
 
-    void imprimirArbol(NodoArbolGlobal *raiz, int cont)
+    void imprimirArbol(NodoArbol *raiz, int cont)
     {
         if (raiz == NULL)
         {
@@ -88,7 +88,7 @@ public:
         }
     }
 
-    void preOrden(NodoArbolGlobal *arbol)
+    void preOrden(NodoArbol *arbol)
     {
         if (arbol == NULL)
         {
@@ -102,7 +102,7 @@ public:
         }
     }
 
-    void inOrden(NodoArbolGlobal *arbol)
+    void inOrden(NodoArbol *arbol)
     {
 
         if (arbol == NULL)
@@ -117,7 +117,7 @@ public:
         }
     }
 
-    void postOrden(NodoArbolGlobal *arbol)
+    void postOrden(NodoArbol *arbol)
     {
         if (arbol == NULL)
         {
@@ -131,7 +131,7 @@ public:
         }
     }
 
-    void destruirNodo(NodoArbolGlobal *nodo)
+    void destruirNodo(NodoArbol *nodo)
     {
         nodo->izq = NULL;
         nodo->der = NULL;
@@ -139,7 +139,7 @@ public:
         delete nodo;
     }
 
-    void eliminar(NodoArbolGlobal *arbol, int n)
+    void eliminar(NodoArbol *arbol, int n)
     {
         if (arbol == NULL)
         {
@@ -161,7 +161,7 @@ public:
 
     // Determinar el nodo más izquierdo
 
-    NodoArbolGlobal *minimo(NodoArbolGlobal *raiz)
+    NodoArbol *minimo(NodoArbol *raiz)
     {
         if (raiz == NULL)
         {
@@ -182,7 +182,7 @@ public:
     }
 
     // Reemplazar Nodo
-    void reemplazarNodo(NodoArbolGlobal *nodoEliminar, NodoArbolGlobal *nuevo)
+    void reemplazarNodo(NodoArbol *nodoEliminar, NodoArbol *nuevo)
     {
         if (nodoEliminar == raiz)
         {
@@ -201,12 +201,12 @@ public:
         }
     }
 
-    void EliminarNodo(NodoArbolGlobal *nodoEliminar)
+    void EliminarNodo(NodoArbol *nodoEliminar)
     {
 
         if (nodoEliminar->izq && nodoEliminar->der)
         {
-            NodoArbolGlobal *menor = minimo(nodoEliminar->der);
+            NodoArbol *menor = minimo(nodoEliminar->der);
             nodoEliminar->id = menor->id;
             EliminarNodo(menor);
         }

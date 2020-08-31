@@ -9,7 +9,7 @@
 #include "Matrix.h"
 #include "ArbolAVL.h"
 #include "ArbolBinario.h"
-#include "NodoArbolGlobal.h"
+#include "NodoArbol.h"
 #include "ListaNiveles.h"
 #include "NodoNivel.h"
 
@@ -119,6 +119,7 @@ void mostrarMenu()
             mostrarMenu();
             break;
         case 2:
+            //system("clear");
             std::cout << "\n\t:: Editar proyectos \n"
                       << endl;
             std::cout << " 1. Agregar Nivel" << endl;
@@ -147,9 +148,9 @@ void mostrarMenu()
                 std::cout << "Elige un proyecto (por id): ";
                 cin >> sel_proyecto;
 
+                //std::cout << "** Lista de niveles **"<<endl;
                 getListaNivelesNodo(sel_proyecto);
                 //avl->obtenerListaNodo(avl->getRaiz(), sel_proyecto);
-                //std::cout << "** Lista de niveles **"<<endl;
                 //llamar funcion
                 break;
             case 3:
@@ -178,6 +179,7 @@ void mostrarMenu()
             cargarArchivo(r2);
             cargarArchivo(r3);
             cin.get();
+            //system("clear");
             mostrarMenu();
             break;
         case 4:
@@ -275,14 +277,15 @@ void cargarArchivo(string ruta)
 
         avl->insertar(id);
         avl->crearListaNiveles(avl->getRaiz(), id);
-        
+        //avl->crearABB(avl->getRaiz(), id)
         nivelesJson = totalJSON["niveles"];
         std::cout << "\n";
         for (const auto pos : nivelesJson)
         {
-            
+
             n_nivel = pos["nivel"];
             avl->insertarNivel(avl->getRaiz(), id, n_nivel);
+            avl->crearABBObjetos(avl->getRaiz(), id, n_nivel);
             /*
                 Paredes
                 Ventanas
@@ -312,13 +315,15 @@ void cargarArchivo(string ruta)
                 std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
                 std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
 
-                //Agregar objetos al abb
-
                 puntosObjetosJson = pos["puntos"];
 
                 for (const auto pos : puntosObjetosJson)
                 {
                     //std::cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
+
+                    //AGREGAR OBJETOS AL ABB DE OBJETOS
+
+                    //AGREGAR OBJETOS A LA MATRIZ
                 }
             }
 
@@ -363,7 +368,7 @@ void cargarLibrerias(string ruta)
                 y = pos["y"];
                 std::cout << "\n";
 
-                abbGlobal->insertarNodo(new NodoArbolGlobal(id, nombre, letra, color, x, y));
+                abbGlobal->insertarNodo(new NodoArbol(id, nombre, letra, color, x, y));
             }
             std::cout << " \n";
         }

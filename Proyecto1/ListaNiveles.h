@@ -95,7 +95,34 @@ public:
             }
         }
     }
-    //~ListaNiveles();
+
+    void crearArbol(int nivel)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+
+        while (ptr != NULL)
+        {
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->setArbol(new ArbolBinario());
+                cout << " Arbol creado" << endl;
+                cout << temp->getArbol() << endl;
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            //cout << " el nodo no existe \n"
+            //     << endl;
+            //agregarNivel(ptr);
+        }
+    }
 };
 /*
 ListaNiveles::ListaNiveles()

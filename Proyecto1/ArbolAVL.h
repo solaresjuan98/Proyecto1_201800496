@@ -31,7 +31,10 @@ public:
     void crearListaNiveles(NodoAVL *raiz, int id);
     void insertarNivel(NodoAVL *raiz, int id, int numeroNivel);
     void obtenerListaNodo(NodoAVL *raiz, int id);
-    //
+
+    // Arboles ABB en nodo AVL
+    void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
+
     void generar();
     void Delete(NodoAVL *raiz);
 };
@@ -319,9 +322,7 @@ void ArbolAVL::crearListaNiveles(NodoAVL *nodo, int n)
     if (busqueda(nodo, n))
     {
         std::cout << " encontrado " << endl;
-        //ListaNiveles *l = new ListaNiveles();
         nodo->setLista(new ListaNiveles());
-        //std::cout << " lista creada" << endl;
         std::cout << nodo->getLista() << endl;
     }
     else
@@ -351,6 +352,27 @@ void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
     else
     {
         std::cout << " no encontrado " << endl;
+    }
+    
+}
+
+void ArbolAVL::crearABBObjetos(NodoAVL *nodo, int id, int nivel)
+{
+    if(busqueda(nodo, id))
+    {
+       
+       nodo->getLista()->crearArbol(nivel);
+       
+        /*
+            1. Verificar si tiene lista
+            2. Buscar NodoNivel
+                2.1 Si existe el NodoNivel, setear el arbol binario al nodo
+        */
+
+    }
+    else
+    {
+        
     }
     
 }

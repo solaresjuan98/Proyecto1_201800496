@@ -31,6 +31,7 @@ public:
     int getFE();
     int getID();
     ListaNiveles *getLista();
+    
     //otros metodos
     void imprimirLista(ListaNiveles *lista);
 
@@ -99,7 +100,9 @@ NodoAVL *NodoAVL::getDer()
 void NodoAVL::imprimirLista(ListaNiveles *l)
 {
     this->lista->imprimirLista();
-} 
+}
+
+
 
 void NodoAVL::agregarNivel(NodoNivel *n)
 {
