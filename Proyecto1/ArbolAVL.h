@@ -25,15 +25,17 @@ public:
     void postOrden(NodoAVL *n);
     void preOrden(NodoAVL *n);
     bool busqueda(NodoAVL *n, int id);
+    NodoAVL *busquedaNodo(NodoAVL *nodo, int id);
     void imprimir(NodoAVL *raiz, int cont);
 
     // Listas en nodo
-    void crearListaNiveles(NodoAVL *raiz, int id);
-    void insertarNivel(NodoAVL *raiz, int id, int numeroNivel);
+    void crearListaNiveles(int id);
+    void insertarNivel(int id, int numeroNivel);
     void obtenerListaNodo(NodoAVL *raiz, int id);
 
     // Arboles ABB en nodo AVL
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
+    void insertarnodoABB(NodoAVL *raiz, int id, int nivel, int id_objeto, string nombre);
 
     void generar();
     void Delete(NodoAVL *raiz);
@@ -257,7 +259,7 @@ void ArbolAVL::insertar(int valor)
 {
     bool b = false;
     bool *a = &b;
-    cout << " --"<<endl;
+    cout << " --" << endl;
     this->raiz = insertar(this->raiz, valor, *a);
 }
 
@@ -281,7 +283,6 @@ void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
     }
 }
 
-
 void ArbolAVL::inOrden(NodoAVL *actual)
 {
     if (actual == NULL)
@@ -291,9 +292,13 @@ void ArbolAVL::inOrden(NodoAVL *actual)
     else
     {
         inOrden(actual->getIzq());
+
         std::cout << " Proyecto: " << actual->getID() << endl;
         std::cout << " Lista : " << actual->getLista() << endl;
-        //actual->getLista()->imprimirLista();
+        if (actual->getLista() != NULL)
+        {
+            actual->getLista()->imprimirLista();
+        }
 
         inOrden(actual->getDer());
     }
@@ -301,6 +306,18 @@ void ArbolAVL::inOrden(NodoAVL *actual)
 
 bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
 {
+    /*if (nodo != NULL)
+    {
+        if (nodo->getID() == id)
+        {
+            cout << " Encontrado. " << endl;
+            return true;
+        }
+
+        busqueda(nodo->getIzq(), id);
+        busqueda(nodo->getDer(), id);
+    }*/
+
     if (nodo == NULL)
     {
         return false;
@@ -319,14 +336,14 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
     }
 }
 
-
-void ArbolAVL::crearListaNiveles(NodoAVL *nodo, int n)
+void ArbolAVL::crearListaNiveles(int n)
 {
-    if (busqueda(nodo, n))
+    NodoAVL *tmp = this->raiz;
+    if (busqueda(tmp, n))
     {
-        std::cout << " encontrado " << endl;
-        nodo->setLista(new ListaNiveles());
-        std::cout << nodo->getLista() << endl;
+
+        busquedaNodo(tmp, n)->setLista(new ListaNiveles());
+        std::cout << tmp->getLista() << endl;
     }
     else
     {
@@ -334,11 +351,47 @@ void ArbolAVL::crearListaNiveles(NodoAVL *nodo, int n)
     }
 }
 
-void ArbolAVL::insertarNivel(NodoAVL *nodo, int id, int numeroNivel)
+NodoAVL *ArbolAVL::busquedaNodo(NodoAVL *nodo, int id)
 {
-    if (busqueda(nodo, id))
+    /*if (nodo != NULL)
     {
-        nodo->getLista()->agregarNuevoNivel(new NodoNivel(numeroNivel));
+        if (nodo->getID() == id)
+        {
+            cout << " Encontrado. " << endl;
+            return true;
+        }
+
+        busqueda(nodo->getIzq(), id);
+        busqueda(nodo->getDer(), id);
+    }*/
+
+    if (nodo == NULL)
+    {
+        return NULL;
+    }
+    else if (nodo->getID() == id)
+    {
+        return nodo;
+    }
+    else if (id < nodo->getID())
+    {
+        return busquedaNodo(nodo->getIzq(), id);
+    }
+    else
+    {
+        return busquedaNodo(nodo->getDer(), id);
+    }
+}
+
+void ArbolAVL::insertarNivel(int id, int numeroNivel)
+{
+    NodoAVL *tmp = this->raiz;
+    if (busqueda(tmp, id))
+    {
+        tmp = this->raiz;
+        cout << " --" << endl;
+        busquedaNodo(tmp, id)->getLista()->agregarNuevoNivel(new NodoNivel(numeroNivel));
+        cout << " Insertando nivel" << numeroNivel << " en proyecto " << tmp->getID() << endl;
     }
     else
     {
@@ -348,35 +401,52 @@ void ArbolAVL::insertarNivel(NodoAVL *nodo, int id, int numeroNivel)
 
 void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
 {
-    if(busqueda(nodo, id))
+    if (busqueda(nodo, id))
     {
-        cout << nodo->getLista();
+        cout << nodo->getLista() << endl;
         nodo->getLista()->imprimirLista();
     }
     else
     {
         std::cout << " no encontrado " << endl;
     }
-    
 }
 
 void ArbolAVL::crearABBObjetos(NodoAVL *nodo, int id, int nivel)
 {
-    if(busqueda(nodo, id))
+    if (busqueda(nodo, id))
     {
-       
-       nodo->getLista()->crearArbol(nivel);
-       
+
+        nodo->getLista()->crearArbol(nivel);
+
         /*
             1. Verificar si tiene lista
             2. Buscar NodoNivel
                 2.1 Si existe el NodoNivel, setear el arbol binario al nodo
         */
-
     }
     else
     {
-        
     }
-    
+}
+
+void ArbolAVL::insertarnodoABB(NodoAVL *nodo, int id, int nivel, int id_objeto, string nombre)
+{
+    //1. buscar si el nodo avl existe
+    //2. Verificar si ese nodo avl está apuntada a una lista
+    //3. Si existe la lista, buscar el nivel al que partenece el objeto
+    //4. Agregar objeto al ABB de objetos
+
+    if (busqueda(nodo, id))
+    {
+        if (nodo->getLista() != NULL)
+        {
+            nodo->getLista()->agregar_nodo_abb(nivel, id_objeto, nombre);
+            cout << "Lista: " << nodo->getLista() << endl;
+        }
+    }
+    else
+    {
+        cout << " no encontrado " << endl;
+    }
 }

@@ -23,6 +23,7 @@ public:
     {
         NodoNivel *temp = NULL;
         NodoNivel *ptr = cabeza;
+
         bool encontrado = false;
 
         while (ptr != NULL)
@@ -36,12 +37,12 @@ public:
             ptr = ptr->siguiente;
         }
 
-        if (!encontrado)
+        /*if (!encontrado)
         {
             //cout << " el nodo no existe \n"
             //     << endl;
             //agregarNivel(ptr);
-        }
+        }*/
 
         return temp;
     }
@@ -78,6 +79,7 @@ public:
 
     void imprimirLista()
     {
+
         if (cabeza == NULL)
         {
             std::cout << " lista vacia." << endl;
@@ -121,6 +123,33 @@ public:
             //cout << " el nodo no existe \n"
             //     << endl;
             //agregarNivel(ptr);
+        }
+    }
+
+    void agregar_nodo_abb(int nivel, int id_objeto, string nombre)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        NodoArbol *nuevo_nodo = new NodoArbol(id_objeto, nombre);
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->setArbol(new ArbolBinario());
+                //cout << " Arbol creado" << endl;
+                temp->getArbol()->insertarNodo(nuevo_nodo);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
         }
     }
 };

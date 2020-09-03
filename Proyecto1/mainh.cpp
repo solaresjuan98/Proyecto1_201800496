@@ -63,16 +63,56 @@ int convertirASCII(string cadena);
 
 void getListaNivelesNodo(int id);
 
+string n1, n2, n3, n4, n5;
+
 int main()
 {
     /*
-    for (int i = 1; i < 8; i++)
+    avl->insertar(99);
+    //avl->crearListaNiveles( 99);
+
+    for (int i = 1; i < 5; i++)
     {
-        pr->insertar(i);
+        avl->insertarNivel( 99, i);
     }
 
-    //pr->inOrden(pr->getRaiz());
-    pr->imprimir(pr->getRaiz(), 0);
+    avl->insertar(100);
+    //avl->crearListaNiveles( 100);
+    avl->insertarNivel(100, 33);
+    avl->insertarNivel( 100, 44);
+    avl->insertarNivel(100, 55);
+    avl->insertarNivel(100, 66);
+
+    for (int i = 1; i < 10; i++)
+    {
+        avl->insertarNivel(avl->getRaiz(), 100, i);
+    }
+
+    avl->insertar(101);
+    //avl->crearListaNiveles(101);
+    for (int i = 1; i < 7; i++)
+    {
+        avl->insertarNivel(101, i);
+    }
+
+    avl->insertar(102);
+    //avl->crearListaNiveles(102);
+    for (int i = 1; i < 3; i++)
+    {
+        avl->insertarNivel(102, i);
+    }
+
+    avl->insertar(103);
+    //avl->crearListaNiveles(103);
+    for (int i = 1; i < 4; i++)
+    {
+        avl->insertarNivel(103, i);
+    }
+
+    cout << " --------------------------- \n";
+
+    //avl->imprimir(avl->getRaiz(), 0);
+    avl->inOrden(avl->getRaiz());
     */
     mostrarDatos();
     mostrarMenu();
@@ -178,20 +218,21 @@ void mostrarMenu()
             break;
         case 3:
             std::cout << "\n Cargar archivo: " << endl;
-            //std::cout << " Escribe la ruta del archivo: ";
-            //cin.get();
-            r1 = "Archivos/ejemplo1.json";
-            r2 = "Archivos/ejemplo2.json";
-            //r3 = "Archivos/ejemplo3.json";
-            //r4 = "Archivos/ejemplo4.json";
+            std::cout << " Escribe la ruta del archivo: ";
+            cin.get();
+            getline(cin, ruta);
+            cargarArchivo(ruta);
 
-            //getline(cin, ruta);
-            //cargarArchivo(ruta);
+            cin.get();
+            /*r1 = "Archivos/ejemplo1.json";
+            r2 = "Archivos/ejemplo2.json";
+            r3 = "Archivos/ejemplo3.json";
+            r4 = "Archivos/ejemplo4.json";
+
             cargarArchivo(r1);
             cargarArchivo(r2);
-            //cargarArchivo(r3);
-            //cargarArchivo(r4);
-            cin.get();
+            cargarArchivo(r3);
+            cargarArchivo(r4);*/
             //system("clear");
             mostrarMenu();
             break;
@@ -212,13 +253,15 @@ void mostrarMenu()
             mostrarMenu();
             break;
         case 7:
-            //system("clear");
+            system("clear");
+            mostrarMenu();
             break;
         case 8:
             exit(1);
             break;
         case 9:
 
+            //avl->imprimir(avl->getRaiz(), 0);
             /*
             Matrix *md = new Matrix();
 
@@ -232,7 +275,69 @@ void mostrarMenu()
             md->print_nodes_x();
             md->print_nodes_y();
             */
+            cout << " -------------------------" << endl;
+            n1 = "Proyecto1";
+            n2 = "Proyecto2";
+            n3 = "Proyecto3";
+            n3 = "Proyecto4";
+            n3 = "Proyecto5";
+            //convertirASCII(n1);
+            //convertirASCII(n2);
+            /*
+            avl->insertar(convertirASCII(n1));
+            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n1));
 
+            for (int i = 0; i < 5; i++)
+            {
+                avl->insertarNivel(avl->getRaiz(), convertirASCII(n1), i);
+                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n1), i);
+
+                for (int j = 0; j < 4; j++)
+                {
+                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n1), i, j, "prueba");
+                    for (int k = 0; k < 3; k++)
+                    {
+                    }
+                }
+            }
+
+            avl->insertar(convertirASCII(n2));
+            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n2));
+
+            for (int i = 0; i < 7; i++)
+            {
+                avl->insertarNivel(avl->getRaiz(), convertirASCII(n2), i);
+                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n2), i);
+
+                for (int j = 0; j < 4; j++)
+                {
+                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n2), i, j, "prueba");
+                    for (int k = 0; k < 3; k++)
+                    {
+                    }
+                }
+            }
+
+            avl->insertar(convertirASCII(n3));
+            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n3));
+
+            for (int i = 0; i < 2; i++)
+            {
+                avl->insertarNivel(avl->getRaiz(), convertirASCII(n3), i);
+                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n3), i);
+
+                for (int j = 0; j < 4; j++)
+                {
+                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n3), i, j, "prueba");
+                    for (int k = 0; k < 3; k++)
+                    {
+                    }
+                }
+            }
+
+            avl->imprimir(avl->getRaiz(), 0);
+            avl->inOrden(avl->getRaiz());
+            */
             break;
         case 10:
         {
@@ -262,7 +367,10 @@ void mostrarMenu()
 
 void cargarArchivo(string ruta)
 {
-    //std::cout << p1.getIdProyecto() << endl;
+    //Variables de los objetos que irán en el abb de objetos
+    int id_objeto = 0;
+    string nombre;
+
     std::ifstream archivo(ruta);
     int n_nivel;
     if (archivo.fail())
@@ -276,12 +384,14 @@ void cargarArchivo(string ruta)
         nombreProyectoJson = totalJSON["nombre"];
         string nombreP;
 
-        std::cout << totalJSON["nombre"].get<std::string>() << endl;
+        //std::cout << totalJSON["nombre"].get<std::string>() << endl;
         id = convertirASCII(nombreProyectoJson);
         std::cout << " Valor ascii: " << id << endl;
 
+        fflush(stdin);
         avl->insertar(id);
-        //avl->crearListaNiveles(avl->getRaiz(), id);
+
+        //avl->crearListaNiveles(avl->getRaiz(), convertirASCII(nombreProyectoJson));
         //avl->crearABB(avl->getRaiz(), id)
         nivelesJson = totalJSON["niveles"];
         std::cout << "\n";
@@ -289,19 +399,20 @@ void cargarArchivo(string ruta)
         {
 
             n_nivel = pos["nivel"];
-            //avl->insertarNivel(avl->getRaiz(), id, n_nivel);
-            //avl->crearABBObjetos(avl->getRaiz(), id, n_nivel);
+            fflush(stdin);
+            avl->insertarNivel(id, n_nivel);
+            //avl->crearABBObjetos(avl->getRaiz(), convertirASCII(nombreProyectoJson), n_nivel);
             /*
                 Paredes
                 Ventanas
                 objetos
             */
             paredesJson = pos["paredes"];
-            //std::cout << " Parades: " << endl;
+            std::cout << " Parades: " << endl;
 
             for (const auto pos : paredesJson)
             {
-                // std::cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
+                //std::cout << " - " << pos["inicio"] << " -- " << pos["final"] << endl;
             }
 
             ventanasJson = pos["ventanas"];
@@ -319,14 +430,16 @@ void cargarArchivo(string ruta)
                 std::cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
                 std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
                 std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
+                id_objeto = pos["identificador"];
+                nombre = pos["nombre"];
 
+                //AGREGAR OBJETOS AL ABB DE OBJETOS
+                //avl->insertarnodoABB(avl->getRaiz(), id, n_nivel, id_objeto, nombre);
                 puntosObjetosJson = pos["puntos"];
 
                 for (const auto pos : puntosObjetosJson)
                 {
                     //std::cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
-
-                    //AGREGAR OBJETOS AL ABB DE OBJETOS
 
                     //AGREGAR OBJETOS A LA MATRIZ
                 }
@@ -373,7 +486,7 @@ void cargarLibrerias(string ruta)
                 y = pos["y"];
                 std::cout << "\n";
 
-                abbGlobal->insertarNodo(new NodoArbol(id, nombre, letra, color, x, y));
+                //abbGlobal->insertarNodo(new NodoArbol(id, nombre, letra, color, x, y));
             }
             std::cout << " \n";
         }

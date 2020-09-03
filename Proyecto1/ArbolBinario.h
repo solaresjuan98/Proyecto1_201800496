@@ -28,7 +28,7 @@ public:
         if (raiz == NULL)
         {
             raiz = nuevo_nodo;
-            cout << " id insertado al inicio :)" << endl;
+            cout << " insertado al inicio :)" << endl;
         }
         else
         {
@@ -45,7 +45,7 @@ public:
                 {
                     // insertar nodo en hijo izquierdo
                     temp->izq = nuevo_nodo;
-                    cout << " id insertado a la izq :)" << endl;
+                    cout << " Nodo insertado a la izq :)" << endl;
                     break;
                 }
                 else if (nuevo_nodo->id < temp->id)
@@ -83,7 +83,7 @@ public:
                 cout << "   ";
             }
 
-            cout << "["<<raiz->id << " " <<raiz->letra << "]"<<endl;
+            cout << "["<<raiz->id << " " <<raiz->nombre << "]"<<endl;
             imprimirArbol(raiz->izq, cont + 1);
         }
     }

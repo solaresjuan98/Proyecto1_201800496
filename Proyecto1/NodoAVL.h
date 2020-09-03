@@ -14,7 +14,7 @@ private:
     NodoAVL *izq;
     NodoAVL *der;
     // apuntar a Lista de niveles
-    ListaNiveles *lista;
+    ListaNiveles *lista = new ListaNiveles();
 
 public:
     NodoAVL(int _id);
@@ -44,6 +44,7 @@ NodoAVL::NodoAVL(int _id)
     this->id = _id;
     this->izq = NULL;
     this->der = NULL;
+    //this->lista = NULL;
 }
 
 
@@ -101,8 +102,6 @@ void NodoAVL::imprimirLista(ListaNiveles *l)
 {
     this->lista->imprimirLista();
 }
-
-
 
 void NodoAVL::agregarNivel(NodoNivel *n)
 {
