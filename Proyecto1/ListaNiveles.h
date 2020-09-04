@@ -37,15 +37,46 @@ public:
             ptr = ptr->siguiente;
         }
 
-        /*if (!encontrado)
+        if (!encontrado)
         {
-            //cout << " el nodo no existe \n"
-            //     << endl;
+            cout << " el nodo no existe \n"
+                 << endl;
             //agregarNivel(ptr);
-        }*/
+        }
 
         return temp;
     }
+
+    NodoNivel *retornarABB(int k)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+
+        bool encontrado = false;
+
+        while (ptr != NULL)
+        {
+            if (ptr->id == k)
+            {
+                //ptr->verArbolObjetos(ptr->getArbol()->raiz);
+                temp = ptr;
+                temp->verArbolObjetos(ptr->getArbol()->raiz);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " el nodo no existe \n"
+                 << endl;
+            //agregarNivel(ptr);
+        }
+
+        return temp;
+    }
+
 
     // Agregar el nivel a la lista
     void agregarNuevoNivel(NodoNivel *n)
@@ -138,8 +169,9 @@ public:
             if (ptr->id == nivel)
             {
                 temp = ptr;
-                temp->setArbol(new ArbolBinario());
+                //temp->setArbol(new ArbolBinario());
                 //cout << " Arbol creado" << endl;
+                
                 temp->getArbol()->insertarNodo(nuevo_nodo);
                 encontrado = true;
             }

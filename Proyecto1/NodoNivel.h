@@ -8,7 +8,8 @@ using namespace std;
 class NodoNivel
 {
 private:
-    ArbolBinario *arbol;
+    //Apuntar a nodo de objetos
+    ArbolBinario *arbol = new ArbolBinario();
 
 public:
     int id; // ID nivel
@@ -18,6 +19,7 @@ public:
     void setArbol(ArbolBinario *abb);
     ArbolBinario *getArbol();
     void verArbolObjetos(NodoArbol *arbol); // imprime en in order
+    
 
     NodoNivel(int n)
     {
@@ -36,13 +38,14 @@ void NodoNivel::setArbol(ArbolBinario *abb)
 
 ArbolBinario *NodoNivel::getArbol()
 {
-    return this->arbol;
+    return this->arbol;// aqui muere
 }
 
 void NodoNivel::verArbolObjetos(NodoArbol *arbol)
 {
     this->arbol->inOrden(arbol);
 }
+
 /*
 NodoNivel::NodoNivel()
 {

@@ -64,10 +64,11 @@ int convertirASCII(string cadena);
 void getListaNivelesNodo(int id);
 
 string n1, n2, n3, n4, n5;
-
+string r1, r2, r3, r4;
 int main()
 {
-    /*
+   
+    
     avl->insertar(99);
     //avl->crearListaNiveles( 99);
 
@@ -82,11 +83,13 @@ int main()
     avl->insertarNivel( 100, 44);
     avl->insertarNivel(100, 55);
     avl->insertarNivel(100, 66);
+    avl->insertarnodoABB(100, 33, 1, "Mesa");
+    avl->insertarnodoABB(100, 33, 2, "Escritorio");
+    avl->insertarnodoABB(100, 44, 3, "Silla");
+    avl->insertarnodoABB(100, 44, 4, "Puerta");
+    avl->insertarnodoABB(100, 44, 5, "Mesa");
+    //AGREGAR A MATRIZ
 
-    for (int i = 1; i < 10; i++)
-    {
-        avl->insertarNivel(avl->getRaiz(), 100, i);
-    }
 
     avl->insertar(101);
     //avl->crearListaNiveles(101);
@@ -113,9 +116,15 @@ int main()
 
     //avl->imprimir(avl->getRaiz(), 0);
     avl->inOrden(avl->getRaiz());
-    */
-    mostrarDatos();
-    mostrarMenu();
+    
+    cout << "\n\n";
+
+    avl->imprimirABBobjetos(100, 33);
+    cout<< "\n";
+    avl->imprimirABBobjetos(100, 44);
+
+    //mostrarDatos();
+    //mostrarMenu();
 
     cin.get();
     return 0;
@@ -135,8 +144,6 @@ void mostrarDatos()
 void mostrarMenu()
 {
     int opcion = 0;
-
-    string r1, r2, r3, r4;
 
     std::cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
     std::cout << " Elige una opcion: " << endl;
@@ -430,10 +437,15 @@ void cargarArchivo(string ruta)
                 std::cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
                 std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
                 std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
+                
                 id_objeto = pos["identificador"];
                 nombre = pos["nombre"];
+                letraJson = pos["letra"];
+                colorJson = pos["color"];
 
                 //AGREGAR OBJETOS AL ABB DE OBJETOS
+                //avl->insertarnodoABB(id, n_nivel, id_objeto, nombre, letraJson, colorJson);
+                
                 //avl->insertarnodoABB(avl->getRaiz(), id, n_nivel, id_objeto, nombre);
                 puntosObjetosJson = pos["puntos"];
 

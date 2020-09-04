@@ -112,7 +112,8 @@ public:
         else
         {
             inOrden(arbol->izq);
-            cout << arbol->id << " - ";
+            cout << arbol->id << endl;
+            cout << arbol->nombre << endl;
             inOrden(arbol->der);
         }
     }
