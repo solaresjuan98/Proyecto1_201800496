@@ -67,29 +67,40 @@ string n1, n2, n3, n4, n5;
 string r1, r2, r3, r4;
 int main()
 {
-   
-    
-    avl->insertar(99);
-    //avl->crearListaNiveles( 99);
+    /*Matrix *md = new Matrix();
 
+    md->add(10, "m", "white", 2, 1);
+    md->add(12, "t", "black", 3, 1);
+    md->add(14, "l", "red", 3, 2);
+    md->add(12, "s", "brown", 5, 4);
+    md->add(13, "e", "black", 4, 3);
+
+    md->print_headers();
+    md->print_nodes_x();
+    md->print_nodes_y();
+
+    cout << " -------------------------" << endl;*/
+
+    
+    avl->insertar(1002);
     for (int i = 1; i < 5; i++)
     {
-        avl->insertarNivel( 99, i);
+        avl->insertarNivel(1002, i);
     }
 
     avl->insertar(100);
-    //avl->crearListaNiveles( 100);
     avl->insertarNivel(100, 33);
-    avl->insertarNivel( 100, 44);
+    avl->insertarNivel(100, 44);
     avl->insertarNivel(100, 55);
     avl->insertarNivel(100, 66);
     avl->insertarnodoABB(100, 33, 1, "Mesa");
     avl->insertarnodoABB(100, 33, 2, "Escritorio");
+    //avl->insertarenMatriz(100, 33, 1, "m", "azul", x, y)
+    cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
     avl->insertarnodoABB(100, 44, 4, "Puerta");
     avl->insertarnodoABB(100, 44, 5, "Mesa");
     //AGREGAR A MATRIZ
-
 
     avl->insertar(101);
     //avl->crearListaNiveles(101);
@@ -116,13 +127,13 @@ int main()
 
     //avl->imprimir(avl->getRaiz(), 0);
     avl->inOrden(avl->getRaiz());
-    
+
     cout << "\n\n";
 
     avl->imprimirABBobjetos(100, 33);
-    cout<< "\n";
+    cout << "\n";
     avl->imprimirABBobjetos(100, 44);
-
+    
     //mostrarDatos();
     //mostrarMenu();
 
@@ -269,25 +280,25 @@ void mostrarMenu()
         case 9:
 
             //avl->imprimir(avl->getRaiz(), 0);
-            /*
-            Matrix *md = new Matrix();
 
-            md->add(10, "Mesa", 2, 1);
-            md->add(12, "TV", 3, 1);
-            md->add(14, "Lampara", 3, 2);
-            md->add(12, "Sillon", 5, 4);
-            md->add(13, "Escritorio", 4, 3);
+            /*Matrix *md = new Matrix();
+
+            md->add(10, "m", "white", 2, 1);
+            md->add(12, "t", "black", 3, 1);
+            md->add(14, "l", "red", 3, 2);
+            md->add(12, "s", "brown", 5, 4);
+            md->add(13, "e", "black", 4, 3);
 
             md->print_headers();
             md->print_nodes_x();
             md->print_nodes_y();
-            */
+
             cout << " -------------------------" << endl;
             n1 = "Proyecto1";
             n2 = "Proyecto2";
             n3 = "Proyecto3";
             n3 = "Proyecto4";
-            n3 = "Proyecto5";
+            n3 = "Proyecto5";*/
             //convertirASCII(n1);
             //convertirASCII(n2);
             /*
@@ -346,25 +357,6 @@ void mostrarMenu()
             avl->inOrden(avl->getRaiz());
             */
             break;
-        case 10:
-        {
-            int num;
-            std::cout << " Ingresa el id que deseas buscar: ";
-            cin >> num;
-
-            if (avl->busqueda(avl->getRaiz(), num))
-            {
-                std::cout << " Proyecto encontrado " << endl;
-            }
-            else
-            {
-                std::cout << " Proyecto no encontrado " << endl;
-            }
-
-            std::cout << "\n";
-
-            break;
-        }
         }
 
         cin.get();
@@ -437,7 +429,7 @@ void cargarArchivo(string ruta)
                 std::cout << " - Nombre: " << pos["nombre"].get<std::string>() << endl;
                 std::cout << " - Letra: " << pos["letra"].get<std::string>() << endl;
                 std::cout << " - Color: " << pos["color"].get<std::string>() << endl;*/
-                
+
                 id_objeto = pos["identificador"];
                 nombre = pos["nombre"];
                 letraJson = pos["letra"];
@@ -445,7 +437,7 @@ void cargarArchivo(string ruta)
 
                 //AGREGAR OBJETOS AL ABB DE OBJETOS
                 //avl->insertarnodoABB(id, n_nivel, id_objeto, nombre, letraJson, colorJson);
-                
+
                 //avl->insertarnodoABB(avl->getRaiz(), id, n_nivel, id_objeto, nombre);
                 puntosObjetosJson = pos["puntos"];
 

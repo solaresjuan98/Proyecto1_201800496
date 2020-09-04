@@ -12,23 +12,24 @@ public:
 
     Matrix()
     {
-        Node *tmp = new Node(0, "Raiz");
+        Node *tmp = new Node(0, "Raiz", "White");
         head = tmp;
     }
     ~Matrix();
 
-    void add(int n, string data, int x, int y)
+    //add(int n, string letra, string color, int x, int y)
+    void add(int n, string letra, string color, int x, int y)
     {
         //1. crear cabeceras
         //1.1 crear cabecera en x
-        add_x_header(x, data);
+        add_x_header(x, letra);
         //1.2 crear cabecera en y
-        add_y_header(y, data);
+        add_y_header(y, letra);
         //2. insertar el nodo
-        Node *new_node = new Node(n, data);
+        Node *new_node = new Node(n, letra, color);
         add_x(new_node, x);
         add_y(new_node, y);
-        add_node(n, data, x, y);
+        add_node(n, letra, x, y);
     }
 
     void add_x(Node *new_node, int x)
@@ -61,11 +62,11 @@ public:
         }
     }
 
-    void add_x_header(int x, string data)
+    void add_x_header(int x, string letra)
     {
         if (head->right == NULL)
         {
-            Node *tmp = new Node(x, data);
+            Node *tmp = new Node(x, letra, "white");
             head->right = tmp;
             tmp->left = head;
         }
@@ -80,14 +81,14 @@ public:
 
             if (tmp2->right == NULL)
             {
-                Node *new_tmp = new Node(x, data);
+                Node *new_tmp = new Node(x, letra, "white");
                 tmp2->right = new_tmp;
                 new_tmp->left = tmp2;
             }
             else if (tmp2->right != NULL && tmp2->right->n != x)
             {
                 // no se llegó al final (meter en medio)
-                Node *new_tmp = new Node(x, data);
+                Node *new_tmp = new Node(x, letra, "white");
                 Node *der = tmp2->right;
 
                 // Doble enlace
@@ -99,11 +100,11 @@ public:
         }
     }
 
-    void add_y_header(int y, string data)
+    void add_y_header(int y, string letra)
     {
         if (head->down == NULL)
         {
-            Node *tmp = new Node(y, data);
+            Node *tmp = new Node(y, letra,"white");
             head->down = tmp;
             tmp->up = head; // primer nodo en Y
         }
@@ -118,13 +119,13 @@ public:
 
             if (tmp2->down == NULL)
             {
-                Node *new_tmp = new Node(y, data);
+                Node *new_tmp = new Node(y, letra, "white");
                 tmp2->down = new_tmp;
                 new_tmp->up = tmp2;
             }
             else if (tmp2->down != NULL && tmp2->down->n != y)
             {
-                Node *new_tmp = new Node(y, data);
+                Node *new_tmp = new Node(y, letra, "white");
                 Node *der = tmp2->down;
                 tmp2->down = new_tmp;
                 new_tmp->up = tmp2;
@@ -169,7 +170,7 @@ public:
         cout << "\n\n";
     }
 
-    void add_node(int valor, string data, int x, int y)
+    void add_node(int valor, string letra, int x, int y)
     {
         Node *tmp = head;
 
@@ -196,7 +197,8 @@ public:
 
             if (tmp->down != NULL)
             {
-                cout << tmp->down->data;
+                cout << tmp->down->letra;
+                cout << " " << tmp->down->color;
             }
 
             cout << "\n";
@@ -208,7 +210,8 @@ public:
 
         if (tmp->down != NULL)
         {
-            cout << tmp->down->data;
+            cout << tmp->down->letra;
+            cout << " " <<tmp->down->color;
         }
 
         cout << "\n";
@@ -220,14 +223,15 @@ public:
 
         while (tmp->down != NULL)
         {
-            cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
+            //cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
             cout << tmp->n;
             cout << " -> ";
 
             if (tmp->right != NULL)
             {
-                cout << tmp->right->data << endl;
-                //cout << "Arriba: " << aux->up->data << endl;
+                cout << tmp->right->letra;
+                cout << " " << tmp->right->color << endl;
+                //cout << "Arriba: " << aux->up->letra << endl;
             }
 
             tmp = tmp->down;
@@ -235,14 +239,14 @@ public:
             cout << "\n";
         }
 
-        cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
+        //cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
         cout << tmp->n;
         cout << " -> ";
 
         if (tmp->right != NULL)
         {
-            cout << tmp->right->data << endl;
-            //cout << "Arriba: " << aux->up->data << endl;
+            cout << tmp->right->letra;
+            cout << "  " << tmp->right->color << endl;
         }
 
         cout << "\n";
@@ -254,7 +258,7 @@ public:
 
         while (actual->right != NULL)
         {
-            cout << actual->right->data;
+            cout << actual->right->letra;
         }
     }
 };

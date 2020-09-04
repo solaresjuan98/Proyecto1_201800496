@@ -184,6 +184,11 @@ public:
             cout << " Nivel no existente" << endl;
         }
     }
+
+    void agregar_nodo_matriz(int nivel, int id_objeto, string letra, string color, int x, int y)
+    {
+        
+    }
 };
 /*
 ListaNiveles::ListaNiveles()

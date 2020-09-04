@@ -39,6 +39,9 @@ public:
     void insertarnodoABB(int id, int nivel, int id_obj, string nombre);
     //void insertarnodoABB(NodoAVL *raiz, int id, int nivel, int id_objeto, string nombre);
 
+    // Matrices de la lista
+    void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
+
     void generar();
     void Delete(NodoAVL *raiz);
 };
@@ -446,5 +449,20 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
     else
     {
         cout << " no encontrado " << endl;
+    }
+}
+
+void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj,string letra, string color, int x, int y)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if(busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+            //busquedaNodo(tmp, id)->getLista()->
+            //busquedaNodo(tmp,id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre);
+            //cout << "Lista: " << nodo->getLista() << endl;
+        }
     }
 }

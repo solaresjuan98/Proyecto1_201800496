@@ -7,16 +7,23 @@ using namespace std;
 class Node
 {
 public:
+    //Datos del objeto
     int n;
-    string data;
+    //string data;
+    string letra;
+    string color;
+
+    //-----------------
     Node *right;
     Node *left;
     Node *down;
     Node *up;
 
-    Node(int n,string data){
+    Node(int n, string letra, string color)
+    {
         this->n = n;
-        this->data = data;
+        this->letra = letra;
+        this->color = color;
         right = NULL;
         left = NULL;
         up = NULL;
