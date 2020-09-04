@@ -81,7 +81,6 @@ int main()
 
     cout << " -------------------------" << endl;*/
 
-    
     avl->insertar(1002);
     for (int i = 1; i < 5; i++)
     {
@@ -93,9 +92,17 @@ int main()
     avl->insertarNivel(100, 44);
     avl->insertarNivel(100, 55);
     avl->insertarNivel(100, 66);
+
+    // Insertar en abb de objetos
     avl->insertarnodoABB(100, 33, 1, "Mesa");
     avl->insertarnodoABB(100, 33, 2, "Escritorio");
-    //avl->insertarenMatriz(100, 33, 1, "m", "azul", x, y)
+
+    // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
+    avl->insertarEnMatriz(100, 33, 1, "m", "azul", 5, 2);
+    avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 1);
+    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 1);
+    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 2, 2);
+
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
     avl->insertarnodoABB(100, 44, 4, "Puerta");
@@ -108,6 +115,14 @@ int main()
     {
         avl->insertarNivel(101, i);
     }
+
+    // Insertar en abb de objetos
+    avl->insertarnodoABB(101, 2, 1, "Mesa");
+    avl->insertarnodoABB(101, 2, 2, "Escritorio");
+
+    // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
+    avl->insertarEnMatriz(101, 2, 1, "m", "azul", 5, 1);
+    avl->insertarEnMatriz(101, 2, 2, "e", "red", 2, 1);
 
     avl->insertar(102);
     //avl->crearListaNiveles(102);
@@ -131,9 +146,10 @@ int main()
     cout << "\n\n";
 
     avl->imprimirABBobjetos(100, 33);
+    avl->imprimirMatriz(100, 33);
     cout << "\n";
     avl->imprimirABBobjetos(100, 44);
-    
+
     //mostrarDatos();
     //mostrarMenu();
 

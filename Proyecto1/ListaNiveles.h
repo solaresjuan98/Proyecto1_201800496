@@ -77,6 +77,38 @@ public:
         return temp;
     }
 
+    NodoNivel *retornarMatriz(int k)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+
+        bool encontrado = false;
+
+        while (ptr != NULL)
+        {
+            if (ptr->id == k)
+            {
+
+                temp = ptr;
+                temp->getMatriz()->print_headers();
+                temp->getMatriz()->print_nodes_x();
+                temp->getMatriz()->print_nodes_y();
+                //temp->verArbolObjetos(ptr->getArbol()->raiz);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " el nodo no existe \n"
+                 << endl;
+            //agregarNivel(ptr);
+        }
+
+        return temp;
+    }
 
     // Agregar el nivel a la lista
     void agregarNuevoNivel(NodoNivel *n)
@@ -171,7 +203,7 @@ public:
                 temp = ptr;
                 //temp->setArbol(new ArbolBinario());
                 //cout << " Arbol creado" << endl;
-                
+
                 temp->getArbol()->insertarNodo(nuevo_nodo);
                 encontrado = true;
             }
@@ -187,7 +219,26 @@ public:
 
     void agregar_nodo_matriz(int nivel, int id_objeto, string letra, string color, int x, int y)
     {
-        
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->getMatriz()->add(id_objeto, letra, color, x, y);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
+        }
     }
 };
 /*

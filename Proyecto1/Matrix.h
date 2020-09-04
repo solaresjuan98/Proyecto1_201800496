@@ -261,6 +261,12 @@ public:
             cout << actual->right->letra;
         }
     }
+
+
+    void generarMatriz()
+    {
+        
+    }
 };
 
 /*

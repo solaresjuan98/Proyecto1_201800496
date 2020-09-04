@@ -32,15 +32,16 @@ public:
     void crearListaNiveles(int id);
     void insertarNivel(int id, int numeroNivel);
     void obtenerListaNodo(NodoAVL *raiz, int id);
-    void imprimirABBobjetos(int id, int numeroNivel);
+    
 
     // Arboles ABB en nodo AVL
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
     void insertarnodoABB(int id, int nivel, int id_obj, string nombre);
-    //void insertarnodoABB(NodoAVL *raiz, int id, int nivel, int id_objeto, string nombre);
+    void imprimirABBobjetos(int id, int numeroNivel);
 
     // Matrices de la lista
     void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
+    void imprimirMatriz(int id, int numeroNivel);
 
     void generar();
     void Delete(NodoAVL *raiz);
@@ -442,7 +443,7 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
     {
         if (busquedaNodo(tmp, id)->getLista() != NULL)
         {
-            busquedaNodo(tmp,id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre);
+            busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre);
             //cout << "Lista: " << nodo->getLista() << endl;
         }
     }
@@ -452,17 +453,38 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
     }
 }
 
-void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj,string letra, string color, int x, int y)
+void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, string color, int x, int y)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if (busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+            
+            busquedaNodo(tmp, id)->getLista()->agregar_nodo_matriz(id_nivel ,id_obj, letra, color, x, y);
+            
+        }
+    }
+}
+
+void ArbolAVL::imprimirMatriz(int id, int numeroNivel)
 {
     NodoAVL *tmp = this->raiz;
 
     if(busquedaNodo(tmp, id))
     {
-        if (busquedaNodo(tmp, id)->getLista() != NULL)
-        {
-            //busquedaNodo(tmp, id)->getLista()->
-            //busquedaNodo(tmp,id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre);
-            //cout << "Lista: " << nodo->getLista() << endl;
-        }
+        busquedaNodo(tmp, id)->getLista()->retornarMatriz(numeroNivel);
     }
+    else
+    {
+        cout << " ";
+    }
+    
+
+
 }
+
+
+
+
