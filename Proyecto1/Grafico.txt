@@ -1,0 +1,13 @@
+digraph G {
+node[shape=box]
+{rank = same; 
+0x55cec74de120[label ="2"];
+0x55cec74de2e0[label ="3"];
+0x55cec74ddf60[label ="5"];
+0x55cec74de4a0[label ="8"];
+}
+
+label = MATRIZ ;
+ 
+ } 
+ }

@@ -91,9 +91,9 @@ public:
 
                 temp = ptr;
                 temp->getMatriz()->print_headers();
-                temp->getMatriz()->print_nodes_x();
-                temp->getMatriz()->print_nodes_y();
-                //temp->verArbolObjetos(ptr->getArbol()->raiz);
+                temp->getMatriz()->print_in_order();
+                /*temp->getMatriz()->print_nodes_x();
+                temp->getMatriz()->print_nodes_y();*/
                 encontrado = true;
             }
 

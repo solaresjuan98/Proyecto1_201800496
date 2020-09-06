@@ -99,9 +99,9 @@ int main()
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
     avl->insertarEnMatriz(100, 33, 1, "m", "azul", 5, 2);
-    avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 1);
-    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 1);
-    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 2, 2);
+    avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
+    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 9);
+    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 8, 2);
 
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");

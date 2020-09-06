@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #pragma once
 #include "Node.h"
 using namespace std;
@@ -29,7 +30,7 @@ public:
         Node *new_node = new Node(n, letra, color);
         add_x(new_node, x);
         add_y(new_node, y);
-        add_node(n, letra, x, y);
+        add_node(n, letra, color, x, y);
     }
 
     void add_x(Node *new_node, int x)
@@ -104,7 +105,7 @@ public:
     {
         if (head->down == NULL)
         {
-            Node *tmp = new Node(y, letra,"white");
+            Node *tmp = new Node(y, letra, "white");
             head->down = tmp;
             tmp->up = head; // primer nodo en Y
         }
@@ -170,26 +171,45 @@ public:
         cout << "\n\n";
     }
 
-    void add_node(int valor, string letra, int x, int y)
+    void add_node(int valor, string letra, string color, int x, int y)
     {
         Node *tmp = head;
+        Node *new_node = new Node(valor, letra, color);
 
-        while (tmp->n != x)
+        while (tmp->right != NULL)
         {
             tmp = tmp->right;
+
+            if (tmp->n == x)
+            {
+                tmp->down = new_node;
+                new_node->up = tmp;
+            }
         }
+
+        while (tmp->down != NULL)
+        {
+            tmp = tmp->down;
+
+            if (tmp->n == y)
+            {
+                tmp->right = new_node;
+                new_node->left = tmp;
+            }
+        }
+
         if (tmp->down == NULL) //INICIAL
         {
         }
 
-        cout << "Se va a ingresar en x = " << x << " y = " << y;
+        //cout << "Se va a ingresar en x = " << x << " y = " << y;
         cout << "\n";
     }
 
     void print_nodes_x()
     {
         Node *tmp = head->right;
-
+        cout << " >> en x: " << endl;
         while (tmp->right != NULL)
         {
             cout << tmp->n;
@@ -211,7 +231,7 @@ public:
         if (tmp->down != NULL)
         {
             cout << tmp->down->letra;
-            cout << " " <<tmp->down->color;
+            cout << " " << tmp->down->color;
         }
 
         cout << "\n";
@@ -220,7 +240,7 @@ public:
     void print_nodes_y()
     {
         Node *tmp = head->down;
-
+        cout << " >> y: " << endl;
         while (tmp->down != NULL)
         {
             //cout << "  :::: Nodos en la fila y = " << tmp->n << endl;
@@ -230,7 +250,7 @@ public:
             if (tmp->right != NULL)
             {
                 cout << tmp->right->letra;
-                cout << " " << tmp->right->color << endl;
+                cout << " " << tmp->right->color;
                 //cout << "Arriba: " << aux->up->letra << endl;
             }
 
@@ -254,18 +274,170 @@ public:
 
     void print_in_order()
     {
-        Node *actual = head->down;
+        Node *x_header = head;
+        Node *y_header = head->down;
+        Node *actual = head;
+        Node *actual_2;
+        Node *actual_3;
+        int pos = 0;
 
+        // Archivo que tendrá el grafico
+        ofstream grafico;
+
+        grafico.open("Grafico.txt", ios::out);
+
+        if (grafico.fail())
+        {
+            cout << " Error ";
+        }
+
+        grafico << "digraph G {\n"
+                << "node[shape=box]\n"
+                << "{rank = same; \n";
+
+        x_header = head;
+        //Imprimiendo los headers en X
+        while (x_header->right != NULL)
+        {
+            cout << x_header->n << "<->";
+            x_header = x_header->right;
+            grafico << &*x_header << "[label =\"" << x_header->n << "\"];\n";
+
+            cout << x_header->n << endl;
+        }
+
+        grafico << "}\n";
+        //grafico << &*x_header << "[label =\"" << x_header->n << "\"]\n";
+
+        /*
+        //Recorriendo por la derecha
         while (actual->right != NULL)
         {
-            cout << actual->right->letra;
-        }
-    }
+            grafico << "Node" << &*actual << "[label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                    << " \n";
+            if (actual->right)
+            {
+                grafico << "Node" << &*actual << "->";
+                grafico << "Node" << &*actual->right << "[dir = both] "
+                        << ";";
+            }
 
+            actual = actual->right;
+            grafico << " Node" << &*actual << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                    << " \n";
+        }
+
+        grafico << "}";
+        
+        actual = head;
+
+        // Recorriendo por debajo
+        while (actual->down != NULL)
+        {
+            //cout << "Nodo: " << *&actual << actual->letra << endl;
+            grafico << "Node" << &*actual << "[label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                    << " \n";
+
+            if (actual->down)
+            {
+                grafico << "Node" << &*actual << "->";
+                grafico << "Node" << &*actual->down << "[dir = both] "
+                        << ";";
+                //cout << "Nodo: " << *&actual << " ->";
+                //cout << "Nodo: " << *&actual->down << endl;
+            }
+
+            actual = actual->down;
+            grafico << " Node" << &*actual << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                    << "\n";
+        }
+
+        actual = head;
+
+        while (actual->down != NULL)
+        {
+            if (actual->right != NULL && actual != head)
+            {
+                actual_3 = actual;
+
+                grafico << "{rank = same;";
+                grafico << "Node" << *&actual_3 << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                        << "\n";
+
+                while (actual_3->right != NULL)
+                {
+                    grafico << "Node" << actual_3->n << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                            << "\n";
+
+                    if (actual_3->right)
+                    {
+                        grafico << "Node" << &*actual_3 << "->";
+                        grafico << "Node" << &*actual_3->right << "[dir = both]"
+                                << ";";
+                    }
+
+                    actual_3 = actual_3->right;
+                }
+
+                grafico << "}";
+                grafico << "Node" << &*actual_3 << "[ label = \"" << actual_3->letra << "\"];"
+                        << "\n";
+            }
+
+            actual = actual->down;
+        }
+
+        actual = head;
+        
+        while (actual->right != NULL)
+        {
+            if (actual->down != NULL && actual != head)
+            {
+                actual_2 = actual;
+                grafico << "Node" << *&actual_2 << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
+                        << "\n";
+
+                while (actual_2->down != NULL)
+                {
+                    if (actual->down)
+                    {
+                        grafico << "Node" << &*actual_2 << "->";
+                        grafico << "Node" << &*actual_2->down << "[dir = both]"
+                                << ";";
+                    }
+
+                    actual_2 = actual_2->down;
+                }
+
+                grafico << "Node" << &*actual_2 << "[ label = \"" << actual_2->letra << "\"];"
+                        << "\n";
+            }
+
+            actual = actual->right;
+        }
+        */
+
+        grafico << "\n"
+                << "label = MATRIZ ;\n"
+                << " \n } \n }";
+
+        grafico.close();
+
+        /*
+        while (actual->right != NULL && actual->down != NULL)
+        {
+            //Imprimir hacia la derecha
+            cout << actual->right->letra << " <-> ";
+            if (actual->right == NULL)
+            {
+                actual = actual->down;
+            }
+            actual = actual->right;
+        }*/
+    }
 
     void generarMatriz()
     {
-        
     }
 };
 
