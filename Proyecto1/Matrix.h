@@ -293,20 +293,40 @@ public:
 
         grafico << "digraph G {\n"
                 << "node[shape=box]\n"
-                << "{rank = same; \n";
+                << "{ rank = same; \n"
+                << "raiz[label=\"RAIZ\"]\n";
 
         x_header = head;
-        //Imprimiendo los headers en X
+
+        //Recorriendo los headers en X
         while (x_header->right != NULL)
         {
+            Node *aux = head;
             cout << x_header->n << "<->";
             x_header = x_header->right;
-            grafico << &*x_header << "[label =\"" << x_header->n << "\"];\n";
-
+            grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\"];\n";
             cout << x_header->n << endl;
         }
 
         grafico << "}\n";
+        
+        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n"; 
+        grafico << "raiz->"
+                << "nodo"<<&*y_header << "\n";
+        
+        grafico << "nodo" << &*y_header << "->"
+                << "nodo"<< &*y_header->down << "\n";
+
+        //Recorriendo los headers en Y
+        while (y_header->down != NULL)
+        {
+            
+            y_header = y_header->down;
+            grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\"];\n";
+            grafico << "nodo"<<&*y_header << " ->"
+                    << "nodo"<<&*y_header->down << "\n";
+        }
+
         //grafico << &*x_header << "[label =\"" << x_header->n << "\"]\n";
 
         /*
@@ -445,8 +465,7 @@ public:
 Matrix::Matrix()
 {
 }
-
+*/
 Matrix::~Matrix()
 {
 }
-*/

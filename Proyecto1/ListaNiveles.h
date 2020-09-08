@@ -7,6 +7,7 @@ class ListaNiveles
 {
 public:
     NodoNivel *cabeza;
+    //
 
     ListaNiveles()
     {
@@ -39,8 +40,8 @@ public:
 
         if (!encontrado)
         {
-            cout << " el nodo no existe \n"
-                 << endl;
+            //cout << " el nodo no existe \n"
+            //     << endl;
             //agregarNivel(ptr);
         }
 
@@ -69,8 +70,8 @@ public:
 
         if (!encontrado)
         {
-            cout << " el nodo no existe \n"
-                 << endl;
+            /*cout << " el nodo no existe \n"
+                 << endl;*/
             //agregarNivel(ptr);
         }
 
@@ -121,8 +122,8 @@ public:
             if (cabeza == NULL)
             {
                 cabeza = n;
-                std::cout << " Nivel agregado como nodo cabeza" << endl;
-                std::cout << n->id << endl;
+                //std::cout << " Nivel agregado como nodo cabeza" << endl;
+                //std::cout << n->id << endl;
             }
             else
             {
@@ -134,8 +135,8 @@ public:
                 }
 
                 ptr->siguiente = n;
-                cout << " Nivel agregado. " << endl;
-                std::cout << n->id << endl;
+                //cout << " Nivel agregado. " << endl;
+                //std::cout << n->id << endl;
             }
         }
     }
@@ -239,6 +240,79 @@ public:
         {
             cout << " Nivel no existente" << endl;
         }
+    }
+
+    void eliminar_nivel(int nivel)
+    {
+        if (cabeza == NULL)
+        {
+            // Lista vacía
+        }
+        else if (cabeza != NULL)
+        {
+
+            if (cabeza->id == nivel)
+            {
+                NodoNivel *aux = cabeza;
+                cabeza = cabeza->siguiente;
+
+                delete aux;
+            }
+            else
+            {
+                NodoNivel *temp = NULL;
+                NodoNivel *ptrprev = cabeza;
+                NodoNivel *actual = cabeza->siguiente;
+
+                while (actual != NULL)
+                {
+                    if (actual->id == nivel)
+                    {
+                        temp = actual;
+                        //delete actual->getArbol();
+                        //delete actual->getMatriz();
+                        actual = NULL;
+                        delete actual;
+                    }
+                    else
+                    {
+                        ptrprev = ptrprev->siguiente;
+                        actual = actual->siguiente;
+                    }
+                }
+
+                if (temp != NULL)
+                {
+                    ptrprev->siguiente = temp->siguiente;
+                }
+                else
+                {
+                }
+            }
+        }
+    }
+
+    // Obtener cantidad de niveles del proyecto (lista)
+    int obtenerTamanio()
+    {
+        int cant_niveles = 0;
+
+        if (cabeza == NULL)
+        {
+            return 0;
+        }
+        else
+        {
+            NodoNivel *actual = cabeza;
+
+            while (actual != NULL)
+            {
+                actual = actual->siguiente;
+                cant_niveles++;
+            }
+        }
+
+        return cant_niveles;
     }
 };
 /*

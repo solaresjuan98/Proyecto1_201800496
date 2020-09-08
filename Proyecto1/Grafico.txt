@@ -1,11 +1,21 @@
 digraph G {
 node[shape=box]
-{rank = same; 
-0x55cec74de120[label ="2"];
-0x55cec74de2e0[label ="3"];
-0x55cec74ddf60[label ="5"];
-0x55cec74de4a0[label ="8"];
+{ rank = same; 
+raiz[label="RAIZ"]
+nodo0x55ab93f95260[label ="2"];
+nodo0x55ab93f95420[label ="3"];
+nodo0x55ab93f950a0[label ="5"];
+nodo0x55ab93f955e0[label ="8"];
 }
+nodo0x55ab93f95110[label ="2"];
+raiz->nodo0x55ab93f95110
+nodo0x55ab93f95110->nodo0x55ab93f952d0
+nodo0x55ab93f952d0[label = "3"];
+nodo0x55ab93f952d0 ->nodo0x55ab93f95490
+nodo0x55ab93f95490[label = "9"];
+nodo0x55ab93f95490 ->nodo0x55ab93f95650
+nodo0x55ab93f95650[label = "10"];
+nodo0x55ab93f95650 ->nodo0
 
 label = MATRIZ ;
  

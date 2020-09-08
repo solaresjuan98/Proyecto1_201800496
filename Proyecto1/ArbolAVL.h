@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include <string.h>
 #include "NodoAVL.h"
+#include "ListaProyectos.h"
+#include "NodoProyecto.h"
 #pragma once
 using namespace std;
 
@@ -20,6 +22,10 @@ public:
     NodoAVL *rotacionDerIzq(NodoAVL *n, NodoAVL *n1);
     NodoAVL *getRaiz();
     void setRaiz(NodoAVL *n);
+    
+    //Lista Ordenada ascendentemente
+    ListaProyectos *lista = new ListaProyectos();
+
     //Recorridos
     void inOrden(NodoAVL *n);
     void postOrden(NodoAVL *n);
@@ -28,11 +34,17 @@ public:
     NodoAVL *busquedaNodo(NodoAVL *nodo, int id);
     void imprimir(NodoAVL *raiz, int cont);
 
-    // Listas en nodo
+    // Listas en nodo AVL
     void crearListaNiveles(int id);
     void insertarNivel(int id, int numeroNivel);
     void obtenerListaNodo(NodoAVL *raiz, int id);
+    void eliminarNivel(int id, int numeroNivel);
+    void obtenerNumNiveles(int id);
     
+    //Obtener los proyectos con mayor numero de niveles en forma ascendente
+    // - Generando lista
+    void generarListaPOrd(NodoAVL *actual);
+    void imprimirAsc();
 
     // Arboles ABB en nodo AVL
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
@@ -301,10 +313,10 @@ void ArbolAVL::inOrden(NodoAVL *actual)
 
         std::cout << " Proyecto: " << actual->getID() << endl;
         //std::cout << " Lista : " << actual->getLista() << endl;
-        if (actual->getLista() != NULL)
+        /*if (actual->getLista() != NULL)
         {
             actual->getLista()->imprimirLista();
-        }
+        }*/
 
         inOrden(actual->getDer());
     }
@@ -329,6 +341,35 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
     {
         return busqueda(nodo->getDer(), id);
     }
+}
+
+/*
+    LISTAS EN NODO AVL
+*/
+
+void ArbolAVL::generarListaPOrd(NodoAVL *actual)
+{
+    
+    if(actual== NULL)
+    {
+        return;
+    }
+    else
+    {
+        generarListaPOrd(actual->getIzq());
+        
+        //agregando a lista
+        lista->agregarProyecto(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
+
+        generarListaPOrd(actual->getDer());
+        /* code */
+    }
+    
+}
+
+void ArbolAVL::imprimirAsc()
+{
+    lista->imprimirLista();
 }
 
 void ArbolAVL::crearListaNiveles(int n)
@@ -383,6 +424,16 @@ void ArbolAVL::insertarNivel(int id, int numeroNivel)
     }
 }
 
+void ArbolAVL::eliminarNivel(int id, int numeroNivel)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if(busqueda(tmp, id))
+    {
+        busquedaNodo(tmp, id)->getLista()->eliminar_nivel(numeroNivel);
+    }
+}
+
 void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
 {
     NodoAVL *tmp = this->raiz;
@@ -398,6 +449,25 @@ void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
     }
 }
 
+void ArbolAVL::obtenerNumNiveles(int id)
+{
+    NodoAVL *nodo = this->raiz;
+
+    if(busquedaNodo(nodo, id))
+    {
+        cout << " Proyecto: "<<busquedaNodo(nodo, id)->getID() << endl;
+        cout << " No. Niveles -> " << busquedaNodo(nodo, id)->getLista()->obtenerTamanio() << endl;
+    }
+    else
+    {
+        cout << " No encontrado. "<<endl;
+    }
+    
+}
+
+/*
+    ARBOLES ABB DE OBJETOS
+*/
 void ArbolAVL::imprimirABBobjetos(int id, int numeroNivel)
 {
     NodoAVL *tmp = this->raiz;

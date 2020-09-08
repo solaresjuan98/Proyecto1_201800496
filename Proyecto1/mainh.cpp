@@ -5,13 +5,15 @@
 #include "json.hpp"
 #include <time.h>
 
-//clases
+//clases / estructuras
 #include "Matrix.h"
 #include "ArbolAVL.h"
 #include "ArbolBinario.h"
 #include "NodoArbol.h"
 #include "ListaNiveles.h"
 #include "NodoNivel.h"
+#include "ListaProyectos.h"
+#include "NodoProyecto.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -49,6 +51,9 @@ ArbolAVL *pr = new ArbolAVL();
 // Arbol del listado de objetos
 ArbolBinario *abbGlobal = new ArbolBinario();
 ListaNiveles *ln1 = new ListaNiveles();
+//
+ListaProyectos *lp = new ListaProyectos();
+
 // ruta de archivo a leer
 string ruta;
 string cadena;
@@ -82,12 +87,17 @@ int main()
     cout << " -------------------------" << endl;*/
 
     avl->insertar(1002);
-    for (int i = 1; i < 5; i++)
+    for (int i = 1; i < 6; i++)
     {
         avl->insertarNivel(1002, i);
     }
 
+    // Eliminando niveles del proyecto con ID 1002
+    avl->eliminarNivel(1002, 2);
+    avl->eliminarNivel(1002, 3);
+
     avl->insertar(100);
+    // insertarNivel(id en avl, # nivel)
     avl->insertarNivel(100, 33);
     avl->insertarNivel(100, 44);
     avl->insertarNivel(100, 55);
@@ -101,7 +111,7 @@ int main()
     avl->insertarEnMatriz(100, 33, 1, "m", "azul", 5, 2);
     avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
     avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 9);
-    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 8, 2);
+    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 8, 10);
 
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
@@ -111,7 +121,7 @@ int main()
 
     avl->insertar(101);
     //avl->crearListaNiveles(101);
-    for (int i = 1; i < 7; i++)
+    for (int i = 1; i < 17; i++)
     {
         avl->insertarNivel(101, i);
     }
@@ -126,14 +136,14 @@ int main()
 
     avl->insertar(102);
     //avl->crearListaNiveles(102);
-    for (int i = 1; i < 3; i++)
+    for (int i = 1; i < 5; i++)
     {
         avl->insertarNivel(102, i);
     }
 
     avl->insertar(103);
     //avl->crearListaNiveles(103);
-    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < 9; i++)
     {
         avl->insertarNivel(103, i);
     }
@@ -150,9 +160,38 @@ int main()
     cout << "\n";
     avl->imprimirABBobjetos(100, 44);
 
+    cout << "\t :: AVL CON PROYECTOS ACTUALES :: \n";
+
+    //avl->imprimir(avl->getRaiz(), 0);
+    avl->inOrden(avl->getRaiz());
     //mostrarDatos();
     //mostrarMenu();
 
+    cout << "\n\n";
+
+    cout << " \t ..:: Reportes 3 y 4 ::..\n";
+    /*avl->obtenerNumNiveles(100);
+    avl->obtenerNumNiveles(101);
+    avl->obtenerNumNiveles(102);
+    avl->obtenerNumNiveles(103);
+    avl->obtenerNumNiveles(1002);*/
+
+    //avl->generarListaPOrd(avl->getRaiz());
+    //avl->imprimirAsc();
+
+    
+    //CANT. NIVELES DE FORMA ASCENDENTE
+    /*lp->agregarProyecto(new NodoProyecto(1, 7));
+    lp->agregarProyecto(new NodoProyecto(2, 10));
+    lp->agregarProyecto(new NodoProyecto(3, 2));
+    lp->agregarProyecto(new NodoProyecto(4, 1));
+    lp->agregarProyecto(new NodoProyecto(5, 14));
+    lp->agregarProyecto(new NodoProyecto(6, 25));
+    lp->agregarProyecto(new NodoProyecto(7, 20));
+    lp->agregarProyecto(new NodoProyecto(8, 5));
+    lp->agregarProyecto(new NodoProyecto(9, 11));
+    
+    lp->imprimirLista();*/
     cin.get();
     return 0;
 }

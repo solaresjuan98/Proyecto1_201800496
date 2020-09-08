@@ -28,7 +28,7 @@ public:
         if (raiz == NULL)
         {
             raiz = nuevo_nodo;
-            cout << " insertado al inicio :)" << endl;
+            //cout << " insertado al inicio :)" << endl;
         }
         else
         {
@@ -38,14 +38,14 @@ public:
             {
                 if (nuevo_nodo->id == temp->id)
                 {
-                    cout << " Nodo repetido, intenta de nuevo :'v" << endl;
+                    //cout << " Nodo repetido, intenta de nuevo :'v" << endl;
                     return; // no se aceptan nodos repetidos
                 }
                 else if (nuevo_nodo->id < temp->id && temp->izq == NULL)
                 {
                     // insertar nodo en hijo izquierdo
                     temp->izq = nuevo_nodo;
-                    cout << " Nodo insertado a la izq :)" << endl;
+                    //cout << " Nodo insertado a la izq :)" << endl;
                     break;
                 }
                 else if (nuevo_nodo->id < temp->id)
@@ -56,7 +56,7 @@ public:
                 {
                     // insertar nodo en hijo derecho
                     temp->der = nuevo_nodo;
-                    cout << " id insertado a la der :)" << endl;
+                    //cout << " id insertado a la der :)" << endl;
                     break;
                 }
                 else
