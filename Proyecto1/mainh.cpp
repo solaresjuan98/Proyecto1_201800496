@@ -112,6 +112,8 @@ int main()
     avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
     avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 9);
     avl->insertarEnMatriz(100, 33, 4, "b", "brown", 8, 10);
+    avl->insertarEnMatriz(100, 33, 5, "p", "red", 2, 1);
+    avl->insertarEnMatriz(100, 33, 6, "r", "red", 4, 1);
 
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
@@ -167,14 +169,15 @@ int main()
     //mostrarDatos();
     //mostrarMenu();
 
-    cout << "\n\n";
+    //cout << "\n\n";
 
-    cout << " \t ..:: Reportes 3 y 4 ::..\n";
+    //cout << " \t ..:: Reportes 3 y 4 ::..\n";
     /*avl->obtenerNumNiveles(100);
     avl->obtenerNumNiveles(101);
     avl->obtenerNumNiveles(102);
     avl->obtenerNumNiveles(103);
-    avl->obtenerNumNiveles(1002);*/
+    avl->obp
+tenerNumNiveles(1002);*/
 
     //avl->generarListaPOrd(avl->getRaiz());
     //avl->imprimirAsc();

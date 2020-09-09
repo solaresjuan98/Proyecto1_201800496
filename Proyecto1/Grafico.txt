@@ -2,20 +2,27 @@ digraph G {
 node[shape=box]
 { rank = same; 
 raiz[label="RAIZ"]
-nodo0x55ab93f95260[label ="2"];
-nodo0x55ab93f95420[label ="3"];
-nodo0x55ab93f950a0[label ="5"];
-nodo0x55ab93f955e0[label ="8"];
+raiz->nodo0x561f3515e260[dir="both"]
+nodo0x561f3515e260[label ="2" group=2];
+nodo0x561f3515e260 ->nodo0x561f3515e420[dir="both"]
+nodo0x561f3515e420[label ="3" group=3];
+nodo0x561f3515e420 ->nodo0x561f3515e8f0[dir="both"]
+nodo0x561f3515e8f0[label ="4" group=4];
+nodo0x561f3515e8f0 ->nodo0x561f3515e0a0[dir="both"]
+nodo0x561f3515e0a0[label ="5" group=5];
+nodo0x561f3515e0a0 ->nodo0x561f3515e5e0[dir="both"]
+nodo0x561f3515e5e0[label ="8" group=8];
 }
-nodo0x55ab93f95110[label ="2"];
-raiz->nodo0x55ab93f95110
-nodo0x55ab93f95110->nodo0x55ab93f952d0
-nodo0x55ab93f952d0[label = "3"];
-nodo0x55ab93f952d0 ->nodo0x55ab93f95490
-nodo0x55ab93f95490[label = "9"];
-nodo0x55ab93f95490 ->nodo0x55ab93f95650
-nodo0x55ab93f95650[label = "10"];
-nodo0x55ab93f95650 ->nodo0
+nodo0x561f3515e7a0[label ="1"];
+raiz->nodo0x561f3515e7a0[dir="both"]
+nodo0x561f3515e7a0->nodo0x561f3515e110[dir="both"]
+nodo0x561f3515e110[label = "2"];
+nodo0x561f3515e110 ->nodo0x561f3515e2d0[dir="both"]
+nodo0x561f3515e2d0[label = "3"];
+nodo0x561f3515e2d0 ->nodo0x561f3515e490[dir="both"]
+nodo0x561f3515e490[label = "9"];
+nodo0x561f3515e490 ->nodo0x561f3515e650[dir="both"]
+nodo0x561f3515e650[label = "10"];
 
 label = MATRIZ ;
  

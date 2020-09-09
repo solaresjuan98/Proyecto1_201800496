@@ -298,34 +298,58 @@ public:
 
         x_header = head;
 
+        grafico << "raiz->"
+                << "nodo" << &*x_header->right << "[dir=\"both\"]\n";
+
         //Recorriendo los headers en X
         while (x_header->right != NULL)
         {
-            Node *aux = head;
-            cout << x_header->n << "<->";
+            Node *ant = x_header->left;
             x_header = x_header->right;
-            grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\"];\n";
+            grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\" group=" << x_header->n << "];\n";
             cout << x_header->n << endl;
+            cout << x_header->down->letra << endl;
+            cout << "\n";
+            if (x_header->right)
+            {
+                grafico << "nodo" << &*x_header << " ->"
+                        << "nodo" << &*x_header->right << "[dir=\"both\"]\n";
+            }
+
         }
 
         grafico << "}\n";
-        
-        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n"; 
-        grafico << "raiz->"
-                << "nodo"<<&*y_header << "\n";
-        
-        grafico << "nodo" << &*y_header << "->"
-                << "nodo"<< &*y_header->down << "\n";
 
+        // Enlazando las cabeceras en y con el nodo raiz
+        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n";
+        grafico << "raiz->"
+                << "nodo" << &*y_header << "[dir=\"both\"]\n";
+
+        grafico << "nodo" << &*y_header << "->"
+                << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
+
+        cout << "--" << endl;
+        cout << y_header->n << endl;
+        cout << y_header->right->letra << endl;
+        
         //Recorriendo los headers en Y
         while (y_header->down != NULL)
         {
-            
+            //Node *aux;
             y_header = y_header->down;
             grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\"];\n";
-            grafico << "nodo"<<&*y_header << " ->"
-                    << "nodo"<<&*y_header->down << "\n";
+            cout << y_header->n << endl;
+            cout << y_header->right->letra << endl;
+            //cout << "-----\n";
+            //cout << y_header->right->up->letra << endl;
+            cout << "\n";
+            if (y_header->down)
+            {
+                grafico << "nodo" << &*y_header << " ->"
+                        << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
+            }
         }
+
 
         //grafico << &*x_header << "[label =\"" << x_header->n << "\"]\n";
 
