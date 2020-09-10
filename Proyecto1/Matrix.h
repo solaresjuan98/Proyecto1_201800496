@@ -307,177 +307,86 @@ public:
             Node *ant = x_header->left;
             x_header = x_header->right;
             grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\" group=" << x_header->n << "];\n";
-            cout << x_header->n << endl;
-            cout << x_header->down->letra << endl;
-            cout << "\n";
+            //cout << x_header->n << endl;
+            //cout << x_header->down->letra << endl;
+            //cout << "\n";
+
             if (x_header->right)
             {
                 grafico << "nodo" << &*x_header << " ->"
                         << "nodo" << &*x_header->right << "[dir=\"both\"]\n";
             }
-
         }
 
+        //Fin del rank = same
         grafico << "}\n";
 
+        Node *aux = head;
+        Node *aux2 = x_header->down;
+        x_header = head->right;
+        /*Node *temp =head;
+        //Pasada 2 (Generando los nodos)
+        while (temp->right != NULL)
+        {
+            temp = temp->right;
+            grafico << "nodo" << &*temp->down << "[label = \"" << temp->down->letra
+                    << "\" group=" << temp->n << "];\n";
+        }*/
+
         // Enlazando las cabeceras en y con el nodo raiz
-        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n";
+
         grafico << "raiz->"
                 << "nodo" << &*y_header << "[dir=\"both\"]\n";
-
+        grafico << "{ rank = same; \n";
+        grafico << "nodo1" << &*aux->down << "[label = \"" << aux->down->letra
+                << "\" group=" << aux->n << "];\n";
+        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n";
+        grafico << "}\n";
         grafico << "nodo" << &*y_header << "->"
                 << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
 
+        cout << " Derecho de actual: " << y_header->letra << endl;
+        //grafico << "nodo1" << &*aux->down << "->"
+        //        << "nodo" << &*aux2->up << ";\n";
+
         cout << "--" << endl;
-        cout << y_header->n << endl;
-        cout << y_header->right->letra << endl;
-        
+
         //Recorriendo los headers en Y
         while (y_header->down != NULL)
         {
-            //Node *aux;
+            grafico << "{ rank = same; \n";
             y_header = y_header->down;
-            grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\"];\n";
-            cout << y_header->n << endl;
-            cout << y_header->right->letra << endl;
-            //cout << "-----\n";
-            //cout << y_header->right->up->letra << endl;
-            cout << "\n";
+            //x_header = x_header->right;
+            aux = aux->down;
+            aux2 = y_header->right;
+            grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\" group=0];\n";
+            cout << " y_header actual: " << y_header->n << endl;
+            cout << " Dirección a la derecha: " << &*y_header->right << endl;
+            cout << " Valor a la derecha: " << y_header->right->letra << endl;
+
+            grafico << "nodo1" << &*aux->down << "[label = \"" << aux->down->letra
+                    << "\" group=" << aux->n << "];\n";
+            grafico << "}\n";
+
+            // hacer enlace
+            grafico << "nodo1" << &*aux->down << "->"
+                    << "nodo" << &*aux2->up << ";\n";
+
+            //No tocar
+            //cout << aux2->up->n << endl;
+            //cout << &*aux2->up << endl;
             if (y_header->down)
             {
-                grafico << "nodo" << &*y_header << " ->"
+                grafico << "nodo" << &*y_header << "->"
                         << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
             }
         }
-
-
-        //grafico << &*x_header << "[label =\"" << x_header->n << "\"]\n";
-
-        /*
-        //Recorriendo por la derecha
-        while (actual->right != NULL)
-        {
-            grafico << "Node" << &*actual << "[label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                    << " \n";
-            if (actual->right)
-            {
-                grafico << "Node" << &*actual << "->";
-                grafico << "Node" << &*actual->right << "[dir = both] "
-                        << ";";
-            }
-
-            actual = actual->right;
-            grafico << " Node" << &*actual << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                    << " \n";
-        }
-
-        grafico << "}";
-        
-        actual = head;
-
-        // Recorriendo por debajo
-        while (actual->down != NULL)
-        {
-            //cout << "Nodo: " << *&actual << actual->letra << endl;
-            grafico << "Node" << &*actual << "[label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                    << " \n";
-
-            if (actual->down)
-            {
-                grafico << "Node" << &*actual << "->";
-                grafico << "Node" << &*actual->down << "[dir = both] "
-                        << ";";
-                //cout << "Nodo: " << *&actual << " ->";
-                //cout << "Nodo: " << *&actual->down << endl;
-            }
-
-            actual = actual->down;
-            grafico << " Node" << &*actual << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                    << "\n";
-        }
-
-        actual = head;
-
-        while (actual->down != NULL)
-        {
-            if (actual->right != NULL && actual != head)
-            {
-                actual_3 = actual;
-
-                grafico << "{rank = same;";
-                grafico << "Node" << *&actual_3 << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                        << "\n";
-
-                while (actual_3->right != NULL)
-                {
-                    grafico << "Node" << actual_3->n << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                            << "\n";
-
-                    if (actual_3->right)
-                    {
-                        grafico << "Node" << &*actual_3 << "->";
-                        grafico << "Node" << &*actual_3->right << "[dir = both]"
-                                << ";";
-                    }
-
-                    actual_3 = actual_3->right;
-                }
-
-                grafico << "}";
-                grafico << "Node" << &*actual_3 << "[ label = \"" << actual_3->letra << "\"];"
-                        << "\n";
-            }
-
-            actual = actual->down;
-        }
-
-        actual = head;
-        
-        while (actual->right != NULL)
-        {
-            if (actual->down != NULL && actual != head)
-            {
-                actual_2 = actual;
-                grafico << "Node" << *&actual_2 << "[ label = \"" << actual->letra << "\", color = \"" << actual->color << "\"]; "
-                        << "\n";
-
-                while (actual_2->down != NULL)
-                {
-                    if (actual->down)
-                    {
-                        grafico << "Node" << &*actual_2 << "->";
-                        grafico << "Node" << &*actual_2->down << "[dir = both]"
-                                << ";";
-                    }
-
-                    actual_2 = actual_2->down;
-                }
-
-                grafico << "Node" << &*actual_2 << "[ label = \"" << actual_2->letra << "\"];"
-                        << "\n";
-            }
-
-            actual = actual->right;
-        }
-        */
 
         grafico << "\n"
                 << "label = MATRIZ ;\n"
                 << " \n } \n }";
 
         grafico.close();
-
-        /*
-        while (actual->right != NULL && actual->down != NULL)
-        {
-            //Imprimir hacia la derecha
-            cout << actual->right->letra << " <-> ";
-            if (actual->right == NULL)
-            {
-                actual = actual->down;
-            }
-            actual = actual->right;
-        }*/
     }
 
     void generarMatriz()

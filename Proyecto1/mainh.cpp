@@ -108,12 +108,25 @@ int main()
     avl->insertarnodoABB(100, 33, 2, "Escritorio");
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
-    avl->insertarEnMatriz(100, 33, 1, "m", "azul", 5, 2);
+    avl->insertarEnMatriz(100, 33, 1, "m", "azul", 1, 2);
     avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
-    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 3, 9);
-    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 8, 10);
-    avl->insertarEnMatriz(100, 33, 5, "p", "red", 2, 1);
+    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 4, 4);
+    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 2, 4);
+    /*avl->insertarEnMatriz(100, 33, 5, "p", "red", 2, 1);
     avl->insertarEnMatriz(100, 33, 6, "r", "red", 4, 1);
+    avl->insertarEnMatriz(100, 33, 7, "k", "red", 11, 7);
+    avl->insertarEnMatriz(100, 33, 8, "o", "red", 10, 4);
+    avl->insertarEnMatriz(100, 33, 9, "c", "red", 15, 2);
+    avl->insertarEnMatriz(100, 33, 10, "t", "blue", 13, 11);
+    avl->insertarEnMatriz(100, 33, 11, "j", "white", 19, 12);*/
+    /*for (int i = 0; i < 45; i++)
+    {
+        for (int j = 0; j < 50; j++)
+        {
+            avl->insertarEnMatriz(100, 33, i, "p", "red", i, j);
+        }
+        
+    }*/
 
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
@@ -182,10 +195,9 @@ tenerNumNiveles(1002);*/
     //avl->generarListaPOrd(avl->getRaiz());
     //avl->imprimirAsc();
 
-    
     //CANT. NIVELES DE FORMA ASCENDENTE
     /*lp->agregarProyecto(new NodoProyecto(1, 7));
-    lp->agregarProyecto(new NodoProyecto(2, 10));
+        lp->agregarProyecto(new NodoProyecto(2, 10));
     lp->agregarProyecto(new NodoProyecto(3, 2));
     lp->agregarProyecto(new NodoProyecto(4, 1));
     lp->agregarProyecto(new NodoProyecto(5, 14));
@@ -193,6 +205,7 @@ tenerNumNiveles(1002);*/
     lp->agregarProyecto(new NodoProyecto(7, 20));
     lp->agregarProyecto(new NodoProyecto(8, 5));
     lp->agregarProyecto(new NodoProyecto(9, 11));
+    
     
     lp->imprimirLista();*/
     cin.get();

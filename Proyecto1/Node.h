@@ -9,7 +9,6 @@ class Node
 public:
     //Datos del objeto
     int n;
-    //string data;
     string letra;
     string color;
 
