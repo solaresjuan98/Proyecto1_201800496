@@ -304,13 +304,11 @@ public:
         //Recorriendo los headers en X
         while (x_header->right != NULL)
         {
-            Node *ant = x_header->left;
+            //Node *ant = x_header->left;
             x_header = x_header->right;
             grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\" group=" << x_header->n << "];\n";
-            //cout << x_header->n << endl;
-            //cout << x_header->down->letra << endl;
-            //cout << "\n";
-
+            //grafico << "nodo" << &*x_header->down << "[label =\"" << x_header->down->letra << "\" group=" << x_header->n << "];\n";
+            //cout << "  >>> " << x_header->down->letra << endl;
             if (x_header->right)
             {
                 grafico << "nodo" << &*x_header << " ->"
@@ -323,17 +321,8 @@ public:
 
         Node *aux = head;
         Node *aux2 = x_header->down;
+        Node *aux3 = aux2->right;
         x_header = head->right;
-        /*Node *temp =head;
-        //Pasada 2 (Generando los nodos)
-        while (temp->right != NULL)
-        {
-            temp = temp->right;
-            grafico << "nodo" << &*temp->down << "[label = \"" << temp->down->letra
-                    << "\" group=" << temp->n << "];\n";
-        }*/
-
-        // Enlazando las cabeceras en y con el nodo raiz
 
         grafico << "raiz->"
                 << "nodo" << &*y_header << "[dir=\"both\"]\n";
@@ -345,6 +334,8 @@ public:
         grafico << "nodo" << &*y_header << "->"
                 << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
 
+        grafico << "nodo1" << &*aux->down << "->"
+                << "nodo" << &*x_header << ";\n"; // ojo aqui
         cout << " Derecho de actual: " << y_header->letra << endl;
         //grafico << "nodo1" << &*aux->down << "->"
         //        << "nodo" << &*aux2->up << ";\n";
@@ -359,6 +350,7 @@ public:
             //x_header = x_header->right;
             aux = aux->down;
             aux2 = y_header->right;
+            // Creando las cabeceras en y
             grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\" group=0];\n";
             cout << " y_header actual: " << y_header->n << endl;
             cout << " Dirección a la derecha: " << &*y_header->right << endl;
@@ -371,10 +363,13 @@ public:
             // hacer enlace
             grafico << "nodo1" << &*aux->down << "->"
                     << "nodo" << &*aux2->up << ";\n";
-
+            //cout << aux2->down->letra << endl;
+            
             //No tocar
             //cout << aux2->up->n << endl;
-            //cout << &*aux2->up << endl;
+            //cout << &*aux2->up << endl;//*IMPORTANTE*
+
+            // Enlazando los headers en y
             if (y_header->down)
             {
                 grafico << "nodo" << &*y_header << "->"
@@ -391,6 +386,21 @@ public:
 
     void generarMatriz()
     {
+        Node *actual_x = head;
+        Node *actual_y = head->down;
+        Node *aux1 = actual_y->right;
+
+        while (actual_y->down != NULL)
+        {
+            cout << " GENERANDO " << endl;
+            while (aux1->right != NULL)
+            {
+                cout << aux1->letra << endl;
+                aux1 = aux1->right;
+            }
+
+            actual_y = actual_y->down;
+        }
     }
 };
 

@@ -93,6 +93,7 @@ public:
                 temp = ptr;
                 temp->getMatriz()->print_headers();
                 temp->getMatriz()->print_in_order();
+                temp->getMatriz()->generarMatriz();
                 /*temp->getMatriz()->print_nodes_x();
                 temp->getMatriz()->print_nodes_y();*/
                 encontrado = true;
@@ -206,6 +207,34 @@ public:
                 //cout << " Arbol creado" << endl;
 
                 temp->getArbol()->insertarNodo(nuevo_nodo);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
+        }
+    }
+
+    void eliminar_nodo_abb(int nivel, int id_objeto)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        //NodoArbol *nuevo_nodo = new NodoArbol(id_objeto, nombre);
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                //temp->setArbol(new ArbolBinario());
+                //cout << " Arbol creado" << endl;
+
+                temp->getArbol()->eliminar(id_objeto);
                 encontrado = true;
             }
 

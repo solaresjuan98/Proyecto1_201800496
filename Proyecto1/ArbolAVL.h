@@ -22,7 +22,7 @@ public:
     NodoAVL *rotacionDerIzq(NodoAVL *n, NodoAVL *n1);
     NodoAVL *getRaiz();
     void setRaiz(NodoAVL *n);
-    
+
     //Lista Ordenada ascendentemente
     ListaProyectos *lista = new ListaProyectos();
 
@@ -40,7 +40,7 @@ public:
     void obtenerListaNodo(NodoAVL *raiz, int id);
     void eliminarNivel(int id, int numeroNivel);
     void obtenerNumNiveles(int id);
-    
+
     //Obtener los proyectos con mayor numero de niveles en forma ascendente
     // - Generando lista
     void generarListaPOrd(NodoAVL *actual);
@@ -50,6 +50,7 @@ public:
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
     void insertarnodoABB(int id, int nivel, int id_obj, string nombre);
     void imprimirABBobjetos(int id, int numeroNivel);
+    void eliminarnodoABB(int id, int numeroNivel, int id_obj);
 
     // Matrices de la lista
     void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
@@ -349,22 +350,21 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
 
 void ArbolAVL::generarListaPOrd(NodoAVL *actual)
 {
-    
-    if(actual== NULL)
+
+    if (actual == NULL)
     {
         return;
     }
     else
     {
         generarListaPOrd(actual->getIzq());
-        
+
         //agregando a lista
         lista->agregarProyecto(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
 
         generarListaPOrd(actual->getDer());
         /* code */
     }
-    
 }
 
 void ArbolAVL::imprimirAsc()
@@ -428,7 +428,7 @@ void ArbolAVL::eliminarNivel(int id, int numeroNivel)
 {
     NodoAVL *tmp = this->raiz;
 
-    if(busqueda(tmp, id))
+    if (busqueda(tmp, id))
     {
         busquedaNodo(tmp, id)->getLista()->eliminar_nivel(numeroNivel);
     }
@@ -453,16 +453,15 @@ void ArbolAVL::obtenerNumNiveles(int id)
 {
     NodoAVL *nodo = this->raiz;
 
-    if(busquedaNodo(nodo, id))
+    if (busquedaNodo(nodo, id))
     {
-        cout << " Proyecto: "<<busquedaNodo(nodo, id)->getID() << endl;
+        cout << " Proyecto: " << busquedaNodo(nodo, id)->getID() << endl;
         cout << " No. Niveles -> " << busquedaNodo(nodo, id)->getLista()->obtenerTamanio() << endl;
     }
     else
     {
-        cout << " No encontrado. "<<endl;
+        cout << " No encontrado. " << endl;
     }
-    
 }
 
 /*
@@ -523,6 +522,24 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
     }
 }
 
+void ArbolAVL::eliminarnodoABB(int id, int nivel, int id_obj)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if (busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+            busquedaNodo(tmp, id)->getLista()->eliminar_nodo_abb(nivel, id_obj);
+            //cout << "Lista: " << nodo->getLista() << endl;
+        }
+    }
+    else
+    {
+        cout << " no encontrado " << endl;
+    }
+}
+
 void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, string color, int x, int y)
 {
     NodoAVL *tmp = this->raiz;
@@ -531,9 +548,8 @@ void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, 
     {
         if (busquedaNodo(tmp, id)->getLista() != NULL)
         {
-            
-            busquedaNodo(tmp, id)->getLista()->agregar_nodo_matriz(id_nivel ,id_obj, letra, color, x, y);
-            
+
+            busquedaNodo(tmp, id)->getLista()->agregar_nodo_matriz(id_nivel, id_obj, letra, color, x, y);
         }
     }
 }
@@ -542,7 +558,7 @@ void ArbolAVL::imprimirMatriz(int id, int numeroNivel)
 {
     NodoAVL *tmp = this->raiz;
 
-    if(busquedaNodo(tmp, id))
+    if (busquedaNodo(tmp, id))
     {
         busquedaNodo(tmp, id)->getLista()->retornarMatriz(numeroNivel);
     }
@@ -550,11 +566,4 @@ void ArbolAVL::imprimirMatriz(int id, int numeroNivel)
     {
         cout << " ";
     }
-    
-
-
 }
-
-
-
-

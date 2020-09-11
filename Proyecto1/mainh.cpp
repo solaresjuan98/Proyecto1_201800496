@@ -106,33 +106,34 @@ int main()
     // Insertar en abb de objetos
     avl->insertarnodoABB(100, 33, 1, "Mesa");
     avl->insertarnodoABB(100, 33, 2, "Escritorio");
+    avl->insertarnodoABB(100, 33, 3, "Silla");
+    avl->insertarnodoABB(100, 33, 4, "Lampara");
+    avl->insertarnodoABB(100, 33, 5, "Banco");
+    avl->insertarnodoABB(100, 33, 6, "tv");
+
+    // Eliminando de abb
+    avl->eliminarnodoABB(100, 33, 4);
+    avl->eliminarnodoABB(100, 33, 6);
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
     avl->insertarEnMatriz(100, 33, 1, "m", "azul", 1, 2);
     avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
     avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 4, 4);
-    avl->insertarEnMatriz(100, 33, 4, "b", "brown", 2, 4);
-    /*avl->insertarEnMatriz(100, 33, 5, "p", "red", 2, 1);
+    avl->insertarEnMatriz(100, 33, 4, "k", "yellow", 5, 7);
+    avl->insertarEnMatriz(100, 33, 5, "b", "brown", 2, 4);
+    avl->insertarEnMatriz(100, 33, 51, "p", "red", 2, 1);
     avl->insertarEnMatriz(100, 33, 6, "r", "red", 4, 1);
     avl->insertarEnMatriz(100, 33, 7, "k", "red", 11, 7);
     avl->insertarEnMatriz(100, 33, 8, "o", "red", 10, 4);
     avl->insertarEnMatriz(100, 33, 9, "c", "red", 15, 2);
     avl->insertarEnMatriz(100, 33, 10, "t", "blue", 13, 11);
-    avl->insertarEnMatriz(100, 33, 11, "j", "white", 19, 12);*/
-    /*for (int i = 0; i < 45; i++)
-    {
-        for (int j = 0; j < 50; j++)
-        {
-            avl->insertarEnMatriz(100, 33, i, "p", "red", i, j);
-        }
-        
-    }*/
+    avl->insertarEnMatriz(100, 33, 11, "j", "white", 19, 12);
+    avl->insertarEnMatriz(100, 33, 12, "n", "white", 11, 3);
 
     cout << " -- " << endl;
     avl->insertarnodoABB(100, 44, 3, "Silla");
     avl->insertarnodoABB(100, 44, 4, "Puerta");
     avl->insertarnodoABB(100, 44, 5, "Mesa");
-    //AGREGAR A MATRIZ
 
     avl->insertar(101);
     //avl->crearListaNiveles(101);
@@ -144,6 +145,7 @@ int main()
     // Insertar en abb de objetos
     avl->insertarnodoABB(101, 2, 1, "Mesa");
     avl->insertarnodoABB(101, 2, 2, "Escritorio");
+
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
     avl->insertarEnMatriz(101, 2, 1, "m", "azul", 5, 1);

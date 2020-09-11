@@ -83,7 +83,7 @@ public:
                 cout << "   ";
             }
 
-            cout << "["<<raiz->id << " " <<raiz->nombre << "]"<<endl;
+            cout << "[" << raiz->id << " " << raiz->nombre << "]" << endl;
             imprimirArbol(raiz->izq, cont + 1);
         }
     }
@@ -139,7 +139,7 @@ public:
 
         delete nodo;
     }
-
+    /*
     void eliminar(NodoArbol *arbol, int n)
     {
         if (arbol == NULL)
@@ -158,10 +158,135 @@ public:
         {
             EliminarNodo(arbol);
         }
+    }*/
+
+    bool eliminar(int id)
+    {
+        NodoArbol *aux = raiz;
+        NodoArbol *padre = raiz;
+
+        bool Hijoizq = true;
+
+        while (aux->id != id)
+        {
+            padre = aux;
+
+            if (id < aux->id)
+            {
+                Hijoizq = true;
+                aux = aux->izq;
+            }
+            else
+            {
+                Hijoizq = false;
+                aux = aux->der;
+            }
+
+            if (aux == NULL)
+            {
+                return false;
+            }
+        }
+
+        if (aux->izq == NULL && aux->der == NULL)
+        {
+            //Es un nodo hoja
+            if (aux == raiz)
+            {
+                //unico nodo
+                raiz = NULL;
+            }
+            else if (Hijoizq)
+            {
+                padre->izq = NULL;
+            }
+            else
+            {
+                padre->der = NULL;
+            }
+        }
+        else if (aux->der == NULL)
+        {
+            //Es un nodo hoja
+            if (aux == raiz)
+            {
+                //unico nodo
+                raiz = aux->izq;
+            }
+            else if (Hijoizq)
+            {
+                padre->izq = aux->izq;
+            }
+            else
+            {
+                //19.17
+                padre->der = aux->izq;
+            }
+        }
+        else if (aux->izq == NULL)
+        {
+            if (aux == raiz)
+            {
+                //unico nodo
+                raiz = aux->der;
+            }
+            else if (Hijoizq)
+            {
+                padre->izq = aux->der;
+            }
+            else
+            {
+                padre->der = aux->der;
+            }
+        }
+        else
+        {
+            //Buscando el nodo reemplazo
+            NodoArbol *reemp = getRemplazo(aux);
+
+            if (aux == raiz)
+            {
+                raiz = reemp;
+            }
+            else if (Hijoizq)
+            {
+                padre->izq = reemp;
+            }
+            else
+            {
+                padre->der = reemp;
+            }
+
+            reemp->izq = aux->izq;
+        }
+
+        return true;
+    }
+
+    //get nodo reemplazo
+    NodoArbol *getRemplazo(NodoArbol *nodoR)
+    {
+        NodoArbol *reem_padre = nodoR;
+        NodoArbol *reem = nodoR;
+        NodoArbol *aux = nodoR->der;
+
+        while (aux != NULL)
+        {
+            reem_padre = reem;
+            reem = aux;
+            aux = aux->izq;
+        }
+
+        if (reem != nodoR->der)
+        {
+            reem_padre->izq = reem->der;
+            reem->der = nodoR->der;
+        }
+
+        cout << " Nodo reemp: " << reem << endl;
     }
 
     // Determinar el nodo más izquierdo
-
     NodoArbol *minimo(NodoArbol *raiz)
     {
         if (raiz == NULL)
