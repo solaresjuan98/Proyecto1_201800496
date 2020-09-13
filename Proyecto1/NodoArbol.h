@@ -9,11 +9,11 @@ class NodoArbol
 public:
     int id;
     string nombre;
-    //string letra;
-    //string color;
+    string letra;
+    string color;
     //puntos
-    //int x;
-    //int y;
+    int x;
+    int y;
     NodoArbol *izq;
     NodoArbol *der;
     NodoArbol *padre;
@@ -29,14 +29,14 @@ public:
     }
     */
 
-    NodoArbol(int n, string _nombre)
+    NodoArbol(int n, string nombre_, string letra_, string color_, int x, int y)
     {
         id = n;
-        nombre = _nombre;
-        //letra = _letra;
-        //color = _color;
-        //x = _x;
-        //y = _y;
+        nombre = nombre_;
+        letra = letra_;
+        color = color_;
+        x = x;
+        y = y;
         izq = NULL;
         der = NULL;
     }

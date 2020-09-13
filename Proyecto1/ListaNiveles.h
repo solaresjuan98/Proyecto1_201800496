@@ -40,8 +40,8 @@ public:
 
         if (!encontrado)
         {
-            //cout << " el nodo no existe \n"
-            //     << endl;
+            cout << " >> El nivel no existe \n"
+                 << endl;
             //agregarNivel(ptr);
         }
 
@@ -144,20 +144,20 @@ public:
 
     void imprimirLista()
     {
-
+        cout << "  ********* :: NIVELES :: ********* \n";
         if (cabeza == NULL)
         {
             std::cout << " lista vacia." << endl;
         }
         else
         {
-            std::cout << " Valores de lista : " << endl;
+            //std::cout << " Valores de lista : " << endl;
             NodoNivel *temp = cabeza;
 
             while (temp != NULL)
             {
                 cout.flush();
-                cout << "    >> Nivel " << temp->id << endl;
+                cout << "  *  >> Nivel " << temp->id << " * " << endl;
                 temp = temp->siguiente;
             }
         }
@@ -191,12 +191,12 @@ public:
         }
     }
 
-    void agregar_nodo_abb(int nivel, int id_objeto, string nombre)
+    void agregar_nodo_abb(int nivel, int id_objeto, string nombre, string letra, string color, int x, int y)
     {
         NodoNivel *temp = NULL;
         NodoNivel *ptr = cabeza;
         bool encontrado = false;
-        NodoArbol *nuevo_nodo = new NodoArbol(id_objeto, nombre);
+        NodoArbol *nuevo_nodo = new NodoArbol(id_objeto, nombre, letra, color, x, y);
         while (ptr != NULL)
         {
             // encuentra el nivel

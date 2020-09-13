@@ -1,0 +1,12 @@
+ digraph BST {
+node [shape = record, style=filled, fillcolor=gray];
+nodo9[label="<A0>|Hola|<A1>"];
+nodo5[label="<A0>|Que|<A1>"];
+nodo4[label="JAJA"];
+nodo5:A0->nodo4
+nodo7[label="Tal"];
+nodo5:A1->nodo7
+nodo9:A0->nodo5
+nodo22[label=":v"];
+nodo9:A1->nodo22
+}

@@ -16,6 +16,8 @@ public:
     ArbolAVL();
     ~ArbolAVL();
     void insertar(int valor);
+
+    // Rotaciones
     NodoAVL *rotacionII(NodoAVL *n, NodoAVL *n1);
     NodoAVL *rotacionDD(NodoAVL *n, NodoAVL *n1);
     NodoAVL *rotacionIzqDer(NodoAVL *n, NodoAVL *n1);
@@ -33,6 +35,10 @@ public:
     bool busqueda(NodoAVL *n, int id);
     NodoAVL *busquedaNodo(NodoAVL *nodo, int id);
     void imprimir(NodoAVL *raiz, int cont);
+    NodoAVL *getReemplazo(NodoAVL *raiz);
+
+    //Eliminación de nodoAVL
+    bool eliminar(int idProyecto);
 
     // Listas en nodo AVL
     void crearListaNiveles(int id);
@@ -40,6 +46,9 @@ public:
     void obtenerListaNodo(NodoAVL *raiz, int id);
     void eliminarNivel(int id, int numeroNivel);
     void obtenerNumNiveles(int id);
+    void crearPisos(int id, int cantidadPisos);
+    void copiarNivel(int id, int nivelCopiar, int nivelDestino);
+    // copia de lista
 
     //Obtener los proyectos con mayor numero de niveles en forma ascendente
     // - Generando lista
@@ -48,8 +57,9 @@ public:
 
     // Arboles ABB en nodo AVL
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
-    void insertarnodoABB(int id, int nivel, int id_obj, string nombre);
+    void insertarnodoABB(int id, int nivel, int id_obj, string nombre, string letra, string color, int x, int y);
     void imprimirABBobjetos(int id, int numeroNivel);
+    void imprimirABBInOrder(int id, int numeroNivel);
     void eliminarnodoABB(int id, int numeroNivel, int id_obj);
 
     // Matrices de la lista
@@ -304,6 +314,7 @@ void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
 
 void ArbolAVL::inOrden(NodoAVL *actual)
 {
+
     if (actual == NULL)
     {
         return;
@@ -312,7 +323,7 @@ void ArbolAVL::inOrden(NodoAVL *actual)
     {
         inOrden(actual->getIzq());
 
-        std::cout << " Proyecto: " << actual->getID() << endl;
+        std::cout << " >> Proyecto: " << actual->getID() << endl;
         //std::cout << " Lista : " << actual->getLista() << endl;
         /*if (actual->getLista() != NULL)
         {
@@ -341,6 +352,127 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
     else
     {
         return busqueda(nodo->getDer(), id);
+    }
+}
+
+//Eliminando nodo de AVL
+bool ArbolAVL::eliminar(int idProyecto)
+{
+    NodoAVL *aux = this->raiz;
+    NodoAVL *padre = this->raiz;
+
+    bool h_izq = true;
+
+    while (aux->getID() != idProyecto)
+    {
+        padre = aux;
+
+        if (aux->getID() > idProyecto)
+        {
+            h_izq = true;
+            aux = aux->getIzq();
+        }
+        else
+        {
+            h_izq = false;
+            aux = aux->getDer();
+        }
+
+        if (aux == NULL)
+        {
+            return false;
+        }
+    }
+
+    // Es un nodo hoja
+    if (aux->getIzq() == NULL && aux->getDer() == NULL)
+    {
+        if (aux == this->raiz)
+        {
+            this->raiz = NULL;
+        }
+        else if (h_izq)
+        {
+            padre->getIzq() == NULL;
+        }
+        else
+        {
+            padre->getDer() == NULL;
+        }
+    }
+    else if (aux->getDer() == NULL)
+    {
+
+        if (aux == this->raiz)
+        {
+            this->raiz = aux->getIzq();
+        }
+        else if (h_izq)
+        {
+            padre->setIzq(aux->getIzq());
+
+        }
+        else
+        {
+            padre->setDer(aux->getIzq());
+        }
+    }
+    else if (aux->getIzq() == NULL)
+    {
+        if (aux == this->raiz)
+        {
+            this->raiz = aux->getDer();
+        }
+        else if (h_izq)
+        {
+            padre->setIzq(aux->getDer());
+        }
+        else
+        {
+            padre->setDer(aux->getDer());
+        }
+    }
+    else
+    {
+        // Buscar el reemplazo del nodo eliminado
+        NodoAVL *reemplazo = getReemplazo(aux);
+
+        if (aux == this->raiz)
+        {
+            this->raiz = reemplazo;
+        }
+        else if (h_izq)
+        {
+            padre->setIzq(reemplazo);
+        }
+        else
+        {
+            padre->setDer(reemplazo);
+        }
+
+        reemplazo->setIzq(aux->getIzq());
+    }
+
+    return true;
+}
+
+NodoAVL *ArbolAVL::getReemplazo(NodoAVL *nodoReemplazo)
+{
+    NodoAVL *reemplazo_padre = nodoReemplazo;
+    NodoAVL *reemplazo = nodoReemplazo;
+    NodoAVL *aux = nodoReemplazo->getDer();
+
+    while (aux != NULL)
+    {
+        reemplazo_padre = reemplazo;
+        reemplazo = aux;
+        aux = aux->getIzq();
+    }
+
+    if (reemplazo != nodoReemplazo->getDer())
+    {
+        reemplazo_padre->setIzq(reemplazo->getDer());
+        reemplazo->setDer(nodoReemplazo->getDer());
     }
 }
 
@@ -437,7 +569,7 @@ void ArbolAVL::eliminarNivel(int id, int numeroNivel)
 void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
 {
     NodoAVL *tmp = this->raiz;
-    if (busqueda(nodo, id))
+    if (busquedaNodo(nodo, id))
     {
         tmp = this->raiz;
         cout << nodo->getLista() << endl;
@@ -461,6 +593,59 @@ void ArbolAVL::obtenerNumNiveles(int id)
     else
     {
         cout << " No encontrado. " << endl;
+    }
+}
+
+//Crear nivel via json
+
+//Crear pisos a partir del ultimo nivel
+void ArbolAVL::crearPisos(int id, int numeroNiveles)
+{
+    NodoAVL *nodo = this->raiz;
+    int nuevototal = 0;
+    int tamanio = 0;
+
+    if (busquedaNodo(nodo, id))
+    {
+        // Tamaño de la lista al inicio
+        tamanio = busquedaNodo(nodo, id)->getLista()->obtenerTamanio();
+
+        nuevototal = numeroNiveles + busquedaNodo(nodo, id)->getLista()->obtenerTamanio();
+        // Agregar niveles a partir del ultimo nivel de la lista
+        for (int i = tamanio; i < nuevototal; i++)
+        {
+            //cout << " >> Creando nivel " << i << endl;
+            busquedaNodo(nodo, id)->getLista()->agregarNuevoNivel(new NodoNivel(i));
+        }
+    }
+    else
+    {
+        /* code */
+    }
+}
+
+//Copiar niveles (idProyecto, copia, nivelDestino)
+void ArbolAVL::copiarNivel(int id, int nivelCopia, int nivelDestino)
+{
+    NodoAVL *nodo = this->raiz;
+
+    NodoNivel *temp = NULL;
+    NodoNivel *destino = NULL;
+
+    if (busquedaNodo(nodo, id))
+    {
+        // Llamar los metodos ValidarSiNodoExiste que retornan algo
+        temp = busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelCopia);
+        destino = busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelDestino);
+        cout << "Copiando nivel " << busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelCopia)->id << endl;
+        cout << "a nivel: " << busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelDestino)->id << endl;
+
+        destino = temp;
+        // usar metodo en la clase lista para hacer el algoritmo
+    }
+    else
+    {
+        /* code */
     }
 }
 
@@ -500,7 +685,7 @@ void ArbolAVL::crearABBObjetos(NodoAVL *nodo, int id, int nivel)
     }
 }
 
-void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
+void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre, string letra, string color,int x, int y)
 {
     //1. buscar si el nodo avl existe
     //2. Verificar si ese nodo avl está apuntada a una lista
@@ -512,7 +697,7 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre)
     {
         if (busquedaNodo(tmp, id)->getLista() != NULL)
         {
-            busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre);
+            busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre, letra, color,x, y);
             //cout << "Lista: " << nodo->getLista() << endl;
         }
     }
@@ -539,6 +724,23 @@ void ArbolAVL::eliminarnodoABB(int id, int nivel, int id_obj)
         cout << " no encontrado " << endl;
     }
 }
+
+void ArbolAVL::imprimirABBInOrder(int id, int numeroNivel)
+{
+    NodoAVL *nodo = this->raiz;
+
+    if (busquedaNodo(nodo, id))
+    {
+        //busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(numeroNivel)->verArbolObjetos()
+    }
+    else
+    {
+    }
+}
+
+/*
+    MATRIZ 
+*/
 
 void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, string color, int x, int y)
 {

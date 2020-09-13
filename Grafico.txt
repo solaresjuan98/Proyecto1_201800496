@@ -1,0 +1,70 @@
+digraph G {
+node[shape=box]
+{ rank = same; 
+raiz[label="RAIZ"]
+raiz->nodo0x5555557a4450[dir="both"]
+nodo0x5555557a4450[label ="1" group=1];
+nodo0x5555557a4450 ->nodo0x5555557a4610[dir="both"]
+nodo0x5555557a4610[label ="2" group=2];
+nodo0x5555557a4610 ->nodo0x5555557a47d0[dir="both"]
+nodo0x5555557a47d0[label ="4" group=4];
+nodo0x5555557a47d0 ->nodo0x5555557a4990[dir="both"]
+nodo0x5555557a4990[label ="5" group=5];
+nodo0x5555557a4990 ->nodo0x5555557a4fb0[dir="both"]
+nodo0x5555557a4fb0[label ="10" group=10];
+nodo0x5555557a4fb0 ->nodo0x5555557a4e60[dir="both"]
+nodo0x5555557a4e60[label ="11" group=11];
+nodo0x5555557a4e60 ->nodo0x5555557a5250[dir="both"]
+nodo0x5555557a5250[label ="13" group=13];
+nodo0x5555557a5250 ->nodo0x5555557a5100[dir="both"]
+nodo0x5555557a5100[label ="15" group=15];
+nodo0x5555557a5100 ->nodo0x5555557a5410[dir="both"]
+nodo0x5555557a5410[label ="19" group=19];
+}
+raiz->nodo0x5555557a4c30[dir="both"]
+{ rank = same; 
+nodo10x5555557a4c30[label = "p" group=0];
+nodo0x5555557a4c30[label ="1"];
+}
+nodo0x5555557a4c30->nodo0x5555557a44c0[dir="both"]
+nodo10x5555557a4c30->nodo0x5555557a4450;
+{ rank = same; 
+nodo0x5555557a44c0[label = "2" group=0];
+nodo10x5555557a44c0[label = "m" group=1];
+}
+nodo10x5555557a44c0->nodo0x5555557a4450;
+nodo0x5555557a44c0->nodo0x5555557a4680[dir="both"]
+{ rank = same; 
+nodo0x5555557a4680[label = "3" group=0];
+nodo10x5555557a4680[label = "e" group=2];
+}
+nodo10x5555557a4680->nodo0x5555557a4610;
+nodo0x5555557a4680->nodo0x5555557a4840[dir="both"]
+{ rank = same; 
+nodo0x5555557a4840[label = "4" group=0];
+nodo10x5555557a4840[label = "l" group=3];
+}
+nodo10x5555557a4840->nodo0x5555557a47d0;
+nodo0x5555557a4840->nodo0x5555557a4a00[dir="both"]
+{ rank = same; 
+nodo0x5555557a4a00[label = "7" group=0];
+nodo10x5555557a4a00[label = "k" group=4];
+}
+nodo10x5555557a4a00->nodo0x5555557a4990;
+nodo0x5555557a4a00->nodo0x5555557a52c0[dir="both"]
+{ rank = same; 
+nodo0x5555557a52c0[label = "11" group=0];
+nodo10x5555557a52c0[label = "t" group=7];
+}
+nodo10x5555557a52c0->nodo0x5555557a5250;
+nodo0x5555557a52c0->nodo0x5555557a5480[dir="both"]
+{ rank = same; 
+nodo0x5555557a5480[label = "12" group=0];
+nodo10x5555557a5480[label = "j" group=11];
+}
+nodo10x5555557a5480->nodo0x5555557a5410;
+
+label = MATRIZ ;
+ 
+ } 
+ }

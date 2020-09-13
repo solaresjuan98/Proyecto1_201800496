@@ -86,15 +86,34 @@ int main()
 
     cout << " -------------------------" << endl;*/
 
+    /*abbGlobal->insertarNodo(new NodoArbol(9, "Hola"));
+    abbGlobal->insertarNodo(new NodoArbol(5, "Que"));
+    abbGlobal->insertarNodo(new NodoArbol(7, "Tal"));
+    abbGlobal->insertarNodo(new NodoArbol(4, "JAJA"));
+    abbGlobal->insertarNodo(new NodoArbol(22, ":v"));
+    abbGlobal->inOrden(abbGlobal->raiz);*/
+
+    //grafica bien pero tiende a fallar
+    //abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
+    //abbGlobal->GraficarABB();
+
     avl->insertar(1002);
     for (int i = 1; i < 6; i++)
     {
         avl->insertarNivel(1002, i);
     }
 
+    for (int i = 0; i < 5; i++)
+    {
+        avl->insertarnodoABB(1002, 2, i, ":v", "l", "blue", 0, 1);
+    }
+
+    avl->eliminarnodoABB(1002, 2, 2);
+    avl->eliminarnodoABB(1002, 2, 3);
+
     // Eliminando niveles del proyecto con ID 1002
-    avl->eliminarNivel(1002, 2);
-    avl->eliminarNivel(1002, 3);
+    //avl->eliminarNivel(1002, 2);
+    //avl->eliminarNivel(1002, 3);
 
     avl->insertar(100);
     // insertarNivel(id en avl, # nivel)
@@ -104,20 +123,20 @@ int main()
     avl->insertarNivel(100, 66);
 
     // Insertar en abb de objetos
-    avl->insertarnodoABB(100, 33, 1, "Mesa");
-    avl->insertarnodoABB(100, 33, 2, "Escritorio");
-    avl->insertarnodoABB(100, 33, 3, "Silla");
-    avl->insertarnodoABB(100, 33, 4, "Lampara");
-    avl->insertarnodoABB(100, 33, 5, "Banco");
-    avl->insertarnodoABB(100, 33, 6, "tv");
+    avl->insertarnodoABB(100, 33, 1, "Mesa", "m", "white", 0, 1);
+    avl->insertarnodoABB(100, 33, 2, "Escritorio", "e", "white", 0, 2);
+    avl->insertarnodoABB(100, 33, 3, "Silla", "s", "white", 0, 3);
+    avl->insertarnodoABB(100, 33, 4, "Lampara", "l", "white", 1, 4);
+    avl->insertarnodoABB(100, 33, 5, "Banco", "b", "white", 4, 5);
+    avl->insertarnodoABB(100, 33, 6, "tv", "t", "white", 0, 9);
 
     // Eliminando de abb
     avl->eliminarnodoABB(100, 33, 4);
     avl->eliminarnodoABB(100, 33, 6);
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
-    avl->insertarEnMatriz(100, 33, 1, "m", "azul", 1, 2);
-    avl->insertarEnMatriz(100, 33, 2, "e", "red", 2, 3);
+    //avl->insertarEnMatriz(100, 33, 1, "m", "azul", 2, 1);
+    avl->insertarEnMatriz(100, 33, 2, "e", "red", 1, 1);
     avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 4, 4);
     avl->insertarEnMatriz(100, 33, 4, "k", "yellow", 5, 7);
     avl->insertarEnMatriz(100, 33, 5, "b", "brown", 2, 4);
@@ -131,9 +150,9 @@ int main()
     avl->insertarEnMatriz(100, 33, 12, "n", "white", 11, 3);
 
     cout << " -- " << endl;
-    avl->insertarnodoABB(100, 44, 3, "Silla");
-    avl->insertarnodoABB(100, 44, 4, "Puerta");
-    avl->insertarnodoABB(100, 44, 5, "Mesa");
+    avl->insertarnodoABB(100, 44, 3, "Silla", "s", "white", 0, 1);
+    avl->insertarnodoABB(100, 44, 4, "Puerta", "p", "white", 0, 2);
+    avl->insertarnodoABB(100, 44, 5, "Mesa", "m", "white", 0, 3);
 
     avl->insertar(101);
     //avl->crearListaNiveles(101);
@@ -143,9 +162,8 @@ int main()
     }
 
     // Insertar en abb de objetos
-    avl->insertarnodoABB(101, 2, 1, "Mesa");
-    avl->insertarnodoABB(101, 2, 2, "Escritorio");
-
+    avl->insertarnodoABB(101, 2, 1, "Mesa", "m", "brown", 0, 4);
+    avl->insertarnodoABB(101, 2, 2, "Escritorio", "e", "black", 2, 4);
 
     // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
     avl->insertarEnMatriz(101, 2, 1, "m", "azul", 5, 1);
@@ -177,39 +195,26 @@ int main()
     cout << "\n";
     avl->imprimirABBobjetos(100, 44);
 
-    cout << "\t :: AVL CON PROYECTOS ACTUALES :: \n";
+    avl->obtenerListaNodo(avl->getRaiz(), 1002);
+    avl->crearPisos(1002, 3);
+    avl->obtenerListaNodo(avl->getRaiz(), 1002);
+    //cout << "\t :: AVL CON PROYECTOS ACTUALES :: \n";
+
+    avl->copiarNivel(1002, 2, 4);
+    //avl->imprimirABBobjetos(1002, 2);
+    avl->imprimirABBobjetos(1002, 2);
+
+    avl->eliminar(1002);
+    cout << avl->eliminar(101) << endl;
+    cout << avl->eliminar(100) << endl;
 
     //avl->imprimir(avl->getRaiz(), 0);
     avl->inOrden(avl->getRaiz());
+    //avl->imprimir(avl->getRaiz(), 0);
+    //avl->inOrden(avl->getRaiz());
     //mostrarDatos();
     //mostrarMenu();
 
-    //cout << "\n\n";
-
-    //cout << " \t ..:: Reportes 3 y 4 ::..\n";
-    /*avl->obtenerNumNiveles(100);
-    avl->obtenerNumNiveles(101);
-    avl->obtenerNumNiveles(102);
-    avl->obtenerNumNiveles(103);
-    avl->obp
-tenerNumNiveles(1002);*/
-
-    //avl->generarListaPOrd(avl->getRaiz());
-    //avl->imprimirAsc();
-
-    //CANT. NIVELES DE FORMA ASCENDENTE
-    /*lp->agregarProyecto(new NodoProyecto(1, 7));
-        lp->agregarProyecto(new NodoProyecto(2, 10));
-    lp->agregarProyecto(new NodoProyecto(3, 2));
-    lp->agregarProyecto(new NodoProyecto(4, 1));
-    lp->agregarProyecto(new NodoProyecto(5, 14));
-    lp->agregarProyecto(new NodoProyecto(6, 25));
-    lp->agregarProyecto(new NodoProyecto(7, 20));
-    lp->agregarProyecto(new NodoProyecto(8, 5));
-    lp->agregarProyecto(new NodoProyecto(9, 11));
-    
-    
-    lp->imprimirLista();*/
     cin.get();
     return 0;
 }
@@ -239,7 +244,7 @@ void mostrarMenu()
     std::cout << " 6. Cargar librerias" << endl;
     std::cout << " 7. Limpiar consola " << endl;
     std::cout << " 8. Salir de la aplicacion " << endl;
-    std::cout << " 9. Lista de prueba " << endl;
+    std::cout << " 9. Seccion de reportes" << endl;
     std::cout << " 10. Buscar Proyecto " << endl;
     std::cout << " Elige una opcion: ";
 
