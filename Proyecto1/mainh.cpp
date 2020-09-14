@@ -72,148 +72,11 @@ string n1, n2, n3, n4, n5;
 string r1, r2, r3, r4;
 int main()
 {
-    /*Matrix *md = new Matrix();
 
-    md->add(10, "m", "white", 2, 1);
-    md->add(12, "t", "black", 3, 1);
-    md->add(14, "l", "red", 3, 2);
-    md->add(12, "s", "brown", 5, 4);
-    md->add(13, "e", "black", 4, 3);
+    
+    mostrarDatos();
+    mostrarMenu();
 
-    md->print_headers();
-    md->print_nodes_x();
-    md->print_nodes_y();
-
-    cout << " -------------------------" << endl;*/
-
-    /*abbGlobal->insertarNodo(new NodoArbol(9, "Hola"));
-    abbGlobal->insertarNodo(new NodoArbol(5, "Que"));
-    abbGlobal->insertarNodo(new NodoArbol(7, "Tal"));
-    abbGlobal->insertarNodo(new NodoArbol(4, "JAJA"));
-    abbGlobal->insertarNodo(new NodoArbol(22, ":v"));
-    abbGlobal->inOrden(abbGlobal->raiz);*/
-
-    //grafica bien pero tiende a fallar
-    //abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
-    //abbGlobal->GraficarABB();
-
-    avl->insertar(1002);
-    for (int i = 1; i < 6; i++)
-    {
-        avl->insertarNivel(1002, i);
-    }
-
-    for (int i = 0; i < 5; i++)
-    {
-        avl->insertarnodoABB(1002, 2, i, ":v", "l", "blue", 0, 1);
-    }
-
-    avl->eliminarnodoABB(1002, 2, 2);
-    avl->eliminarnodoABB(1002, 2, 3);
-
-    // Eliminando niveles del proyecto con ID 1002
-    //avl->eliminarNivel(1002, 2);
-    //avl->eliminarNivel(1002, 3);
-
-    avl->insertar(100);
-    // insertarNivel(id en avl, # nivel)
-    avl->insertarNivel(100, 33);
-    avl->insertarNivel(100, 44);
-    avl->insertarNivel(100, 55);
-    avl->insertarNivel(100, 66);
-
-    // Insertar en abb de objetos
-    avl->insertarnodoABB(100, 33, 1, "Mesa", "m", "white", 0, 1);
-    avl->insertarnodoABB(100, 33, 2, "Escritorio", "e", "white", 0, 2);
-    avl->insertarnodoABB(100, 33, 3, "Silla", "s", "white", 0, 3);
-    avl->insertarnodoABB(100, 33, 4, "Lampara", "l", "white", 1, 4);
-    avl->insertarnodoABB(100, 33, 5, "Banco", "b", "white", 4, 5);
-    avl->insertarnodoABB(100, 33, 6, "tv", "t", "white", 0, 9);
-
-    // Eliminando de abb
-    avl->eliminarnodoABB(100, 33, 4);
-    avl->eliminarnodoABB(100, 33, 6);
-
-    // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
-    //avl->insertarEnMatriz(100, 33, 1, "m", "azul", 2, 1);
-    avl->insertarEnMatriz(100, 33, 2, "e", "red", 1, 1);
-    avl->insertarEnMatriz(100, 33, 3, "l", "yellow", 4, 4);
-    avl->insertarEnMatriz(100, 33, 4, "k", "yellow", 5, 7);
-    avl->insertarEnMatriz(100, 33, 5, "b", "brown", 2, 4);
-    avl->insertarEnMatriz(100, 33, 51, "p", "red", 2, 1);
-    avl->insertarEnMatriz(100, 33, 6, "r", "red", 4, 1);
-    avl->insertarEnMatriz(100, 33, 7, "k", "red", 11, 7);
-    avl->insertarEnMatriz(100, 33, 8, "o", "red", 10, 4);
-    avl->insertarEnMatriz(100, 33, 9, "c", "red", 15, 2);
-    avl->insertarEnMatriz(100, 33, 10, "t", "blue", 13, 11);
-    avl->insertarEnMatriz(100, 33, 11, "j", "white", 19, 12);
-    avl->insertarEnMatriz(100, 33, 12, "n", "white", 11, 3);
-
-    cout << " -- " << endl;
-    avl->insertarnodoABB(100, 44, 3, "Silla", "s", "white", 0, 1);
-    avl->insertarnodoABB(100, 44, 4, "Puerta", "p", "white", 0, 2);
-    avl->insertarnodoABB(100, 44, 5, "Mesa", "m", "white", 0, 3);
-
-    avl->insertar(101);
-    //avl->crearListaNiveles(101);
-    for (int i = 1; i < 17; i++)
-    {
-        avl->insertarNivel(101, i);
-    }
-
-    // Insertar en abb de objetos
-    avl->insertarnodoABB(101, 2, 1, "Mesa", "m", "brown", 0, 4);
-    avl->insertarnodoABB(101, 2, 2, "Escritorio", "e", "black", 2, 4);
-
-    // Insertar en Matriz (proyecto, nivel, id, letra, color, x, y)
-    avl->insertarEnMatriz(101, 2, 1, "m", "azul", 5, 1);
-    avl->insertarEnMatriz(101, 2, 2, "e", "red", 2, 1);
-
-    avl->insertar(102);
-    //avl->crearListaNiveles(102);
-    for (int i = 1; i < 5; i++)
-    {
-        avl->insertarNivel(102, i);
-    }
-
-    avl->insertar(103);
-    //avl->crearListaNiveles(103);
-    for (int i = 1; i < 9; i++)
-    {
-        avl->insertarNivel(103, i);
-    }
-
-    cout << " --------------------------- \n";
-
-    //avl->imprimir(avl->getRaiz(), 0);
-    avl->inOrden(avl->getRaiz());
-
-    cout << "\n\n";
-
-    avl->imprimirABBobjetos(100, 33);
-    avl->imprimirMatriz(100, 33);
-    cout << "\n";
-    avl->imprimirABBobjetos(100, 44);
-
-    avl->obtenerListaNodo(avl->getRaiz(), 1002);
-    avl->crearPisos(1002, 3);
-    avl->obtenerListaNodo(avl->getRaiz(), 1002);
-    //cout << "\t :: AVL CON PROYECTOS ACTUALES :: \n";
-
-    avl->copiarNivel(1002, 2, 4);
-    //avl->imprimirABBobjetos(1002, 2);
-    avl->imprimirABBobjetos(1002, 2);
-
-    avl->eliminar(1002);
-    cout << avl->eliminar(101) << endl;
-    cout << avl->eliminar(100) << endl;
-
-    //avl->imprimir(avl->getRaiz(), 0);
-    avl->inOrden(avl->getRaiz());
-    //avl->imprimir(avl->getRaiz(), 0);
-    //avl->inOrden(avl->getRaiz());
-    //mostrarDatos();
-    //mostrarMenu();
 
     cin.get();
     return 0;
@@ -314,19 +177,19 @@ void mostrarMenu()
             break;
         case 3:
             std::cout << "\n Cargar archivo: " << endl;
-            std::cout << " Escribe la ruta del archivo: ";
-            cin.get();
-            getline(cin, ruta);
-            cargarArchivo(ruta);
-
-            cin.get();
-            /*r1 = "Archivos/ejemplo1.json";
-            r2 = "Archivos/ejemplo2.json";
+            //std::cout << " Escribe la ruta del archivo: ";
+            //cin.get();
+            //getline(cin, ruta);
+            //cargarArchivo(ruta);
+            
+            //cin.get();
+            r1 = "Archivos/ejemplo1.json";
+            /*r2 = "Archivos/ejemplo2.json";
             r3 = "Archivos/ejemplo3.json";
-            r4 = "Archivos/ejemplo4.json";
+            r4 = "Archivos/ejemplo4.json";*/
 
             cargarArchivo(r1);
-            cargarArchivo(r2);
+            /*cargarArchivo(r2);
             cargarArchivo(r3);
             cargarArchivo(r4);*/
             //system("clear");
@@ -356,84 +219,8 @@ void mostrarMenu()
             exit(1);
             break;
         case 9:
-
-            //avl->imprimir(avl->getRaiz(), 0);
-
-            /*Matrix *md = new Matrix();
-
-            md->add(10, "m", "white", 2, 1);
-            md->add(12, "t", "black", 3, 1);
-            md->add(14, "l", "red", 3, 2);
-            md->add(12, "s", "brown", 5, 4);
-            md->add(13, "e", "black", 4, 3);
-
-            md->print_headers();
-            md->print_nodes_x();
-            md->print_nodes_y();
-
-            cout << " -------------------------" << endl;
-            n1 = "Proyecto1";
-            n2 = "Proyecto2";
-            n3 = "Proyecto3";
-            n3 = "Proyecto4";
-            n3 = "Proyecto5";*/
-            //convertirASCII(n1);
-            //convertirASCII(n2);
-            /*
-            avl->insertar(convertirASCII(n1));
-            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n1));
-
-            for (int i = 0; i < 5; i++)
-            {
-                avl->insertarNivel(avl->getRaiz(), convertirASCII(n1), i);
-                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n1), i);
-
-                for (int j = 0; j < 4; j++)
-                {
-                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n1), i, j, "prueba");
-                    for (int k = 0; k < 3; k++)
-                    {
-                    }
-                }
-            }
-
-            avl->insertar(convertirASCII(n2));
-            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n2));
-
-            for (int i = 0; i < 7; i++)
-            {
-                avl->insertarNivel(avl->getRaiz(), convertirASCII(n2), i);
-                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n2), i);
-
-                for (int j = 0; j < 4; j++)
-                {
-                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n2), i, j, "prueba");
-                    for (int k = 0; k < 3; k++)
-                    {
-                    }
-                }
-            }
-
-            avl->insertar(convertirASCII(n3));
-            avl->crearListaNiveles(avl->getRaiz(), convertirASCII(n3));
-
-            for (int i = 0; i < 2; i++)
-            {
-                avl->insertarNivel(avl->getRaiz(), convertirASCII(n3), i);
-                avl->crearABBObjetos(avl->getRaiz(), convertirASCII(n3), i);
-
-                for (int j = 0; j < 4; j++)
-                {
-                    avl->insertarnodoABB(avl->getRaiz(), convertirASCII(n3), i, j, "prueba");
-                    for (int k = 0; k < 3; k++)
-                    {
-                    }
-                }
-            }
-
-            avl->imprimir(avl->getRaiz(), 0);
-            avl->inOrden(avl->getRaiz());
-            */
+            //avl->imprimirMatriz(97, 1);
+            avl->imprimirMatriz(97, 2);
             break;
         }
 
@@ -446,7 +233,10 @@ void cargarArchivo(string ruta)
 {
     //Variables de los objetos que irán en el abb de objetos
     int id_objeto = 0;
+    int x, y;
     string nombre;
+    string letra;
+    string color;
 
     std::ifstream archivo(ruta);
     int n_nivel;
@@ -465,7 +255,7 @@ void cargarArchivo(string ruta)
         id = convertirASCII(nombreProyectoJson);
         std::cout << " Valor ascii: " << id << endl;
 
-        fflush(stdin);
+        //fflush(stdin);
         avl->insertar(id);
 
         //avl->crearListaNiveles(avl->getRaiz(), convertirASCII(nombreProyectoJson));
@@ -510,11 +300,11 @@ void cargarArchivo(string ruta)
 
                 id_objeto = pos["identificador"];
                 nombre = pos["nombre"];
-                letraJson = pos["letra"];
-                colorJson = pos["color"];
+                letra = pos["letra"];
+                color = pos["color"];
 
                 //AGREGAR OBJETOS AL ABB DE OBJETOS
-                //avl->insertarnodoABB(id, n_nivel, id_objeto, nombre, letraJson, colorJson);
+                avl->insertarnodoABB(id, n_nivel, id_objeto, nombre, letra, color, 0, 0);
 
                 //avl->insertarnodoABB(avl->getRaiz(), id, n_nivel, id_objeto, nombre);
                 puntosObjetosJson = pos["puntos"];
@@ -522,8 +312,12 @@ void cargarArchivo(string ruta)
                 for (const auto pos : puntosObjetosJson)
                 {
                     //std::cout << " - Inicio: " << pos["x"] << " Final: " << pos["y"] << endl;
-
+                    x = pos["x"];
+                    y = pos["y"];
                     //AGREGAR OBJETOS A LA MATRIZ
+                    avl->insertarEnMatriz(id, n_nivel, id_objeto, letra, color, x, y);
+
+                    break;
                 }
             }
 

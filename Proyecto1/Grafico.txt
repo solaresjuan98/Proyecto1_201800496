@@ -2,67 +2,43 @@ digraph G {
 node[shape=box]
 { rank = same; 
 raiz[label="RAIZ"]
-raiz->nodo0x55a2891b26d0[dir="both"]
-nodo0x55a2891b26d0[label ="1" group=1];
-nodo0x55a2891b26d0 ->nodo0x55a2891b2c10[dir="both"]
-nodo0x55a2891b2c10[label ="2" group=2];
-nodo0x55a2891b2c10 ->nodo0x55a2891b2890[dir="both"]
-nodo0x55a2891b2890[label ="4" group=4];
-nodo0x55a2891b2890 ->nodo0x55a2891b2a50[dir="both"]
-nodo0x55a2891b2a50[label ="5" group=5];
-nodo0x55a2891b2a50 ->nodo0x55a2891b3070[dir="both"]
-nodo0x55a2891b3070[label ="10" group=10];
-nodo0x55a2891b3070 ->nodo0x55a2891b2f20[dir="both"]
-nodo0x55a2891b2f20[label ="11" group=11];
-nodo0x55a2891b2f20 ->nodo0x55a2891b3380[dir="both"]
-nodo0x55a2891b3380[label ="13" group=13];
-nodo0x55a2891b3380 ->nodo0x55a2891b31c0[dir="both"]
-nodo0x55a2891b31c0[label ="15" group=15];
-nodo0x55a2891b31c0 ->nodo0x55a2891b3540[dir="both"]
-nodo0x55a2891b3540[label ="19" group=19];
+raiz->nodo0x56325a773760[dir="both"]
+nodo0x56325a773760[label ="2" group=2];
+nodo0x56325a773760 ->nodo0x56325a773e60[dir="both"]
+nodo0x56325a773e60[label ="3" group=3];
+nodo0x56325a773e60 ->nodo0x56325a773960[dir="both"]
+nodo0x56325a773960[label ="4" group=4];
+nodo0x56325a773960 ->nodo0x56325a773ae0[dir="both"]
+nodo0x56325a773ae0[label ="5" group=5];
+nodo0x56325a773ae0 ->nodo0x56325a774060[dir="both"]
+nodo0x56325a774060[label ="8" group=8];
 }
-raiz->nodo0x55a2891b2740[dir="both"]
+raiz->nodo0x56325a7737e0[dir="both"]
 { rank = same; 
-nodo10x55a2891b2740[label = "e" group=0];
-nodo0x55a2891b2740[label ="1"];
+nodo0x56325a7737e0[label ="1"];
 }
-nodo0x55a2891b2740->nodo0x55a2891b3230[dir="both"]
-nodo10x55a2891b2740->nodo0x55a2891b26d0;
+nodo0x56325a7737e0->nodo0x56325a773b60[dir="both"]
 { rank = same; 
-nodo0x55a2891b3230[label = "2" group=0];
-nodo10x55a2891b3230[label = "c" group=1];
+nodo0x56325a773b60[label = "2" group=0];
 }
-nodo10x55a2891b3230->nodo0x55a2891b31c0;
-nodo0x55a2891b3230->nodo0x55a2891b3700[dir="both"]
+nodo0x56325a773b60->nodo0x56325a773ce0[dir="both"]
 { rank = same; 
-nodo0x55a2891b3700[label = "3" group=0];
-nodo10x55a2891b3700[label = "n" group=2];
+nodo0x56325a773ce0[label = "3" group=0];
 }
-nodo10x55a2891b3700->nodo0;
-nodo0x55a2891b3700->nodo0x55a2891b2900[dir="both"]
+nodo0x56325a773ce0->nodo0x56325a773ee0[dir="both"]
 { rank = same; 
-nodo0x55a2891b2900[label = "4" group=0];
-nodo10x55a2891b2900[label = "l" group=3];
+nodo0x56325a773ee0[label = "9" group=0];
 }
-nodo10x55a2891b2900->nodo0x55a2891b2890;
-nodo0x55a2891b2900->nodo0x55a2891b2ac0[dir="both"]
+nodo0x56325a773ee0->nodo0x56325a7740e0[dir="both"]
 { rank = same; 
-nodo0x55a2891b2ac0[label = "7" group=0];
-nodo10x55a2891b2ac0[label = "k" group=4];
+nodo0x56325a7740e0[label = "10" group=0];
 }
-nodo10x55a2891b2ac0->nodo0x55a2891b2a50;
-nodo0x55a2891b2ac0->nodo0x55a2891b33f0[dir="both"]
-{ rank = same; 
-nodo0x55a2891b33f0[label = "11" group=0];
-nodo10x55a2891b33f0[label = "t" group=7];
-}
-nodo10x55a2891b33f0->nodo0x55a2891b3380;
-nodo0x55a2891b33f0->nodo0x55a2891b35b0[dir="both"]
-{ rank = same; 
-nodo0x55a2891b35b0[label = "12" group=0];
-nodo10x55a2891b35b0[label = "j" group=11];
-}
-nodo10x55a2891b35b0->nodo0x55a2891b3540;
+nodo0x56325a7737e0[label = "p" group=1];
+nodo0x56325a7737e0->nodo0x56325a773080[dir = "both"]
+nodo0x56325a773a60[label = "r" group=3];
+nodo0x56325a773a60->nodo0x56325a773960[dir = "both"]
+nodo0x56325a773a60[label = "r" group=3];
+nodo0x56325a773a60->nodo0x56325a773960[dir = "both"]
 
 label = MATRIZ ;
  

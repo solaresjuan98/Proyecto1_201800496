@@ -35,7 +35,7 @@ public:
         }
         else
         {
-            NodoArbol *temp = raiz;
+            NodoArbol *temp = this->raiz;
 
             while (temp != NULL)
             {
@@ -67,6 +67,8 @@ public:
                     // pasar a nodo siguiente
                     temp = temp->der;
                 }
+
+                temp = temp->der;
             }
         }
     }
@@ -414,6 +416,8 @@ public:
             }*/
             }
         }
+
+
 
         ~ArbolBinario();
     };

@@ -92,8 +92,12 @@ public:
 
                 temp = ptr;
                 temp->getMatriz()->print_headers();
-                temp->getMatriz()->print_in_order();
+                //temp->getMatriz()->print_in_order();
+                //temp->getMatriz()->generarMatriz();
+                temp->getMatriz()->imprimir_en_consola();
                 temp->getMatriz()->generarMatriz();
+                
+                //temp->getMatriz()->print_headers();
                 /*temp->getMatriz()->print_nodes_x();
                 temp->getMatriz()->print_nodes_y();*/
                 encontrado = true;

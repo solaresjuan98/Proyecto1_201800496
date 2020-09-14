@@ -9,6 +9,8 @@ class Node
 public:
     //Datos del objeto
     int n;
+    int x;
+    int y;
     string letra;
     string color;
 
@@ -18,11 +20,13 @@ public:
     Node *down;
     Node *up;
 
-    Node(int n, string letra, string color)
+    Node(int n, string letra, string color, int x, int y)
     {
         this->n = n;
         this->letra = letra;
         this->color = color;
+        this->x = x;
+        this->y = y;
         right = NULL;
         left = NULL;
         up = NULL;

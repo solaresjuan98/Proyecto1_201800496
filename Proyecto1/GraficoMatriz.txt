@@ -1,0 +1,42 @@
+digraph G {
+node[shape=box]
+nodo0x562de3d89fb0[label= "0"pos ="0,0!" color=gray style=filled];
+nodo0x562de3d89fb0->nodo0x562de3d8ba20[dir="both"];
+nodo0x562de3d89fb0->nodo0x562de3d8bd30[dir="both"];
+nodo0x562de3d8ba20[label= "1"pos ="1,0!" color=gray style=filled];
+nodo0x562de3d8ba20->nodo0x562de3d8bcb0[dir="both"];
+nodo0x562de3d8ba20->nodo0x562de3d8bba0[dir="both"];
+nodo0x562de3d8bcb0[label= "2"pos ="2,0!" color=gray style=filled];
+nodo0x562de3d8bcb0->nodo0x562de3d8c150[dir="both"];
+nodo0x562de3d8bcb0->nodo0x562de3d8be30[dir="both"];
+nodo0x562de3d8c150[label= "3"pos ="3,0!" color=gray style=filled];
+nodo0x562de3d8c150->nodo0x562de3d8c360[dir="both"];
+nodo0x562de3d8c150->nodo0x562de3d8c250[dir="both"];
+nodo0x562de3d8c360[label= "5"pos ="5,0!" color=gray style=filled];
+nodo0x562de3d8c360->nodo0x562de3d8c570[dir="both"];
+nodo0x562de3d8c360->nodo0x562de3d8c460[dir="both"];
+nodo0x562de3d8c570[label= "7"pos ="7,0!" color=gray style=filled];
+nodo0x562de3d8c570->nodo0x562de3d8c6f0[dir="both"];
+nodo0x562de3d8bd30->nodo0x562de3d89fb0[dir="both"];
+nodo0x562de3d8bd30[label= "1"pos ="0,1!" color=gray style=filled];
+nodo0x562de3d8bd30->nodo0x562de3d8baa0[dir="both"];
+nodo0x562de3d8bd30->nodo0x562de3d8be30[dir="both"];
+nodo0x562de3d8baa0[label= "2"pos ="0,2!" color=gray style=filled];
+nodo0x562de3d8baa0->nodo0x562de3d8bf40[dir="both"];
+nodo0x562de3d8baa0->nodo0x562de3d8bba0[dir="both"];
+nodo0x562de3d8bf40[label= "4"pos ="0,4!" color=gray style=filled];
+nodo0x562de3d8bf40->nodo0x562de3d8c5f0[dir="both"];
+nodo0x562de3d8bf40->nodo0x562de3d8c040[dir="both"];
+nodo0x562de3d8c5f0[label= "7"pos ="0,7!" color=gray style=filled];
+nodo0x562de3d8c5f0->nodo0x562de3d8c6f0[dir="both"];
+nodo0x562de3d8be30[label= "T"pos ="2,1!"color="#E6E6E6" style=filled];
+nodo0x562de3d8be30->nodo0x562de3d8c460[dir="both"];
+nodo0x562de3d8c460[label= "P"pos ="5,1!"color="#CB790A" style=filled];
+nodo0x562de3d8bba0[label= "S"pos ="1,2!"color="#FDB546" style=filled];
+nodo0x562de3d8bba0->nodo0x562de3d8c040[dir="both"];
+nodo0x562de3d8c040[label= "F"pos ="1,4!"color="#50CB0A" style=filled];
+nodo0x562de3d8c040->nodo0x562de3d8c250[dir="both"];
+nodo0x562de3d8c250[label= "M"pos ="3,4!"color="#0A18CB" style=filled];
+nodo0x562de3d8c6f0[label= "ES"pos ="7,7!"color="#02703A" style=filled];
+
+}
