@@ -495,7 +495,7 @@ void ArbolAVL::generarListaPOrd(NodoAVL *actual)
         lista->agregarProyecto(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
 
         generarListaPOrd(actual->getDer());
-        /* code */
+        
     }
 }
 

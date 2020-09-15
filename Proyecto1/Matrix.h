@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <fstream>
+#include <bits/stdc++.h>
 #pragma once
 #include "Node.h"
 using namespace std;
@@ -10,6 +11,7 @@ class Matrix
 
 public:
     Node *head;
+    //int cant_nodos = obtenerCantidadNodos();
 
     Matrix()
     {
@@ -28,8 +30,6 @@ public:
         add_y_header(y, letra);
         //2. insertar el nodo
         Node *new_node = new Node(n, letra, color, x, y);
-        //add_x(new_node, x);
-        //add_y(new_node, y);
         add_node(n, letra, color, x, y);
     }
 
@@ -345,158 +345,10 @@ public:
         cout << "\n";
     }
 
-    void print_in_order()
-    {
-        Node *x_header = head;
-        Node *y_header = head->down;
-        Node *actual = head;
-        Node *actual_2;
-        Node *actual_3;
-        int pos = 0;
-
-        // Archivo que tendrá el grafico
-        ofstream grafico;
-
-        grafico.open("Grafico.txt", ios::out);
-
-        if (grafico.fail())
-        {
-            cout << " Error ";
-        }
-
-        grafico << "digraph G {\n"
-                << "node[shape=box]\n"
-                << "{ rank = same; \n"
-                << "raiz[label=\"RAIZ\"]\n";
-
-        x_header = head;
-
-        grafico << "raiz->"
-                << "nodo" << &*x_header->right << "[dir=\"both\"]\n";
-
-        //Recorriendo los headers en X
-        while (x_header->right != NULL)
-        {
-            //Node *ant = x_header->left;
-            x_header = x_header->right;
-            grafico << "nodo" << &*x_header << "[label =\"" << x_header->n << "\" group=" << x_header->n << "];\n";
-            //grafico << "nodo" << &*x_header->down << "[label =\"" << x_header->down->letra << "\" group=" << x_header->n << "];\n";
-            //cout << "  >>> " << x_header->down->letra << endl;
-            if (x_header->right)
-            {
-                grafico << "nodo" << &*x_header << " ->"
-                        << "nodo" << &*x_header->right << "[dir=\"both\"]\n";
-            }
-        }
-
-        //Fin del rank = same
-        grafico << "}\n";
-
-        Node *aux = head;
-        Node *aux2 = x_header->down;
-        Node *aux3 = aux2->right;
-        x_header = head->right;
-
-        grafico << "raiz->"
-                << "nodo" << &*y_header << "[dir=\"both\"]\n";
-        grafico << "{ rank = same; \n";
-        //grafico << "nodo1" << &*aux->down << "[label = \"" << aux->down->letra
-        //        << "\" group=" << aux->n << "];\n";
-        grafico << "nodo" << &*y_header << "[label =\"" << y_header->n << "\"];\n";
-        grafico << "}\n";
-        grafico << "nodo" << &*y_header << "->"
-                << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
-
-        //grafico << "nodo1" << &*aux->down << "->"
-        //        << "nodo" << &*x_header << ";\n"; // ojo aqui
-        cout << " Derecho de actual: " << y_header->letra << endl;
-        //grafico << "nodo1" << &*aux->down << "->"
-        //        << "nodo" << &*aux2->up << ";\n";
-
-        cout << "--" << endl;
-
-        //Recorriendo los headers en Y
-        while (y_header->down != NULL)
-        {
-            grafico << "{ rank = same; \n";
-            y_header = y_header->down;
-            //x_header = x_header->right;
-            aux = aux->down;
-            aux2 = y_header->right;
-
-            // Creando las cabeceras en y
-            grafico << "nodo" << &*y_header << "[label = \"" << y_header->n << "\" group=0];\n";
-            grafico << "}\n";
-            cout << " y_header actual: " << y_header->n << endl;
-            cout << " Dirección a la derecha: " << &*y_header->right << endl;
-            cout << " Valor a la derecha: " << y_header->right->letra << endl;
-
-            Node *actual_en_y = y_header->right;
-            /*
-            while (actual_en_y != NULL)
-            {
-                grafico << "nodo" << &*actual_en_y << "[label = \"" << actual_en_y->letra << "\" group=" << actual_en_y->n <<"];\n";
-                grafico << "nodo" <<&*actual_en_y->up << "->nodo"<<&*actual_en_y<<"[dir=\"both\"]";
-                actual_en_y = actual_en_y->right;
-            }*/
-
-            //Nodo *aux4 =
-            /*grafico << "nodo1" << &*aux->down << "[label = \"" << aux->down->letra
-                    << "\" group=" << aux->n << "];\n";
-            
-
-            // hacer enlace
-            grafico << "nodo1" << &*aux->down << "->"
-                    << "nodo" << &*aux2->up << ";\n";*/
-            //cout << aux2->down->letra << endl;
-
-            //No tocar
-            //cout << aux2->up->n << endl;
-            //cout << &*aux2->up << endl;//*IMPORTANTE*
-
-            // Enlazando los headers en y
-            if (y_header->down)
-            {
-                grafico << "nodo" << &*y_header << "->"
-                        << "nodo" << &*y_header->down << "[dir=\"both\"]\n";
-            }
-        }
-
-        Node *cabecera_y = head->down;
-
-        while (cabecera_y != NULL)
-        {
-            Node *nodo = cabecera_y;
-
-            while (nodo != NULL)
-            {
-                grafico << "nodo" << &*nodo << "[label = \"" << nodo->letra << "\" group=" << nodo->n << "];\n";
-                grafico << "nodo" << &*nodo << "->nodo" << &*nodo->up << "[dir = \"both\"]\n";
-                // creando apuntadores
-                if (nodo->down != NULL)
-                {
-                }
-
-                if (nodo->right != NULL)
-                {
-                }
-
-                nodo = nodo->right;
-            }
-
-            cabecera_y = cabecera_y->right;
-        }
-
-        grafico << "\n"
-                << "label = MATRIZ ;\n"
-                << " \n } \n }";
-
-        grafico.close();
-    }
-
     void generarMatriz()
     {
         ofstream grafico;
+        int nivel = 3;
 
         grafico.open("GraficoMatriz.txt", ios::out);
 
@@ -506,7 +358,7 @@ public:
         }
 
         grafico << "digraph G {\n"
-                << "node[shape=box]\n";
+                << "node[shape=circle]\n";
 
         // IMPRIMIENDO HEADERS
         // headers en x
@@ -544,11 +396,9 @@ public:
                 << "nodo" << &*header_x->down << "[dir=\"both\"];\n";
 
         // ----------------------------------------------------------
+
         Node *header_y = head->down;
 
-        // Generando el primer enlace en y
-        grafico << "nodo" << &*header_y << "->"
-                << "nodo" << &*header_y->up << "[dir=\"both\"];\n";
 
         // IMPRIMIENDO EN Y
         while (header_y->down != NULL)
@@ -593,8 +443,8 @@ public:
             {
                 grafico << "nodo" << &*actual << "[label= \"" << actual->letra << "\""
                         << "pos =\"" << actual->x << "," << actual->y << "!\""
-                        << "color=\""<<actual->color<<"\" style=filled];\n";
-                
+                        << "color=\"" << actual->color << "\" style=filled];\n";
+
                 if (actual->down)
                 {
                     grafico << "nodo" << &*actual << "->"
@@ -608,23 +458,32 @@ public:
                 }
 
                 actual = actual->right;
-                
             }
 
             y_header_aux = y_header_aux->down;
         }
-
+        //grafico << "label = \"" << obtenerCantidadNodos() << " nodos \" \n;";
         grafico << "\n"
                 << "}\n";
 
         grafico.close();
-        //grafico <<
+
+        string cmd, cmd2, cmd3;
+        cmd = "fdp -Tjpg GraficoMatriz.txt -o Nivel";
+        cmd2 = to_string(nivel) + ".png";
+        cmd3 = cmd + cmd2;
+        //cmd += nivel + ".jpg";
+        int tam_cmd = cmd.length();
+        char a[tam_cmd + 1];
+
+        strcpy(a, cmd3.c_str());
+        system(a);
     }
 
     void imprimir_en_consola()
     {
         Node *x_header = head;
-        // COlumnas
+        // Clumnas
         while (x_header != NULL)
         {
             Node *aux = x_header->down;
@@ -644,7 +503,7 @@ public:
         cout << "\n\n";
         // Filas
         Node *y_header = head;
-        // COlumnas
+        // Columnas
         while (y_header != NULL)
         {
             Node *aux = y_header->right;
@@ -659,6 +518,31 @@ public:
 
             y_header = y_header->down;
         }
+    }
+
+    int obtenerCantidadNodos()
+    {
+        int cantidad_nodos = 0;
+
+        Node *y_header = head;
+        // recorriendo en y
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+            cout << y_header->n << "   ";
+
+            while (aux)
+            {
+                //cout << aux->letra << " -  (" << aux->x << "," << aux->y << ") " << aux->color;
+                aux = aux->right;
+                
+            }
+            cout << "\n";
+            cantidad_nodos++;
+            y_header = y_header->down;
+        }
+
+        return cantidad_nodos;
     }
 };
 
