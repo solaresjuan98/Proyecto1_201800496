@@ -16,6 +16,7 @@ public:
     ArbolAVL();
     ~ArbolAVL();
     void insertar(int valor);
+    string contenido_grafico = "";
 
     // Rotaciones
     NodoAVL *rotacionII(NodoAVL *n, NodoAVL *n1);
@@ -37,6 +38,10 @@ public:
     void imprimir(NodoAVL *raiz, int cont);
     NodoAVL *getReemplazo(NodoAVL *raiz);
 
+    //Impresión de AVL en Graphviz
+    void Graficar();
+    void GraficarRecursivo(NodoAVL *raiz);
+
     //Eliminación de nodoAVL
     bool eliminar(int idProyecto);
 
@@ -54,6 +59,7 @@ public:
     // - Generando lista
     void generarListaPOrd(NodoAVL *actual);
     void imprimirAsc();
+    void imprimirDesc();
 
     // Arboles ABB en nodo AVL
     void crearABBObjetos(NodoAVL *raiz, int id, int nivel);
@@ -65,6 +71,7 @@ public:
     // Matrices de la lista
     void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
     void imprimirMatriz(int id, int numeroNivel);
+    void imprimirMatricesEnMasa(int id);
 
     void generar();
     void Delete(NodoAVL *raiz);
@@ -288,7 +295,6 @@ void ArbolAVL::insertar(int valor)
 {
     bool b = false;
     bool *a = &b;
-    cout << " --" << endl;
     this->raiz = insertar(this->raiz, valor, *a);
 }
 
@@ -309,6 +315,72 @@ void ArbolAVL::imprimir(NodoAVL *raiz, int cont)
 
         std::cout << raiz->getID() << endl;
         imprimir(raiz->getIzq(), cont + 1);
+    }
+}
+
+// graficando en Graphviz
+void ArbolAVL::Graficar()
+{
+    ofstream graficoAVL;
+    string cadena;
+    graficoAVL.open("ProyectosAVL.txt", ios::out);
+
+    if (graficoAVL.fail())
+    {
+        cout << "*No se pudo abrir el archivo*" << endl;
+        system("pause");
+        //exit(1);
+    }
+
+    graficoAVL << " digraph BST {\n";
+    graficoAVL << "node [shape = record, style=filled, fillcolor=gray];\n";
+
+    GraficarRecursivo(this->raiz);
+
+    cadena += this->contenido_grafico;
+    graficoAVL << cadena;
+    //graficoAVL << aux;
+
+    graficoAVL << "}";
+
+    graficoAVL.close();
+
+    string cmd;
+    cmd = "dot -Tjpg ProyectosAVL.txt -o Proyectos.jpg";
+    int tam_cmd = cmd.length();
+    char a[tam_cmd + 1];
+
+    strcpy(a, cmd.c_str());
+    system(a);
+
+    this->contenido_grafico = "";
+}
+
+void ArbolAVL::GraficarRecursivo(NodoAVL *raiz)
+{
+    if (raiz != NULL)
+    {
+
+        if (raiz->getIzq() == NULL && raiz->getDer() == NULL)
+        {
+            this->contenido_grafico += "nodo" + to_string(raiz->getID()) + "[label=\"" + to_string(raiz->getID()) + "\"];\n";
+        }
+        else
+        {
+            this->contenido_grafico += "nodo" + to_string(raiz->getID()) + "[label=\"<A0>|" + to_string(raiz->getID()) + "|<A1>\"];\n";
+        }
+
+        if (raiz->getIzq() != NULL)
+        {
+            GraficarRecursivo(raiz->getIzq());
+            this->contenido_grafico += "nodo" + to_string(raiz->getID()) + ":A0->nodo" + to_string(raiz->getIzq()->getID()) + "\n";
+        }
+
+        if (raiz->getDer() != NULL)
+        {
+            GraficarRecursivo(raiz->getDer());
+            this->contenido_grafico += "nodo" + to_string(raiz->getID()) + ":A1->nodo" + to_string(raiz->getDer()->getID()) + "\n";
+        }
     }
 }
 
@@ -410,7 +482,6 @@ bool ArbolAVL::eliminar(int idProyecto)
         else if (h_izq)
         {
             padre->setIzq(aux->getIzq());
-
         }
         else
         {
@@ -495,13 +566,17 @@ void ArbolAVL::generarListaPOrd(NodoAVL *actual)
         lista->agregarProyecto(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
 
         generarListaPOrd(actual->getDer());
-        
     }
 }
 
 void ArbolAVL::imprimirAsc()
 {
     lista->imprimirLista();
+}
+
+void ArbolAVL::imprimirDesc()
+{
+    lista->imprimirDescendente();
 }
 
 void ArbolAVL::crearListaNiveles(int n)
@@ -546,7 +621,7 @@ void ArbolAVL::insertarNivel(int id, int numeroNivel)
     if (busqueda(tmp, id))
     {
         tmp = this->raiz;
-        cout << " --" << endl;
+        //cout << " --" << endl;
         busquedaNodo(tmp, id)->getLista()->agregarNuevoNivel(new NodoNivel(numeroNivel));
         //cout << " Insertando nivel" << numeroNivel << " en proyecto " << tmp->getID() << endl;
     }
@@ -667,25 +742,8 @@ void ArbolAVL::imprimirABBobjetos(int id, int numeroNivel)
     }
 }
 
-void ArbolAVL::crearABBObjetos(NodoAVL *nodo, int id, int nivel)
-{
-    if (busqueda(nodo, id))
-    {
 
-        nodo->getLista()->crearArbol(nivel);
-
-        /*
-            1. Verificar si tiene lista
-            2. Buscar NodoNivel
-                2.1 Si existe el NodoNivel, setear el arbol binario al nodo
-        */
-    }
-    else
-    {
-    }
-}
-
-void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre, string letra, string color,int x, int y)
+void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre, string letra, string color, int x, int y)
 {
     //1. buscar si el nodo avl existe
     //2. Verificar si ese nodo avl está apuntada a una lista
@@ -697,13 +755,9 @@ void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre, str
     {
         if (busquedaNodo(tmp, id)->getLista() != NULL)
         {
-            busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre, letra, color,x, y);
+            busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(nivel, id_obj, nombre, letra, color, x, y);
             //cout << "Lista: " << nodo->getLista() << endl;
         }
-    }
-    else
-    {
-        cout << " no encontrado " << endl;
     }
 }
 
@@ -752,6 +806,7 @@ void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, 
         {
 
             busquedaNodo(tmp, id)->getLista()->agregar_nodo_matriz(id_nivel, id_obj, letra, color, x, y);
+            //busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(id_nivel, id_obj, "nombre", letra, color, x, y);
         }
     }
 }
@@ -768,4 +823,19 @@ void ArbolAVL::imprimirMatriz(int id, int numeroNivel)
     {
         cout << " ";
     }
+}
+
+void ArbolAVL::imprimirMatricesEnMasa(int id)
+{
+    NodoAVL *temp = this->raiz;
+
+    if(busquedaNodo(temp, id))
+    {
+        busquedaNodo(temp, id)->getLista()->GraficarL();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+    
 }

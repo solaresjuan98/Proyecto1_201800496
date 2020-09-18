@@ -7,25 +7,27 @@ class NodoProyecto
 {
 private:
     int id_proyecto;
-    int num_niveles;
+    int cantidad;
 
 public:
     NodoProyecto *siguiente;
     NodoProyecto *anterior;
+    NodoProyecto *ultimo;
 
-    NodoProyecto(int id_proyecto, int num_niveles);
+    NodoProyecto(int id_proyecto, int cantidad);
     int getID();
     void setID(int id);
-    int getNumNiveles();
-    void setNumNiveles(int num_niveles);
+    int getNum();
+    void setNum(int cantidad);
     ~NodoProyecto();
 };
 
-NodoProyecto::NodoProyecto(int id_proyecto, int num_niveles)
+NodoProyecto::NodoProyecto(int id_proyecto, int cantidad)
 {
     this->id_proyecto = id_proyecto;
-    this->num_niveles = num_niveles;
+    this->cantidad = cantidad;
     this->siguiente = NULL;
+    this->ultimo = NULL;
 }
 
 void NodoProyecto::setID(int id)
@@ -33,9 +35,9 @@ void NodoProyecto::setID(int id)
     this->id_proyecto = id;   
 }
 
-void NodoProyecto::setNumNiveles(int num_niveles)
+void NodoProyecto::setNum(int cantidad)
 {
-    this->num_niveles = num_niveles;
+    this->cantidad = cantidad;
 }
 
 int NodoProyecto::getID()
@@ -43,9 +45,9 @@ int NodoProyecto::getID()
     return this->id_proyecto;
 }
 
-int NodoProyecto::getNumNiveles()
+int NodoProyecto::getNum()
 {
-    return this->num_niveles;
+    return this->cantidad;
 }
 
 NodoProyecto::~NodoProyecto()

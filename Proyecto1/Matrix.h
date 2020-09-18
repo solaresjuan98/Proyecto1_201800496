@@ -33,36 +33,6 @@ public:
         add_node(n, letra, color, x, y);
     }
 
-    void add_x(Node *new_node, int x)
-    {
-        Node *tmp = head;
-
-        while (tmp->n != x)
-        {
-            tmp = tmp->right;
-        }
-        if (tmp->down == NULL) //INICIAL
-        {
-            tmp->down = new_node;
-            new_node->up = tmp;
-        }
-    }
-
-    void add_y(Node *new_node, int y)
-    {
-        Node *tmp = head;
-        while (tmp->n != y)
-        {
-            tmp = tmp->down;
-        }
-
-        if (tmp->right == NULL)
-        {
-            tmp->right = new_node;
-            new_node->left = tmp;
-        }
-    }
-
     void add_x_header(int x, string letra)
     {
         if (head->right == NULL)
@@ -345,6 +315,10 @@ public:
         cout << "\n";
     }
 
+    Node *searchNode(int x, int y)
+    {
+    }
+
     void generarMatriz()
     {
         ofstream grafico;
@@ -399,6 +373,139 @@ public:
 
         Node *header_y = head->down;
 
+        // IMPRIMIENDO EN Y
+        while (header_y->down != NULL)
+        {
+            grafico << "nodo" << &*header_y << "[label= \"" << header_y->y << "\""
+                    << "pos =\"" << 0 << "," << header_y->y << "!\""
+                    << " color=gray style=filled];\n";
+
+            // Generando enlaces
+            if (header_y->down)
+            {
+                grafico << "nodo" << &*header_y << "->"
+                        << "nodo" << &*header_y->down << "[dir=\"both\"];\n";
+            }
+
+            // Generando los enlaces a su derecha del header en y
+            if (header_y->right)
+            {
+                grafico << "nodo" << &*header_y << "->"
+                        << "nodo" << &*header_y->right << "[dir=\"both\"];\n";
+            }
+
+            header_y = header_y->down;
+        }
+
+        // generando el ultimo en y
+        grafico << "nodo" << &*header_y << "[label= \"" << header_y->y << "\""
+                << "pos =\"" << 0 << "," << header_y->y << "!\""
+                << " color=gray style=filled];\n";
+
+        // Generando el ultimo enlace en y
+        grafico << "nodo" << &*header_y << "->"
+                << "nodo" << &*header_y->right << "[dir=\"both\"];\n";
+
+        // IMPRIMIENDO LOS NODOS
+        Node *y_header_aux = head->down;
+
+        while (y_header_aux != NULL)
+        {
+            Node *actual = y_header_aux->right;
+            while (actual)
+            {
+                grafico << "nodo" << &*actual << "[label= \"" << actual->letra << "\""
+                        << "pos =\"" << actual->x << "," << actual->y << "!\""
+                        << "color=\"" << actual->color << "\" style=filled];\n";
+
+                if (actual->down)
+                {
+                    grafico << "nodo" << &*actual << "->"
+                            << "nodo" << &*actual->down << "[dir=\"both\"];\n";
+                }
+
+                if (actual->right)
+                {
+                    grafico << "nodo" << &*actual << "->"
+                            << "nodo" << &*actual->right << "[dir=\"both\"];\n";
+                }
+
+                actual = actual->right;
+            }
+
+            y_header_aux = y_header_aux->down;
+        }
+        //grafico << "label = \"" << obtenerCantidadNodos() << " nodos \" \n;";
+        grafico << "\n"
+                << "}\n";
+
+        grafico.close();
+
+        string cmd, cmd2, cmd3;
+        cmd = "fdp -Tjpg GraficoMatriz.txt -o Nivel";
+        cmd2 = to_string(nivel) + ".png";
+        cmd3 = cmd + cmd2;
+        //cmd += nivel + ".jpg";
+        int tam_cmd = cmd.length();
+        char a[tam_cmd + 1];
+
+        strcpy(a, cmd3.c_str());
+        system(a);
+    }
+
+    void generarMatrizPorNivel(int nivel)
+    {
+        ofstream grafico;
+        //int nivel = 3;
+
+        grafico.open("GraficoMatriz.txt", ios::out);
+
+        if (grafico.fail())
+        {
+            cout << " Error al abrir el archivo " << endl;
+        }
+
+        grafico << "digraph G {\n"
+                << "node[shape=circle]\n";
+
+        // IMPRIMIENDO HEADERS
+        // headers en x
+
+        Node *header_x = head;
+
+        while (header_x->right != NULL)
+        {
+            grafico << "nodo" << &*header_x << "[label= \"" << header_x->x << "\""
+                    << "pos =\"" << header_x->x << "," << 0 << "!\""
+                    << " color=gray style=filled];\n";
+
+            // Generando enlaces
+            if (header_x->right)
+            {
+                grafico << "nodo" << &*header_x << "->"
+                        << "nodo" << &*header_x->right << "[dir=\"both\"];\n";
+            }
+
+            if (header_x->down)
+            {
+                grafico << "nodo" << &*header_x << "->"
+                        << "nodo" << &*header_x->down << "[dir=\"both\"];\n";
+            }
+
+            header_x = header_x->right;
+        }
+
+        // generando el ultimo en X
+        grafico << "nodo" << &*header_x << "[label= \"" << header_x->x << "\""
+                << "pos =\"" << header_x->x << "," << 0 << "!\""
+                << " color=gray style=filled];\n";
+        // Enlace hacia abajo del ultimo en x
+        grafico << "nodo" << &*header_x << "->"
+                << "nodo" << &*header_x->down << "[dir=\"both\"];\n";
+
+        // ----------------------------------------------------------
+
+        Node *header_y = head->down;
 
         // IMPRIMIENDO EN Y
         while (header_y->down != NULL)
@@ -483,11 +590,11 @@ public:
     void imprimir_en_consola()
     {
         Node *x_header = head;
-        // Clumnas
+        // Columnas
         while (x_header != NULL)
         {
             Node *aux = x_header->down;
-            cout << x_header->n << "**";
+            cout << x_header->n << "  ";
 
             while (aux)
             {
@@ -523,26 +630,129 @@ public:
     int obtenerCantidadNodos()
     {
         int cantidad_nodos = 0;
+        int largo = 0;
+        int alto = 0;
+        int espacios_libres = 0;
+        Node *y_header = head->down;
+        Node *x_header = head->right;
 
-        Node *y_header = head;
-        // recorriendo en y
+        while (x_header != NULL)
+        {
+
+            x_header = x_header->right;
+            largo++;
+        }
+
         while (y_header != NULL)
         {
             Node *aux = y_header->right;
-            cout << y_header->n << "   ";
 
             while (aux)
             {
-                //cout << aux->letra << " -  (" << aux->x << "," << aux->y << ") " << aux->color;
+
                 aux = aux->right;
-                
+                cantidad_nodos++;
             }
-            cout << "\n";
-            cantidad_nodos++;
+
+            y_header = y_header->down;
+            alto++;
+        }
+
+        //cout << "Cantidad Nodos: " << cantidad_nodos << endl;
+
+        return cantidad_nodos;
+    }
+
+    int obtenerEspaciosLibres()
+    {
+        int cantidad_nodos = 0;
+        int largo = 0;
+        int alto = 0;
+        int espacios_libres = 0;
+        Node *y_header = head->down;
+        Node *x_header = head->right;
+
+        while (x_header != NULL)
+        {
+
+            x_header = x_header->right;
+            largo++;
+        }
+
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+
+            while (aux)
+            {
+
+                aux = aux->right;
+                cantidad_nodos++;
+            }
+
+            y_header = y_header->down;
+            alto++;
+        }
+
+        espacios_libres = (alto * largo) - cantidad_nodos;
+
+        return espacios_libres;
+    }
+
+    int obtenerParedes()
+    {
+        int cant_paredes = 0;
+
+        Node *y_header = head->down;
+
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+
+            while (aux)
+            {
+
+                if (aux->letra == "p")
+                {
+                    // es pared
+                    cant_paredes++;
+                }
+
+                aux = aux->right;
+            }
+
             y_header = y_header->down;
         }
 
-        return cantidad_nodos;
+        return cant_paredes;
+    }
+
+    int obtenerVentanas()
+    {
+        int cant_ventanas = 0;
+
+        Node *y_header = head->down;
+
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+
+            while (aux)
+            {
+
+                if (aux->letra == "v")
+                {
+                    // es ventana
+                    cant_ventanas++;
+                }
+
+                aux = aux->right;
+            }
+
+            y_header = y_header->down;
+        }
+
+        return cant_ventanas;
     }
 };
 

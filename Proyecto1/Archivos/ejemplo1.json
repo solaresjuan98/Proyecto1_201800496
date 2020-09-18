@@ -1,5 +1,5 @@
 {
-    "nombre": "a",
+    "nombre": "b",
     "niveles": [
         {
             "nivel": 1,
@@ -10,43 +10,62 @@
                         1
                     ],
                     "final": [
+                        1,
+                        25
+                    ]
+                },
+                {
+                    "inicio": [
+                        2,
+                        1
+                    ],
+                    "final": [
                         10,
                         1
                     ]
                 },
                 {
                     "inicio": [
-                        1,
+                        15,
+                        1
+                    ],
+                    "final": [
+                        17,
+                        1
+                    ]
+                },
+                {
+                    "inicio": [
+                        17,
                         2
                     ],
                     "final": [
-                        1,
-                        10
+                        17,
+                        25
                     ]
                 },
+                {
+                    "inicio": [
+                        2,
+                        25
+                    ],
+                    "final": [
+                        16,
+                        25
+                    ]
+                }
+            ],
+            "ventanas": [
                 {
                     "inicio": [
                         11,
                         1
                     ],
                     "final": [
-                        11,
-                        10
-                    ]
-                },
-                {
-                    "inicio": [
-                        1,
-                        11
-                    ],
-                    "final": [
-                        11,
-                        11
+                        12,
+                        1
                     ]
                 }
-            ],
-            "ventanas": [
-                
             ],
             "objetos": [
                 {
@@ -56,184 +75,11 @@
                     "color": "#FDB546",
                     "puntos": [
                         {
-                            "x": 2,
-                            "y": 2
-                        },
-                        {
-                            "x": 3,
-                            "y": 2
-                        },
-                        {
-                            "x": 4,
-                            "y": 2
-                        }
-                    ]
-                },
-                {
-                    "identificador": 2,
-                    "nombre": "Television",
-                    "letra": "T",
-                    "color": "#E6E6E6",
-                    "puntos": [
-                        {
-                            "x": 6,
+                            "x": 10,
                             "y": 5
                         }
                     ]
-                },
-                {
-                    "identificador": 3,
-                    "nombre": "planta",
-                    "letra": "F",
-                    "color": "#50CB0A",
-                    "puntos": [
-                        {
-                            "x": 6,
-                            "y": 10
-                        }
-                    ]
-                },
-                {
-                    "identificador": 4,
-                    "nombre": "mesa",
-                    "letra": "M",
-                    "color": "#0A18CB",
-                    "puntos": [
-                        {
-                            "x": 3,
-                            "y": 4
-                        },
-                        {
-                            "x": 4,
-                            "y": 4
-                        },
-                        {
-                            "x": 4,
-                            "y": 5
-                        }
-                    ]
-                },
-                {
-                    "identificador": 5,
-                    "nombre": "puerta",
-                    "letra": "P",
-                    "color": "#CB790A",
-                    "puntos": [
-                        {
-                            "x": 2,
-                            "y": 10
-                        }
-                    ]
-                },
-                {
-                    "identificador": 6,
-                    "nombre": "escalera",
-                    "letra": "ES",
-                    "color": "#02703A",
-                    "puntos": [
-                        {
-                            "x": 7,
-                            "y": 7
-                        },
-                        {
-                            "x": 8,
-                            "y": 7
-                        }
-                    ]
-                },
-                {
-                    "identificador": 9,
-                    "nombre": "Estufa",
-                    "letra": "est",
-                    "color": "#6A4513",
-                    "puntos": [
-                        {
-                            "x": 9,
-                            "y": 7
-                        },
-                        {
-                            "x": 9,
-                            "y": 6
-                        },
-                        {
-                            "x": 9,
-                            "y": 5
-                        }
-                    ]
-                },
-                {
-                    "identificador": 10,
-                    "nombre": "Tablero",
-                    "letra": "t",
-                    "color": "#D9BC94",
-                    "puntos": [
-                        {
-                            "x": 7,
-                            "y": 10
-                        },
-                        {
-                            "x": 8,
-                            "y": 10
-                        }
-   
-                    ]
-                },
-                {
-                    "identificador": 11,
-                    "nombre": "computadora",
-                    "letra": "c",
-                    "color": "#726D66",
-                    "puntos": [
-                        {
-                            "x": 8,
-                            "y": 4
-                        }
-                    ]
-                },
-                {
-                    "identificador": 532,
-                    "nombre": "laboris",
-                    "letra": "N",
-                    "color": "#A4E11B",
-                    "puntos": [
-                      {
-                        "x": 2,
-                        "y": 7
-                      },
-                      {
-                        "x": 8,
-                        "y": 5
-                      },
-                      {
-                        "x": 4,
-                        "y": 7
-                      },
-                      {
-                        "x": 10,
-                        "y": 2
-                      }
-                    ]
-                  },
-                  {
-                    "identificador": 888,
-                    "nombre": "excepteur",
-                    "letra": "E",
-                    "color": "#1F4A0B",
-                    "puntos": [
-                      {
-                        "x": 5,
-                        "y": 5
-                      },
-                      {
-                        "x": 5,
-                        "y": 4
-                      },
-                      {
-                        "x": 2,
-                        "y": 8
-                      }
-                    ]
-                  }
+                }
             ]
         }
     ]

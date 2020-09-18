@@ -35,14 +35,15 @@ public:
         }
         else
         {
-            NodoArbol *temp = this->raiz;
+            NodoArbol *temp = raiz;
 
             while (temp != NULL)
             {
-                if (nuevo_nodo->id == temp->id)//Aqui truena
+                if (nuevo_nodo->id == temp->id) //Aqui truena
                 {
                     //cout << " Nodo repetido, intenta de nuevo :'v" << endl;
-                    return; // no se aceptan nodos repetidos
+                    //return; // no se aceptan nodos repetidos
+                    return;
                 }
                 else if (nuevo_nodo->id < temp->id && temp->izq == NULL)
                 {
@@ -67,8 +68,6 @@ public:
                     // pasar a nodo siguiente
                     temp = temp->der;
                 }
-
-                temp = temp->der;
             }
         }
     }
@@ -101,7 +100,7 @@ public:
         }
         else
         {
-            cout << "  >> " << arbol->id <<"  "<< arbol->nombre << endl;
+            cout << "  >> " << arbol->id << "  " << arbol->nombre << endl;
             preOrden(arbol->izq);
             preOrden(arbol->der);
         }
@@ -203,7 +202,7 @@ public:
             }
             else
             {
-                
+
                 padre->der = aux->izq;
             }
         }
@@ -344,7 +343,7 @@ public:
     {
         ofstream graficoBST;
         string cadena;
-        graficoBST.open("BSTgraph.txt", ios::out);
+        graficoBST.open("BSTgraph_.txt", ios::out);
 
         if (graficoBST.fail())
         {
@@ -355,7 +354,6 @@ public:
 
         graficoBST << " digraph BST {\n";
         graficoBST << "node [shape = record, style=filled, fillcolor=gray];\n";
-        
 
         graficarRecursivo(this->raiz);
 
@@ -388,44 +386,24 @@ public:
             {
                 graficarRecursivo(r->izq);
                 this->contenido_grafico += "nodo" + to_string(r->id) + ":A0->nodo" + to_string(r->izq->id) + "\n";
-
             }
-            
+
             if (r->der != NULL)
             {
                 graficarRecursivo(r->der);
                 this->contenido_grafico += "nodo" + to_string(r->id) + ":A1->nodo" + to_string(r->der->id) + "\n";
-
             }
 
-            /*this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"" + r->nombre + "\"];\n";
-            
-            graficarRecursivo(r->izq);
-            graficarRecursivo(r->der);
-            cout << this->contenido_grafico << endl;
-            if (r->izq != NULL)
-            {
-                //cout << r->id;
-                this->contenido_grafico += "nodo" + to_string(r->id) + "-> nodo" + r->izq->nombre + "\n";
-            }
-
-            if (r->der != NULL)
-            {
-                //cout << r->id;
-                this->contenido_grafico += "nodo" + to_string(r->id) + "-> nodo" + r->der->nombre + "\n";
-            }*/
-            }
         }
-
-
-
-        ~ArbolBinario();
-    };
-
-    ArbolBinario::ArbolBinario()
-    {
     }
 
-    ArbolBinario::~ArbolBinario()
-    {
-    }
+    ~ArbolBinario();
+};
+
+ArbolBinario::ArbolBinario()
+{
+}
+
+ArbolBinario::~ArbolBinario()
+{
+}

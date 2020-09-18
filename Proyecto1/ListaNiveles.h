@@ -92,8 +92,12 @@ public:
 
                 temp = ptr;
 
+                cout << temp->getMatriz()->obtenerCantidadNodos() << endl;
+                cout << temp->getMatriz()->obtenerEspaciosLibres() << endl;
+                cout << temp->getMatriz()->obtenerParedes() << endl;
+                cout << temp->getMatriz()->obtenerVentanas() << endl;
                 temp->getMatriz()->generarMatriz();
-                //cout << temp->getMatriz()->obtenerCantidadNodos() << endl;
+
                 encontrado = true;
             }
 
@@ -134,8 +138,6 @@ public:
                 }
 
                 ptr->siguiente = n;
-                //cout << " Nivel agregado. " << endl;
-                //std::cout << n->id << endl;
             }
         }
     }
@@ -161,7 +163,7 @@ public:
         }
     }
 
-    void crearArbol(int nivel)
+    /*void crearArbol(int nivel)
     {
         NodoNivel *temp = NULL;
         NodoNivel *ptr = cabeza;
@@ -187,7 +189,7 @@ public:
             //     << endl;
             //agregarNivel(ptr);
         }
-    }
+    }*/
 
     void agregar_nodo_abb(int nivel, int id_objeto, string nombre, string letra, string color, int x, int y)
     {
@@ -201,11 +203,9 @@ public:
             if (ptr->id == nivel)
             {
                 temp = ptr;
-                //temp->setArbol(new ArbolBinario());
-                //cout << " Arbol creado" << endl;
-
                 temp->getArbol()->insertarNodo(nuevo_nodo);
                 encontrado = true;
+                //break;
             }
 
             ptr = ptr->siguiente;
@@ -319,7 +319,7 @@ public:
         }
     }
 
-    // Obtener cantidad de niveles del proyecto (lista)
+    // Obtener cantidad de niveles del proyecto (lista de niveles)
     int obtenerTamanio()
     {
         int cant_niveles = 0;
@@ -340,6 +340,28 @@ public:
         }
 
         return cant_niveles;
+    }
+
+    // Graficar los niveles en masa
+    void GraficarL()
+    {
+        if (cabeza == NULL)
+        {
+            cout << " lista vacia." << endl;
+        }
+        else
+        {
+            //std::cout << " Valores de lista : " << endl;
+            NodoNivel *temp = cabeza;
+
+            while (temp != NULL)
+            {
+                cout.flush();
+                //cout << "  *  >> Nivel " << temp->id << " * " << endl;
+                temp->getMatriz()->generarMatrizPorNivel(temp->id);
+                temp = temp->siguiente;
+            }
+        }
     }
 };
 /*
