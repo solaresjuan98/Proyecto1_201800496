@@ -1,12 +1,10 @@
  digraph BST {
 node [shape = record, style=filled, fillcolor=gray];
-nodo101[label="<A0>|101|<A1>"];
 nodo98[label="<A0>|98|<A1>"];
 nodo97[label="97"];
 nodo98:A0->nodo97
-nodo101:A0->nodo98
 nodo104[label="<A0>|104|<A1>"];
 nodo106[label="106"];
 nodo104:A1->nodo106
-nodo101:A1->nodo104
+nodo98:A1->nodo104
 }

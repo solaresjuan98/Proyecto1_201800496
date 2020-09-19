@@ -20,7 +20,52 @@ public:
     }
     ~Matrix();
 
-    //add(int n, string letra, string color, int x, int y)
+    // buscar el nodo
+    Node *nodoExiste(int x, int y)
+    {
+        Node *y_header = head->down;
+        Node *x_header = head->right;
+        Node *objeto = NULL;
+        bool encontrado = false;
+
+        while (x_header != NULL)
+        {
+
+            x_header = x_header->right;
+            //largo++;
+        }
+
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+
+            while (aux)
+            {
+
+                if ((aux->x == x) && (aux->y == y))
+                {
+                    //cout << " >> Nodo encontrado en matriz " << endl;
+                    encontrado = true;
+                    objeto = aux;
+                    //return aux;
+                    //break;
+                }
+
+                aux = aux->right;
+            }
+
+            y_header = y_header->down;
+        }
+
+        if(!encontrado)
+        {
+            //
+        }
+
+
+        return objeto;
+    }
+
     void add(int n, string letra, string color, int x, int y)
     {
         //1. crear cabeceras
@@ -143,110 +188,115 @@ public:
 
     void add_node(int valor, string letra, string color, int x, int y)
     {
-        Node *tmp = head;
-        Node *tmp2 = head;
-        Node *new_node = new Node(valor, letra, color, x, y);
-        bool band = false;
 
-        // Para columnas
-        while (tmp->right != NULL)
+        if (nodoExiste(x, y))
         {
-            tmp = tmp->right;
+            //cout << " >> Nodo repetido. No se puede ingresar. " <<endl;
+        }
+        else
+        {
+            Node *tmp = head;
+            Node *tmp2 = head;
+            Node *new_node = new Node(valor, letra, color, x, y);
+            bool band = false;
 
-            if (tmp->x == x && tmp->down == NULL)
+            // Para columnas
+            while (tmp->right != NULL)
             {
+                tmp = tmp->right;
 
-                tmp->down = new_node;
-                new_node->up = tmp;
-                break;
-            }
-            else if (tmp->x == x && tmp->down != NULL)
-            {
-                Node *aux3 = tmp;
-                Node *ant;
-
-                while (aux3->down != NULL)
+                if (tmp->x == x && tmp->down == NULL)
                 {
-                    ant = aux3;
-                    aux3 = aux3->down;
 
-                    if (aux3->y < y && aux3->down == NULL)
-                    {
-                        aux3->down = new_node;
-                        new_node->up = aux3;
-                        band = true;
-                        break;
-                    }
-                    else if (aux3->y > y)
-                    {
-                        aux3->up = new_node;
-                        new_node->down = aux3;
-                        new_node->up = ant;
-                        ant->down = new_node;
-                        band = true;
-                        break;
-                    }
-                }
-
-                if (band)
-                {
+                    tmp->down = new_node;
+                    new_node->up = tmp;
                     break;
                 }
-            }
-        }
-
-        // Para filas
-        while (tmp2->down != NULL)
-        {
-            tmp2 = tmp2->down;
-
-            if (tmp2->y == y && tmp2->right == NULL)
-            {
-                tmp2->right = new_node;
-                new_node->left = tmp2;
-                break;
-            }
-            else if (tmp2->y == y && tmp2->right != NULL)
-            {
-                Node *aux4 = tmp2;
-                Node *ant;
-
-                while (aux4->right != NULL)
+                else if (tmp->x == x && tmp->down != NULL)
                 {
-                    ant = aux4;
-                    aux4 = aux4->right;
+                    Node *aux3 = tmp;
+                    Node *ant;
 
-                    if (aux4->x < x && aux4->right == NULL)
+                    while (aux3->down != NULL)
                     {
-                        aux4->right = new_node;
-                        new_node->left = aux4;
-                        band = true;
-                        break;
+                        ant = aux3;
+                        aux3 = aux3->down;
+
+                        if (aux3->y < y && aux3->down == NULL)
+                        {
+                            aux3->down = new_node;
+                            new_node->up = aux3;
+                            band = true;
+                            break;
+                        }
+                        else if (aux3->y > y)
+                        {
+                            aux3->up = new_node;
+                            new_node->down = aux3;
+                            new_node->up = ant;
+                            ant->down = new_node;
+                            band = true;
+                            break;
+                        }
                     }
-                    else if (aux4->x > x)
+
+                    if (band)
                     {
-                        aux4->left = new_node;
-                        new_node->right = aux4;
-                        new_node->left = ant;
-                        ant->right = new_node;
-                        band = true;
                         break;
                     }
                 }
+            }
 
-                if (band)
+            // Para filas
+            while (tmp2->down != NULL)
+            {
+                tmp2 = tmp2->down;
+
+                if (tmp2->y == y && tmp2->right == NULL)
                 {
+                    tmp2->right = new_node;
+                    new_node->left = tmp2;
                     break;
                 }
+                else if (tmp2->y == y && tmp2->right != NULL)
+                {
+                    Node *aux4 = tmp2;
+                    Node *ant;
+
+                    while (aux4->right != NULL)
+                    {
+                        ant = aux4;
+                        aux4 = aux4->right;
+
+                        if (aux4->x < x && aux4->right == NULL)
+                        {
+                            aux4->right = new_node;
+                            new_node->left = aux4;
+                            band = true;
+                            break;
+                        }
+                        else if (aux4->x > x)
+                        {
+                            aux4->left = new_node;
+                            new_node->right = aux4;
+                            new_node->left = ant;
+                            ant->right = new_node;
+                            band = true;
+                            break;
+                        }
+                    }
+
+                    if (band)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (tmp->down == NULL) //INICIAL
+            {
             }
         }
-
-        if (tmp->down == NULL) //INICIAL
-        {
-        }
-
-        //cout << "Se va a ingresar en x = " << x << " y = " << y;
-        cout << "\n";
     }
 
     void print_nodes_x()
@@ -657,8 +707,6 @@ public:
             y_header = y_header->down;
             alto++;
         }
-
-        //cout << "Cantidad Nodos: " << cantidad_nodos << endl;
 
         return cantidad_nodos;
     }

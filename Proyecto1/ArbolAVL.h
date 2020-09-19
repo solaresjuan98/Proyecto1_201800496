@@ -17,6 +17,13 @@ public:
     ~ArbolAVL();
     void insertar(int valor);
     string contenido_grafico = "";
+    // listas donde se va a ordenar los proyectos por cantidad de niveles
+    //Lista Ordenada ascendentemente
+    ListaProyectos *lista = new ListaProyectos();
+    //Lista Ordenana descendentemente
+    ListaProyectos *lista_desc = new ListaProyectos();
+    //lista que tiene la cantidad de objetos de cada matriz
+    ListaProyectos *lista_objetos = new ListaProyectos();
 
     // Rotaciones
     NodoAVL *rotacionII(NodoAVL *n, NodoAVL *n1);
@@ -25,9 +32,6 @@ public:
     NodoAVL *rotacionDerIzq(NodoAVL *n, NodoAVL *n1);
     NodoAVL *getRaiz();
     void setRaiz(NodoAVL *n);
-
-    //Lista Ordenada ascendentemente
-    ListaProyectos *lista = new ListaProyectos();
 
     //Recorridos
     void inOrden(NodoAVL *n);
@@ -53,11 +57,20 @@ public:
     void obtenerNumNiveles(int id);
     void crearPisos(int id, int cantidadPisos);
     void copiarNivel(int id, int nivelCopiar, int nivelDestino);
+
+    // Agregando a lista ascendente y descendente para el reporte
+    //void agregarenListaAsc(int id, int cant);
+
     // copia de lista
 
     //Obtener los proyectos con mayor numero de niveles en forma ascendente
     // - Generando lista
     void generarListaPOrd(NodoAVL *actual);
+
+    // Obtener los proyecto con mayor numero de niveles en forma descendente
+    // - Generando lista
+    void generarListaPDesc(NodoAVL *actual);
+
     void imprimirAsc();
     void imprimirDesc();
 
@@ -72,6 +85,13 @@ public:
     void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
     void imprimirMatriz(int id, int numeroNivel);
     void imprimirMatricesEnMasa(int id);
+
+    // PARA REPORTES:
+    void genListaNivelesPorObjeto(int id_proyecto);
+    void imprimirListaNivelesPorObjeto(int id_proyecto);
+
+    void genListaMasEspacio(int id_proyecto);
+    void imprimirListaMasEspacio(int id_proyecto);
 
     void generar();
     void Delete(NodoAVL *raiz);
@@ -395,12 +415,13 @@ void ArbolAVL::inOrden(NodoAVL *actual)
     {
         inOrden(actual->getIzq());
 
-        std::cout << " >> Proyecto: " << actual->getID() << endl;
+        cout << " >> Proyecto: " << actual->getID() << endl;
         //std::cout << " Lista : " << actual->getLista() << endl;
-        /*if (actual->getLista() != NULL)
+        if (actual->getLista() != NULL)
         {
-            actual->getLista()->imprimirLista();
-        }*/
+            //actual->getLista()->imprimirLista();
+            //cout << actual->getLista()->get
+        }
 
         inOrden(actual->getDer());
     }
@@ -563,9 +584,25 @@ void ArbolAVL::generarListaPOrd(NodoAVL *actual)
         generarListaPOrd(actual->getIzq());
 
         //agregando a lista
-        lista->agregarProyecto(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
+        lista->agregarDato(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
 
         generarListaPOrd(actual->getDer());
+    }
+}
+
+void ArbolAVL::generarListaPDesc(NodoAVL *actual)
+{
+
+    if (actual == NULL)
+    {
+        return;
+    }
+    else
+    {
+        generarListaPDesc(actual->getIzq());
+        //agregando a lista
+        lista_desc->agregarDatoDesc(new NodoProyecto(actual->getID(), actual->getLista()->obtenerTamanio()));
+        generarListaPDesc(actual->getDer());
     }
 }
 
@@ -576,7 +613,7 @@ void ArbolAVL::imprimirAsc()
 
 void ArbolAVL::imprimirDesc()
 {
-    lista->imprimirDescendente();
+    lista_desc->imprimirLista();
 }
 
 void ArbolAVL::crearListaNiveles(int n)
@@ -742,7 +779,6 @@ void ArbolAVL::imprimirABBobjetos(int id, int numeroNivel)
     }
 }
 
-
 void ArbolAVL::insertarnodoABB(int id, int nivel, int id_obj, string nombre, string letra, string color, int x, int y)
 {
     //1. buscar si el nodo avl existe
@@ -829,9 +865,75 @@ void ArbolAVL::imprimirMatricesEnMasa(int id)
 {
     NodoAVL *temp = this->raiz;
 
-    if(busquedaNodo(temp, id))
+    if (busquedaNodo(temp, id))
     {
         busquedaNodo(temp, id)->getLista()->GraficarL();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+// REPORTES
+
+/*
+    (id_p)
+*/
+void ArbolAVL::genListaNivelesPorObjeto(int id_proyecto)
+{
+
+    NodoAVL *temp = this->raiz;
+
+    if(busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->insertarNumObjNiveles();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+    
+}
+
+void ArbolAVL::imprimirListaNivelesPorObjeto(int id_proyecto)
+{
+    NodoAVL *temp = this->raiz;
+
+    if(busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaCantObj();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+    
+}
+
+void ArbolAVL::genListaMasEspacio(int id_proyecto)
+{
+
+    NodoAVL *temp = this->raiz;
+
+    if(busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->insertarNumEspaciosVacios();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+    
+}
+
+void ArbolAVL::imprimirListaMasEspacio(int id_proyecto)
+{
+    NodoAVL *temp = this->raiz;
+
+    if(busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaCantEspacios();
     }
     else
     {

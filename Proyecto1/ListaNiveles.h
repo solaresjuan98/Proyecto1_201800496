@@ -1,5 +1,6 @@
 #include <iostream>
 #include "NodoNivel.h"
+#include "ListaProyectos.h"
 #pragma once
 using namespace std;
 
@@ -7,7 +8,11 @@ class ListaNiveles
 {
 public:
     NodoNivel *cabeza;
-    //
+    //lista que tiene la cantidad de objetos de cada matriz
+    ListaProyectos *lista_objetos = new ListaProyectos();
+    //lista que tiene la cantidad de objetos de cada matriz
+    ListaProyectos *lista_espacio = new ListaProyectos();
+
 
     ListaNiveles()
     {
@@ -157,9 +162,42 @@ public:
             while (temp != NULL)
             {
                 cout.flush();
-                cout << "  *  >> Nivel " << temp->id << " * " << endl;
+                cout << "  *  >> Nivel " << temp->id << " " << endl;
+                cout << "  *  >> Objetos:  " << temp->getMatriz()->obtenerCantidadNodos() << endl;
                 temp = temp->siguiente;
             }
+        }
+    }
+
+    NodoProyecto *generarDatos()
+    {
+        //NodoProyecto *nodoRetorno;
+        int numero_nivel;
+        int cant_objetos;
+
+        if (cabeza == NULL)
+        {
+            std::cout << " lista vacia." << endl;
+        }
+        else
+        {
+            //std::cout << " Valores de lista : " << endl;
+            NodoNivel *temp = cabeza;
+
+            while (temp != NULL)
+            {
+                cout.flush();
+                //cout << "  *  >> Nivel " << temp->id << " " << endl;
+                //cout << "  *  >> Objetos:  " << temp->getMatriz()->obtenerCantidadNodos() << endl;
+                numero_nivel = temp->id;
+                cant_objetos = temp->getMatriz()->obtenerCantidadNodos();
+                NodoProyecto *nuevo = new NodoProyecto(numero_nivel, cant_objetos);
+                temp = temp->siguiente;
+                cout << "--" << endl;
+                return nuevo;
+            }
+
+            
         }
     }
 
@@ -362,6 +400,72 @@ public:
                 temp = temp->siguiente;
             }
         }
+    }
+
+
+    // Generando lista con cantidad de objetos
+    void insertarNumObjNiveles()
+    {
+        int num_nivel;
+        int cant_obj;
+        //int arr[]
+        if (cabeza == NULL)
+        {
+            //return 0;
+        }
+        else
+        {
+            NodoNivel *actual = cabeza;
+
+            while (actual != NULL)
+            {
+
+                num_nivel = actual->id;
+                cant_obj = actual->getMatriz()->obtenerCantidadNodos();
+                
+                lista_objetos->agregarDato(new NodoProyecto(num_nivel, cant_obj));
+                actual = actual->siguiente;
+                //cant_niveles++;
+            }
+        }
+
+    }
+
+    void imprimirListaCantObj()
+    {
+        lista_objetos->imprimirLista();
+    }
+   
+    void insertarNumEspaciosVacios()
+    {
+        int num_nivel;
+        int cant_espacio;
+        //int arr[]
+        if (cabeza == NULL)
+        {
+            //return 0;
+        }
+        else
+        {
+            NodoNivel *actual = cabeza;
+
+            while (actual != NULL)
+            {
+
+                num_nivel = actual->id;
+                cant_espacio = actual->getMatriz()->obtenerEspaciosLibres();
+                
+                lista_espacio->agregarDatoDesc(new NodoProyecto(num_nivel, cant_espacio));
+                actual = actual->siguiente;
+                //cant_niveles++;
+            }
+        }
+
+    }
+
+    void imprimirListaCantEspacios()
+    {
+        lista_espacio->imprimirLista();
     }
 };
 /*
