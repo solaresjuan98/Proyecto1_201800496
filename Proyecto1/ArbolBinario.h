@@ -343,7 +343,7 @@ public:
     {
         ofstream graficoBST;
         string cadena;
-        graficoBST.open("BSTgraph_.txt", ios::out);
+        graficoBST.open("ArbolBinario.txt", ios::out);
 
         if (graficoBST.fail())
         {
@@ -359,11 +359,15 @@ public:
 
         cadena += this->contenido_grafico;
         graficoBST << cadena;
-        //graficoBST << aux;
-
         graficoBST << "}";
-
         graficoBST.close();
+
+        string cmd;
+        cmd = "dot -Tpng ArbolBinario.txt -o Arbolbinario.jpg";
+        int tam_cmd = cmd.length();
+        char a[tam_cmd + 1];
+        strcpy(a, cmd.c_str());
+        system(a);
         this->contenido_grafico = "";
     }
 
@@ -393,7 +397,6 @@ public:
                 graficarRecursivo(r->der);
                 this->contenido_grafico += "nodo" + to_string(r->id) + ":A1->nodo" + to_string(r->der->id) + "\n";
             }
-
         }
     }
 

@@ -26,6 +26,7 @@ void mostrarMenuNiveles();
 
 //variables de lectura de archivo JSON
 json totalJSON;
+json proyectosJson;
 json nombreProyectoJson;
 json nivelesJson;
 json paredesJson;
@@ -83,19 +84,25 @@ int main()
     avl->insertar(convertirASCII("VillaNueva"));
     avl->imprimir(avl->getRaiz(), 0);
     */
+
     /*
     Matrix *prueba = new Matrix();
 
-    prueba->add(1, "a", "#0BDFD6", 2, 1);
-    prueba->add(2, "b", "#B28912", 2, 3);
-    prueba->add(3, "h", "#17B212", 2, 1);
-    prueba->add(4, "g", "#3A6439", 7, 8);
-    prueba->add(5, "j", "#21B29E", 9, 10);
-    prueba->add(6, "i", "#8AECDE", 11, 12);
-    
-    cout << prueba->nodoExiste(7, 8)->letra << endl;
+    prueba->add(1, "m", "#0BDFD6", 2, 1);
+    prueba->add(8, "j", "#B28912", 2, 2);
+    prueba->add(9, "r", "#B28912", 2, 3);
+    prueba->add(19, "k", "#B28912", 3, 3);
+    prueba->add(39, "n", "#B28912", 5, 3);
+    prueba->add(11, "z", "#B28912", 3, 2);
+
+
+    prueba->delete_object(3, 3);
+    prueba->delete_object(2, 1);
+    prueba->move_object(2, 2, 6, 2);
+    prueba->move_object(2, 3, 5, 7);
     prueba->generarMatriz();
     */
+
     mostrarDatos();
     mostrarMenu();
 
@@ -118,18 +125,18 @@ void mostrarMenu()
 {
     int opcion = 0;
 
-    std::cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
-    std::cout << " Elige una opcion: " << endl;
-    std::cout << " 1. Ver proyectos " << endl;
-    std::cout << " 2. Editar proyectos " << endl;
-    std::cout << " 3. Cargar proyecto" << endl;
-    std::cout << " 4. Graficar proyectos" << endl;
-    std::cout << " 5. Guardar proyectos" << endl;
-    std::cout << " 6. Cargar librerias" << endl;
-    std::cout << " 7. Limpiar consola " << endl;
-    std::cout << " 8. Seccion de reportes" << endl;
-    std::cout << " 10. Salir de la aplicacion " << endl;
-    std::cout << " Elige una opcion: ";
+    cout << "\t ::: BIENVENIDO A PSEUDO-CAD ::: \n";
+    cout << " Elige una opcion: " << endl;
+    cout << " 1. Ver proyectos " << endl;
+    cout << " 2. Editar proyectos " << endl;
+    cout << " 3. Cargar proyecto" << endl;
+    cout << " 4. Graficar proyectos" << endl;
+    cout << " 5. Guardar proyectos" << endl;
+    cout << " 6. Cargar librerias" << endl;
+    cout << " 7. Limpiar consola " << endl;
+    cout << " 8. Seccion de reportes" << endl;
+    cout << " 10. Salir de la aplicacion " << endl;
+    cout << " Elige una opcion: ";
 
     cin >> opcion;
 
@@ -161,16 +168,16 @@ void mostrarMenu()
             //cargarArchivo(ruta);
 
             //cin.get();
-            r1 = "Archivos/ejemplo1.json";
-            r2 = "Archivos/ejemplo2.json";
+            r1 = "ejemplo1.json";
+            /*r2 = "Archivos/ejemplo2.json";
             r3 = "Archivos/ejemplo3.json";
-            r4 = "Archivos/ejemplo4.json";
+            r4 = "Archivos/ejemplo4.json";*/
             //r5 = "Archivos/ejemplo5.json";
 
-            cargarArchivo(r1);
-            cargarArchivo(r2);
+            cargarArchivo("ejemplo1.json");
+            /*cargarArchivo(r2);
             cargarArchivo(r3);
-            cargarArchivo(r4);
+            cargarArchivo(r4);*/
             //cargarArchivo(r5);
             system("clear");
             mostrarMenu();
@@ -283,7 +290,7 @@ void mostrarMenuReportes()
             cin >> opc_reporte;
             cin.get();
             avl->genListaNivelesPorObjeto(opc_reporte);
-            avl->imprimirListaNivelesPorObjeto(opc_reporte);        
+            avl->imprimirListaNivelesPorObjeto(opc_reporte);
             cin.get();
             system("clear");
             mostrarMenuReportes();
@@ -310,7 +317,6 @@ void mostrarMenuReportes()
         default:
             cout << " opcion incorrecta. \n";
             break;
-
         }
     } while (opcion != 0);
 }
@@ -388,6 +394,17 @@ void mostrarMenuNiveles()
 
         break;
     case 4:
+
+        cout << " >> ELIMINAR PROYECTO " << endl;
+        avl->inOrden(avl->getRaiz());
+        cout << endl;
+        cin.get();
+        cout << "Elige un poryecto (por id): ";
+        cin >> proyecto;
+
+        avl->eliminar(proyecto);
+        avl->inOrden(avl->getRaiz());
+
         break;
     case 5:
         system("clear");
@@ -426,14 +443,35 @@ void cargarArchivo(string ruta)
     {
         //cout << " Archivo cargado" << endl;
         archivo >> totalJSON;
-        nombreP = totalJSON["nombre"].get<std::string>();
+
+        proyectosJson = totalJSON["proyectos"];
+
+        for (const auto pos : proyectosJson)
+        {
+            nombreP = pos["nombre"];
+            id = convertirASCII(nombreP);
+            //cout << " Valor ascii: " << convertirASCII(nombreP) << endl;
+
+            //fflush(stdin);
+            avl->insertar(id);
+
+            nivelesJson = pos["niveles"];
+
+            for(const auto pos: nivelesJson)
+            {
+                cout << pos["nivel"] << endl;
+                fflush(stdin);
+            }
+
+
+        }
 
         //std::cout << totalJSON["nombre"].get<std::string>() << endl;
-        id = convertirASCII(nombreP);
-        cout << " Valor ascii: " << convertirASCII(nombreP) << endl;
+        //id = convertirASCII(nombreP);
+        //cout << " Valor ascii: " << convertirASCII(nombreP) << endl;
 
         //fflush(stdin);
-        avl->insertar(id);
+        //avl->insertar(id);
 
         //avl->crearABB(avl->getRaiz(), id)
         nivelesJson = totalJSON["niveles"];

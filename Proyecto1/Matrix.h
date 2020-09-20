@@ -47,6 +47,33 @@ public:
                     //cout << " >> Nodo encontrado en matriz " << endl;
                     encontrado = true;
                     objeto = aux;
+
+                    if (objeto->down == NULL && objeto->right == NULL)
+                    {
+                        cout << " Arriba: " << objeto->up->letra << endl;
+                        cout << " Izq : " << objeto->left->y << endl;
+                    }
+                    else if (objeto->right == NULL)
+                    {
+                        cout << " Arriba: " << objeto->up->letra << endl;
+                        cout << " Abajo : " << objeto->down->letra << endl;
+                        cout << " Izq : " << objeto->left->letra << endl;
+                    }
+                    else if (objeto->down == NULL)
+                    {
+                        cout << " Arriba: " << objeto->up->x << endl;
+                        cout << " izq : " << objeto->left->letra << endl;
+                        cout << " der : " << objeto->right->letra << endl;
+                    }
+
+                    else
+                    {
+                        cout << " Arriba: " << objeto->up->letra << endl;
+                        cout << " Abajo : " << objeto->left->letra << endl;
+                        cout << " Izq : " << objeto->left->letra << endl;
+                        cout << " Der : " << objeto->right->letra << endl;
+                    }
+
                     //return aux;
                     //break;
                 }
@@ -57,11 +84,10 @@ public:
             y_header = y_header->down;
         }
 
-        if(!encontrado)
+        if (!encontrado)
         {
             //
         }
-
 
         return objeto;
     }
@@ -299,6 +325,140 @@ public:
         }
     }
 
+    void delete_object(int x, int y)
+    {
+        Node *y_header = head->down;
+        Node *x_header = head->right;
+        Node *objetoBorrar = NULL;
+        bool encontrado = false;
+
+        while (x_header != NULL)
+        {
+
+            x_header = x_header->right;
+            //largo++;
+        }
+
+        while (y_header != NULL)
+        {
+            Node *aux = y_header->right;
+
+            while (aux)
+            {
+
+                if ((aux->x == x) && (aux->y == y))
+                {
+                    //cout << " >> Nodo encontrado en matriz " << endl;
+                    encontrado = true;
+                    objetoBorrar = aux;
+                    Node *aux1 = objetoBorrar->up;
+                    Node *aux2 = objetoBorrar->left;
+                    Node *aux3 = objetoBorrar->down;
+                    Node *aux4 = objetoBorrar->right;
+
+                    // 1. No tiene nodos abajo ni a la derecha
+                    if (objetoBorrar->down == NULL && objetoBorrar->right == NULL)
+                    {
+                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                        cout << " Izq : " << objetoBorrar->left->y << endl;
+
+                        objetoBorrar->up = NULL;
+                        aux1->down = NULL;
+                        objetoBorrar->left = NULL;
+                        aux2->right = NULL;
+                        delete objetoBorrar;
+                        break;
+                    }
+                    // 2. No tiene Nodos a la derecha
+                    else if (objetoBorrar->right == NULL)
+                    {
+                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                        cout << " Abajo : " << objetoBorrar->down->letra << endl;
+                        cout << " Izq : " << objetoBorrar->left->letra << endl;
+
+                        objetoBorrar->up = NULL;
+                        objetoBorrar->down = NULL;
+                        objetoBorrar->left = NULL;
+                        aux2->right = NULL;
+                        aux3->up = aux1;
+                        aux1->down = aux3;
+
+                        delete objetoBorrar;
+                        break;
+                    }
+                    // 3. No tiene nodos abajo
+                    else if (objetoBorrar->down == NULL)
+                    {
+                        cout << " Arriba: " << objetoBorrar->up->x << endl;
+                        cout << " izq : " << objetoBorrar->left->letra << endl;
+                        cout << " der : " << objetoBorrar->right->letra << endl;
+
+                        objetoBorrar->up = NULL;
+                        aux1->down = NULL;
+                        objetoBorrar->left = NULL;
+                        aux2->right = aux4;
+                        objetoBorrar->right = NULL;
+                        aux4->left = aux2;
+
+                        delete objetoBorrar;
+                        break;
+                    }
+                    // 4. Tiene apuntadores hacia todos lados
+                    else
+                    {
+                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                        cout << " Abajo : " << objetoBorrar->left->letra << endl;
+                        cout << " Izq : " << objetoBorrar->left->letra << endl;
+                        cout << " Der : " << objetoBorrar->right->letra << endl;
+
+                        objetoBorrar->up = NULL;
+                        aux1->down = aux3;
+                        objetoBorrar->down = NULL;
+                        aux3->up = aux1;
+                        objetoBorrar->left = NULL;
+                        aux2->right = aux4;
+                        objetoBorrar->right = NULL;
+                        aux4->left = aux2;
+
+                        delete objetoBorrar;
+                        break;
+                    }
+
+                    //return aux;
+                    //break;
+                }
+
+                aux = aux->right;
+            }
+
+            y_header = y_header->down;
+        }
+
+        if (!encontrado)
+        {
+            //
+        }
+    }
+
+    void move_object(int x_inicio, int y_inicio, int x_final, int y_final)
+    {
+
+        int valor;
+        string letra, color;
+        // Nodo que tendrá los datos del nodo
+        Node *nodo_mover = nodoExiste(x_inicio, y_inicio);
+        // guardando en variables
+        valor = nodo_mover->n;
+        letra = nodo_mover->letra;
+        color = nodo_mover->color;
+
+        //1. Borrar objeto de su posicion vieja
+        delete_object(x_inicio, y_inicio);
+
+        //2. Ingresar el nuevo Nodo
+        add(valor, letra, color, x_final, y_final);
+    }
+
     void print_nodes_x()
     {
         Node *tmp = head->right;
@@ -363,10 +523,6 @@ public:
         }
 
         cout << "\n";
-    }
-
-    Node *searchNode(int x, int y)
-    {
     }
 
     void generarMatriz()
@@ -498,7 +654,6 @@ public:
         //cmd += nivel + ".jpg";
         int tam_cmd = cmd.length();
         char a[tam_cmd + 1];
-
         strcpy(a, cmd3.c_str());
         system(a);
     }
