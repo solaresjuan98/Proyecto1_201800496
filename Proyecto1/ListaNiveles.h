@@ -13,7 +13,6 @@ public:
     //lista que tiene la cantidad de objetos de cada matriz
     ListaProyectos *lista_espacio = new ListaProyectos();
 
-
     ListaNiveles()
     {
         cabeza = NULL;
@@ -196,8 +195,6 @@ public:
                 cout << "--" << endl;
                 return nuevo;
             }
-
-            
         }
     }
 
@@ -307,6 +304,54 @@ public:
         }
     }
 
+    void eliminar_nodo_matriz(int nivel, int x, int y)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->getMatriz()->delete_object(x, y);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
+        }
+    }
+
+    void mover_nodo_matriz(int nivel, int x, int y, int x_, int y_)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->getMatriz()->move_object(x, y, x_, y_);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
+        }
+    }
+
     void eliminar_nivel(int nivel)
     {
         if (cabeza == NULL)
@@ -396,12 +441,20 @@ public:
             {
                 cout.flush();
                 //cout << "  *  >> Nivel " << temp->id << " * " << endl;
-                temp->getMatriz()->generarMatrizPorNivel(temp->id);
+                if (temp->getMatriz() != NULL)
+                {
+                    temp->getMatriz()->generarMatrizPorNivel(temp->id);
+                }
+                else
+                {
+                    cout << " >> Este nivel no tiene ninguna matriz "<<endl;
+                }
+                
+                
                 temp = temp->siguiente;
             }
         }
     }
-
 
     // Generando lista con cantidad de objetos
     void insertarNumObjNiveles()
@@ -422,20 +475,19 @@ public:
 
                 num_nivel = actual->id;
                 cant_obj = actual->getMatriz()->obtenerCantidadNodos();
-                
+
                 lista_objetos->agregarDato(new NodoProyecto(num_nivel, cant_obj));
                 actual = actual->siguiente;
                 //cant_niveles++;
             }
         }
-
     }
 
     void imprimirListaCantObj()
     {
         lista_objetos->imprimirLista();
     }
-   
+
     void insertarNumEspaciosVacios()
     {
         int num_nivel;
@@ -454,13 +506,12 @@ public:
 
                 num_nivel = actual->id;
                 cant_espacio = actual->getMatriz()->obtenerEspaciosLibres();
-                
+
                 lista_espacio->agregarDatoDesc(new NodoProyecto(num_nivel, cant_espacio));
                 actual = actual->siguiente;
                 //cant_niveles++;
             }
         }
-
     }
 
     void imprimirListaCantEspacios()

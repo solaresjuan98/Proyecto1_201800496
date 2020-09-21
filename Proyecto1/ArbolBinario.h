@@ -310,33 +310,25 @@ public:
         }
     }
 
-    /*
-    void EliminarNodo(NodoArbol *nodoEliminar)
+    NodoArbol *busqueda(NodoArbol *nodo, int id)
     {
-
-        if (nodoEliminar->izq && nodoEliminar->der)
+        if (nodo == NULL)
         {
-            NodoArbol *menor = minimo(nodoEliminar->der);
-            nodoEliminar->id = menor->id;
-            EliminarNodo(menor);
+            return NULL;
         }
-        else if (nodoEliminar->izq)
+        else if (nodo->id == id)
         {
-            reemplazarNodo(nodoEliminar, nodoEliminar->izq);
-            destruirNodo(nodoEliminar);
+            return nodo;
         }
-        else if (nodoEliminar->der)
+        else if (id < nodo->id)
         {
-            reemplazarNodo(nodoEliminar, nodoEliminar->der);
-            destruirNodo(nodoEliminar);
+            return busqueda(nodo->izq, id);
         }
         else
         {
-            reemplazarNodo(nodoEliminar, NULL);
-            destruirNodo(nodoEliminar);
+            return busqueda(nodo->der, id);
         }
     }
-    */
 
     // Generar en graphviz
     void GraficarABB()
@@ -353,7 +345,7 @@ public:
         }
 
         graficoBST << " digraph BST {\n";
-        graficoBST << "node [shape = record, style=filled, fillcolor=gray];\n";
+        graficoBST << "node [shape = record, style=filled];\n";
 
         graficarRecursivo(this->raiz);
 
@@ -363,7 +355,7 @@ public:
         graficoBST.close();
 
         string cmd;
-        cmd = "dot -Tpng ArbolBinario.txt -o Arbolbinario.jpg";
+        cmd = "dot -Tpng ArbolBinario.txt -o Arbolbinario.png";
         int tam_cmd = cmd.length();
         char a[tam_cmd + 1];
         strcpy(a, cmd.c_str());
@@ -379,11 +371,11 @@ public:
 
             if (r->izq == NULL && r->der == NULL)
             {
-                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"" + r->nombre + "\"];\n";
+                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"" + r->nombre + "\" color=\"" + r->color + "\" style=filled];\n";
             }
             else
             {
-                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"<A0>|" + r->nombre + "|<A1>\"];\n";
+                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"<A0>|" + r->nombre + "|<A1>\" color=\"" + r->color + "\" style=filled];\n";
             }
 
             if (r->izq != NULL)

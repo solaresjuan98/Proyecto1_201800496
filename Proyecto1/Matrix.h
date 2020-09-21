@@ -327,116 +327,124 @@ public:
 
     void delete_object(int x, int y)
     {
-        Node *y_header = head->down;
-        Node *x_header = head->right;
-        Node *objetoBorrar = NULL;
-        bool encontrado = false;
 
-        while (x_header != NULL)
+        if (nodoExiste(x, y) != NULL)
         {
+            Node *y_header = head->down;
+            Node *x_header = head->right;
+            Node *objetoBorrar = NULL;
+            bool encontrado = false;
 
-            x_header = x_header->right;
-            //largo++;
-        }
-
-        while (y_header != NULL)
-        {
-            Node *aux = y_header->right;
-
-            while (aux)
+            while (x_header != NULL)
             {
 
-                if ((aux->x == x) && (aux->y == y))
-                {
-                    //cout << " >> Nodo encontrado en matriz " << endl;
-                    encontrado = true;
-                    objetoBorrar = aux;
-                    Node *aux1 = objetoBorrar->up;
-                    Node *aux2 = objetoBorrar->left;
-                    Node *aux3 = objetoBorrar->down;
-                    Node *aux4 = objetoBorrar->right;
-
-                    // 1. No tiene nodos abajo ni a la derecha
-                    if (objetoBorrar->down == NULL && objetoBorrar->right == NULL)
-                    {
-                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
-                        cout << " Izq : " << objetoBorrar->left->y << endl;
-
-                        objetoBorrar->up = NULL;
-                        aux1->down = NULL;
-                        objetoBorrar->left = NULL;
-                        aux2->right = NULL;
-                        delete objetoBorrar;
-                        break;
-                    }
-                    // 2. No tiene Nodos a la derecha
-                    else if (objetoBorrar->right == NULL)
-                    {
-                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
-                        cout << " Abajo : " << objetoBorrar->down->letra << endl;
-                        cout << " Izq : " << objetoBorrar->left->letra << endl;
-
-                        objetoBorrar->up = NULL;
-                        objetoBorrar->down = NULL;
-                        objetoBorrar->left = NULL;
-                        aux2->right = NULL;
-                        aux3->up = aux1;
-                        aux1->down = aux3;
-
-                        delete objetoBorrar;
-                        break;
-                    }
-                    // 3. No tiene nodos abajo
-                    else if (objetoBorrar->down == NULL)
-                    {
-                        cout << " Arriba: " << objetoBorrar->up->x << endl;
-                        cout << " izq : " << objetoBorrar->left->letra << endl;
-                        cout << " der : " << objetoBorrar->right->letra << endl;
-
-                        objetoBorrar->up = NULL;
-                        aux1->down = NULL;
-                        objetoBorrar->left = NULL;
-                        aux2->right = aux4;
-                        objetoBorrar->right = NULL;
-                        aux4->left = aux2;
-
-                        delete objetoBorrar;
-                        break;
-                    }
-                    // 4. Tiene apuntadores hacia todos lados
-                    else
-                    {
-                        cout << " Arriba: " << objetoBorrar->up->letra << endl;
-                        cout << " Abajo : " << objetoBorrar->left->letra << endl;
-                        cout << " Izq : " << objetoBorrar->left->letra << endl;
-                        cout << " Der : " << objetoBorrar->right->letra << endl;
-
-                        objetoBorrar->up = NULL;
-                        aux1->down = aux3;
-                        objetoBorrar->down = NULL;
-                        aux3->up = aux1;
-                        objetoBorrar->left = NULL;
-                        aux2->right = aux4;
-                        objetoBorrar->right = NULL;
-                        aux4->left = aux2;
-
-                        delete objetoBorrar;
-                        break;
-                    }
-
-                    //return aux;
-                    //break;
-                }
-
-                aux = aux->right;
+                x_header = x_header->right;
+                //largo++;
             }
 
-            y_header = y_header->down;
-        }
+            while (y_header != NULL)
+            {
+                Node *aux = y_header->right;
 
-        if (!encontrado)
+                while (aux)
+                {
+
+                    if ((aux->x == x) && (aux->y == y))
+                    {
+                        //cout << " >> Nodo encontrado en matriz " << endl;
+                        encontrado = true;
+                        objetoBorrar = aux;
+                        Node *aux1 = objetoBorrar->up;
+                        Node *aux2 = objetoBorrar->left;
+                        Node *aux3 = objetoBorrar->down;
+                        Node *aux4 = objetoBorrar->right;
+
+                        // 1. No tiene nodos abajo ni a la derecha
+                        if (objetoBorrar->down == NULL && objetoBorrar->right == NULL)
+                        {
+                            //cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                            //cout << " Izq : " << objetoBorrar->left->y << endl;
+
+                            objetoBorrar->up = NULL;
+                            aux1->down = NULL;
+                            objetoBorrar->left = NULL;
+                            aux2->right = NULL;
+                            delete objetoBorrar;
+                            break;
+                        }
+                        // 2. No tiene Nodos a la derecha
+                        else if (objetoBorrar->right == NULL)
+                        {
+                            //cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                            //cout << " Abajo : " << objetoBorrar->down->letra << endl;
+                            //cout << " Izq : " << objetoBorrar->left->letra << endl;
+
+                            objetoBorrar->up = NULL;
+                            objetoBorrar->down = NULL;
+                            objetoBorrar->left = NULL;
+                            aux2->right = NULL;
+                            aux3->up = aux1;
+                            aux1->down = aux3;
+
+                            delete objetoBorrar;
+                            break;
+                        }
+                        // 3. No tiene nodos abajo
+                        else if (objetoBorrar->down == NULL)
+                        {
+                            //cout << " Arriba: " << objetoBorrar->up->x << endl;
+                            //cout << " izq : " << objetoBorrar->left->letra << endl;
+                            //cout << " der : " << objetoBorrar->right->letra << endl;
+
+                            objetoBorrar->up = NULL;
+                            aux1->down = NULL;
+                            objetoBorrar->left = NULL;
+                            aux2->right = aux4;
+                            objetoBorrar->right = NULL;
+                            aux4->left = aux2;
+
+                            delete objetoBorrar;
+                            break;
+                        }
+                        // 4. Tiene apuntadores hacia todos lados
+                        else
+                        {
+                            //cout << " Arriba: " << objetoBorrar->up->letra << endl;
+                            //cout << " Abajo : " << objetoBorrar->left->letra << endl;
+                            //cout << " Izq : " << objetoBorrar->left->letra << endl;
+                            //cout << " Der : " << objetoBorrar->right->letra << endl;
+
+                            objetoBorrar->up = NULL;
+                            aux1->down = aux3;
+                            objetoBorrar->down = NULL;
+                            aux3->up = aux1;
+                            objetoBorrar->left = NULL;
+                            aux2->right = aux4;
+                            objetoBorrar->right = NULL;
+                            aux4->left = aux2;
+
+                            delete objetoBorrar;
+                            break;
+                        }
+
+                        //return aux;
+                        //break;
+                    }
+
+                    aux = aux->right;
+                }
+
+                y_header = y_header->down;
+            }
+
+            if (!encontrado)
+            {
+                //
+            }
+        }
+        else
         {
-            //
+            cout << " >> Nodo no encontrado " << endl;
         }
     }
 

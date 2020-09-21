@@ -83,6 +83,8 @@ public:
 
     // Matrices de la lista
     void insertarEnMatriz(int id, int nivel, int id_obj, string letra, string color, int x, int y);
+    void eliminarDeMatriz(int id, int nivel, int x, int y);
+    void moverenMatriz(int id, int nivel, int x, int y, int x_, int y_);
     void imprimirMatriz(int id, int numeroNivel);
     void imprimirMatricesEnMasa(int id);
 
@@ -845,6 +847,47 @@ void ArbolAVL::insertarEnMatriz(int id, int id_nivel, int id_obj, string letra, 
             //busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(id_nivel, id_obj, "nombre", letra, color, x, y);
         }
     }
+    else
+    {
+        cout << " >> No encontrado " << endl;
+    }
+}
+
+void ArbolAVL::eliminarDeMatriz(int id, int id_nivel, int x, int y)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if (busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+
+            busquedaNodo(tmp, id)->getLista()->eliminar_nodo_matriz(id_nivel, x, y);
+            //busquedaNodo(tmp, id)->getLista()->agregar_nodo_abb(id_nivel, id_obj, "nombre", letra, color, x, y);
+        }
+    }
+    else
+    {
+        cout << " >> No encontrado " << endl;
+    }
+}
+
+void ArbolAVL::moverenMatriz(int id, int id_nivel, int x, int y, int x_, int y_)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if (busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+
+            busquedaNodo(tmp, id)->getLista()->mover_nodo_matriz(id_nivel, x, y, x_, y_);
+        }
+    }
+    else
+    {
+        cout << " >> No encontrado " << endl;
+    }
 }
 
 void ArbolAVL::imprimirMatriz(int id, int numeroNivel)
@@ -885,7 +928,7 @@ void ArbolAVL::genListaNivelesPorObjeto(int id_proyecto)
 
     NodoAVL *temp = this->raiz;
 
-    if(busquedaNodo(temp, id_proyecto))
+    if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->insertarNumObjNiveles();
     }
@@ -893,14 +936,13 @@ void ArbolAVL::genListaNivelesPorObjeto(int id_proyecto)
     {
         cout << " >> Proyecto no encontrado. " << endl;
     }
-    
 }
 
 void ArbolAVL::imprimirListaNivelesPorObjeto(int id_proyecto)
 {
     NodoAVL *temp = this->raiz;
 
-    if(busquedaNodo(temp, id_proyecto))
+    if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaCantObj();
     }
@@ -908,7 +950,6 @@ void ArbolAVL::imprimirListaNivelesPorObjeto(int id_proyecto)
     {
         cout << " >> Proyecto no encontrado. " << endl;
     }
-    
 }
 
 void ArbolAVL::genListaMasEspacio(int id_proyecto)
@@ -916,7 +957,7 @@ void ArbolAVL::genListaMasEspacio(int id_proyecto)
 
     NodoAVL *temp = this->raiz;
 
-    if(busquedaNodo(temp, id_proyecto))
+    if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->insertarNumEspaciosVacios();
     }
@@ -924,14 +965,13 @@ void ArbolAVL::genListaMasEspacio(int id_proyecto)
     {
         cout << " >> Proyecto no encontrado. " << endl;
     }
-    
 }
 
 void ArbolAVL::imprimirListaMasEspacio(int id_proyecto)
 {
     NodoAVL *temp = this->raiz;
 
-    if(busquedaNodo(temp, id_proyecto))
+    if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaCantEspacios();
     }
@@ -939,5 +979,4 @@ void ArbolAVL::imprimirListaMasEspacio(int id_proyecto)
     {
         cout << " >> Proyecto no encontrado. " << endl;
     }
-    
 }
