@@ -455,6 +455,8 @@ public:
         string letra, color;
         // Nodo que tendrá los datos del nodo
         Node *nodo_mover = nodoExiste(x_inicio, y_inicio);
+        // Nodo que tendrá las coordenadas destino
+        Node *nodo_destino = nodoExiste(x_final, y_final);
         // guardando en variables
         valor = nodo_mover->n;
         letra = nodo_mover->letra;
@@ -465,6 +467,247 @@ public:
 
         //2. Ingresar el nuevo Nodo
         add(valor, letra, color, x_final, y_final);
+    }
+
+    void rotate_object(int x, int y, int grados)
+    {
+
+        Node *pivote = nodoExiste(x, y);
+
+        // Si existe el nodo pivote
+        if (pivote != NULL)
+        {
+            /*
+                buscando los nodos a la derecha del pivot
+                (esta a 0 grados)
+            */
+            Node *aux1 = nodoExiste(x + 1, y);
+            Node *aux2 = nodoExiste(x + 2, y);
+            /* 
+                si esta de forma vertical lo que se desa rotar, utilizando el pivot
+                como el nodo más arriba
+                (está a 270 grados)
+            */
+            Node *aux3 = nodoExiste(x, y - 1);
+            Node *aux4 = nodoExiste(x, y - 2);
+
+            // Nodo que está en la "Esquina"
+            Node *aux5 = nodoExiste(x + 1, y - 1);
+
+            // Se quiere rotar dos nodos a partir del pivot
+            if (aux1 != NULL && aux2 != NULL && aux3 == NULL && aux4 == NULL && aux5 == NULL)
+            {
+                //Rotar en funcion de los grados (mover los nodos)
+                if (grados == 45)
+                {
+                    move_object(aux1->x, aux1->y, aux1->x, aux1->y + 1);
+                    move_object(aux2->x, aux2->y, aux2->x, aux2->y + 2);
+                }
+                else if (grados == 90)
+                {
+                    move_object(aux1->x, aux1->y, x, y + 1);
+                    move_object(aux2->x, aux2->y, x, y + 2);
+                }
+                else if (grados == 135)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y + 1);
+                    move_object(aux2->x, aux2->y, x - 2, aux2->y + 2);
+                }
+                else if (grados == 180)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y);
+                    move_object(aux2->x, aux2->y, x - 2, y);
+                }
+                else if (grados == 225)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y - 1);
+                    move_object(aux2->x, aux2->y, x - 2, y - 2);
+                }
+                else if (grados == 270)
+                {
+                    move_object(aux1->x, aux1->y, x, y - 1);
+                    move_object(aux2->x, aux2->y, x, y - 2);
+                }
+                else if (grados == 315)
+                {
+                    move_object(aux1->x, aux1->y, x + 1, y - 1);
+                    move_object(aux2->x, aux2->y, x + 2, y - 2);
+                }
+                else
+                {
+                    cout << " >> inserta una medida correcta" << endl;
+                }
+            }
+            // El nodo pivot solo tiene un nodo a la derecha
+            else if (aux1 != NULL && aux2 == NULL && aux3 == NULL && aux4 == NULL && aux5 == NULL)
+            {
+                //Rotar en funcion de los grados (mover los nodos)
+                if (grados == 45)
+                {
+                    move_object(aux1->x, aux1->y, aux1->x, aux1->y + 1);
+                }
+                else if (grados == 90)
+                {
+                    move_object(aux1->x, aux1->y, x, y + 1);
+                }
+                else if (grados == 135)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y + 1);
+                }
+                else if (grados == 180)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y);
+                }
+                else if (grados == 225)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y - 1);
+                }
+                else if (grados == 270)
+                {
+                    move_object(aux1->x, aux1->y, x, y - 1);
+                }
+                else if (grados == 315)
+                {
+                    move_object(aux1->x, aux1->y, x + 1, y - 1);
+                }
+                else
+                {
+                    cout << " >> inserta una medida correcta" << endl;
+                }
+            }
+            // Si los objetos están posicionados verticalmente
+            else if (aux3 != NULL && aux4 != NULL && aux1 == NULL && aux2 == NULL && aux5 == NULL)
+            {
+                //Rotar en funcion de los grados (mover los nodos)
+                if (grados == 45)
+                {
+                    move_object(aux3->x, aux3->y, x + 1, y - 1);
+                    move_object(aux4->x, aux4->y, x + 2, y - 2);
+                }
+                else if (grados == 90)
+                {
+                    move_object(aux3->x, aux3->y, x + 1, y);
+                    move_object(aux4->x, aux4->y, x + 2, y);
+                }
+                else if (grados == 135)
+                {
+
+                    move_object(aux3->x, aux3->y, x + 1, y + 1);
+                    move_object(aux4->x, aux4->y, x + 2, y + 2);
+                }
+                else if (grados == 180)
+                {
+                    move_object(aux3->x, aux3->y, x, y + 1);
+                    move_object(aux4->x, aux4->y, x, y + 2);
+                }
+                else if (grados == 225)
+                {
+
+                    move_object(aux3->x, aux3->y, x - 1, y + 1);
+                    move_object(aux4->x, aux4->y, x - 2, aux4->y + 4);
+                }
+                else if (grados == 270)
+                {
+
+                    move_object(aux3->x, aux3->y, x - 1, y);
+                    move_object(aux4->x, aux4->y, x - 2, y);
+                }
+                else if (grados == 315)
+                {
+                    move_object(aux3->x, aux3->y, x - 1, y - 1);
+                    move_object(aux4->x, aux4->y, x - 2, y - 2);
+                }
+                else
+                {
+                    cout << " >> inserta una medida correcta" << endl;
+                }
+            }
+            // Si el nodo pivote solo tiene un nodo hacia abajo
+            else if (aux3 != NULL && aux1 == NULL && aux2 == NULL && aux4 == NULL && aux5 == NULL)
+            {
+                //Rotar en funcion de los grados (mover los nodos)
+                if (grados == 45)
+                {
+                    move_object(aux3->x, aux3->y, x + 1, y - 1);
+                }
+                else if (grados == 90)
+                {
+                    move_object(aux3->x, aux3->y, x + 1, y);
+                }
+                else if (grados == 135)
+                {
+
+                    move_object(aux3->x, aux3->y, x + 1, y + 1);
+                }
+                else if (grados == 180)
+                {
+                    move_object(aux3->x, aux3->y, x, y + 1);
+                }
+                else if (grados == 225)
+                {
+
+                    move_object(aux3->x, aux3->y, x - 1, y + 1);
+                }
+                else if (grados == 270)
+                {
+
+                    move_object(aux3->x, aux3->y, x - 1, y);
+                }
+                else if (grados == 315)
+                {
+                    move_object(aux3->x, aux3->y, x - 1, y - 1);
+                }
+                else
+                {
+                    cout << " >> inserta una medida correcta" << endl;
+                }
+            }
+            // Rotando otro tipo de figura
+            else if (aux1 != NULL && aux3 != NULL && aux2 == NULL && aux4 == NULL && aux5 == NULL)
+            {
+                if (grados == 180)
+                {
+                    move_object(aux1->x, aux1->y, x, y + 1);
+                    move_object(aux3->x, aux3->y, aux3->x + 1, aux3->y + 1);
+                }
+                else if (grados == 270)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y);
+                    move_object(aux3->x, aux3->y, x, y + 1);
+                }
+                else if (grados == 360)
+                {
+                    move_object(aux1->x, aux1->y, x, y - 1);
+                    move_object(aux3->x, aux3->y, x - 1, y);
+                }
+            }
+            // Rotando otro tipo de figura (el más complejo), con un nodo a la esquina
+            else if (aux1 != NULL && aux3 != NULL && aux5 != NULL && aux2 == NULL && aux4 == NULL)
+            {
+                if (grados == 90)
+                {
+                    move_object(aux1->x, aux1->y, x, y + 1);
+                    move_object(aux5->x, aux5->y, x + 1, y + 1);
+                    move_object(aux3->x, aux3->y, x + 1, y);
+                }
+                else if (grados == 180)
+                {
+                    move_object(aux1->x, aux1->y, x - 1, y);
+                    move_object(aux5->x, aux5->y, x - 1, y + 1);
+                    move_object(aux3->x, aux3->y, x, y + 1);
+                }
+                else if (grados == 270)
+                {
+                    move_object(aux5->x, aux5->y, x - 1, y);
+                    move_object(aux3->x, aux3->y, x - 1, y - 1);
+                    move_object(aux1->x, aux1->y, x, y - 1);
+                }
+            }
+        }
+        else
+        {
+            cout << " >> El nodo no existe. " << endl;
+        }
     }
 
     void print_nodes_x()

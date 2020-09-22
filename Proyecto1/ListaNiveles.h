@@ -352,6 +352,30 @@ public:
         }
     }
 
+    void rotar_objeto_matriz(int nivel, int x, int y, int grados)
+    {
+        NodoNivel *temp = NULL;
+        NodoNivel *ptr = cabeza;
+        bool encontrado = false;
+        while (ptr != NULL)
+        {
+            // encuentra el nivel
+            if (ptr->id == nivel)
+            {
+                temp = ptr;
+                temp->getMatriz()->rotate_object(x, y, grados);
+                encontrado = true;
+            }
+
+            ptr = ptr->siguiente;
+        }
+
+        if (!encontrado)
+        {
+            cout << " Nivel no existente" << endl;
+        }
+    }
+
     void eliminar_nivel(int nivel)
     {
         if (cabeza == NULL)
@@ -379,8 +403,6 @@ public:
                     if (actual->id == nivel)
                     {
                         temp = actual;
-                        //delete actual->getArbol();
-                        //delete actual->getMatriz();
                         actual = NULL;
                         delete actual;
                     }
@@ -447,10 +469,45 @@ public:
                 }
                 else
                 {
-                    cout << " >> Este nivel no tiene ninguna matriz "<<endl;
+                    cout << " >> Este nivel no tiene ninguna matriz " << endl;
                 }
-                
-                
+
+                temp = temp->siguiente;
+            }
+        }
+    }
+
+    // Graficar por nivel
+    void GraficarNivel(int nivel)
+    {
+        if (cabeza == NULL)
+        {
+            cout << " lista vacia." << endl;
+        }
+        else
+        {
+            //std::cout << " Valores de lista : " << endl;
+            NodoNivel *temp = cabeza;
+
+            while (temp != NULL)
+            {
+                cout.flush();
+                //cout << "  *  >> Nivel " << temp->id << " * " << endl;
+
+                if (temp->id == nivel)
+                {
+                    if (temp->getMatriz() != NULL)
+                    {
+                        temp->getMatriz()->generarMatrizPorNivel(temp->id);
+                        cout << " >> Nivel graficado. " << endl;
+                        break;
+                    }
+                    else
+                    {
+                        cout << " >> Este nivel no tiene ninguna matriz " << endl;
+                    }
+                }
+
                 temp = temp->siguiente;
             }
         }

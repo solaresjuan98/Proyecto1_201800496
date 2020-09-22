@@ -87,6 +87,8 @@ public:
     void moverenMatriz(int id, int nivel, int x, int y, int x_, int y_);
     void imprimirMatriz(int id, int numeroNivel);
     void imprimirMatricesEnMasa(int id);
+    void imprimirNivel(int id, int nivel);
+    void rotarObjeto(int id, int nivel, int x, int y, int grados);
 
     // PARA REPORTES:
     void genListaNivelesPorObjeto(int id_proyecto);
@@ -915,6 +917,38 @@ void ArbolAVL::imprimirMatricesEnMasa(int id)
     else
     {
         cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+void ArbolAVL::imprimirNivel(int id, int nivel)
+{
+    NodoAVL *temp = this->raiz;
+
+    if (busquedaNodo(temp, id))
+    {
+        busquedaNodo(temp, id)->getLista()->GraficarNivel(nivel);
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+void ArbolAVL::rotarObjeto(int id, int nivel, int x, int y, int grados)
+{
+    NodoAVL *tmp = this->raiz;
+
+    if (busquedaNodo(tmp, id))
+    {
+        if (busquedaNodo(tmp, id)->getLista() != NULL)
+        {
+
+            busquedaNodo(tmp, id)->getLista()->rotar_objeto_matriz(nivel, x, y, grados);
+        }
+    }
+    else
+    {
+        cout << " >> No encontrado " << endl;
     }
 }
 

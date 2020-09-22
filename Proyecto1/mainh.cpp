@@ -110,22 +110,24 @@ int main()
     prueba->add(1, "m", "#0BDFD6", 2, 1);
     prueba->add(8, "j", "#B28912", 2, 2);
     prueba->add(9, "r", "#B28912", 2, 3);
-    prueba->add(19, "k", "#B28912", 3, 3);
-    prueba->add(39, "n", "#B28912", 5, 3);
-    prueba->add(11, "z", "#B28912", 3, 2);
+    prueba->add(19, "k", "#37F316", 8, 5);
+    prueba->add(39, "p", "#16F3AD", 8, 6);
+    prueba->add(11, "c", "#37F316", 9, 5);
+    prueba->add(12, "a", "#37F316", 9, 6);
+    prueba->add(13, "e", "yellow", 12, 12);
+    prueba->add(21, "q", "#0889A5", 5, 3);
 
-
-    prueba->delete_object(3, 3);
-    prueba->delete_object(2, 1);
-    prueba->move_object(2, 2, 6, 2);
-    prueba->move_object(2, 3, 5, 7);
+    prueba->rotate_object(8, 6, 270);
+    prueba->move_object(5, 3, 2, 3);
     prueba->generarMatriz();
+
     */
 
     //cargarArchivo("ejemplo1.json");
     //cargarArchivo("Archivos/prueba.json");
     //cargarArchivo("Archivos/prueba2.json");
     //cout << convertirASCII("febrero") << endl;
+
     mostrarDatos();
     mostrarMenu();
 
@@ -487,15 +489,6 @@ void mostrarMenuReportes()
 
 void mostrarMenuNiveles()
 {
-    cout << "\n\t:: MENU DE EDICION DE PROYECTOS \n"
-         << endl;
-    cout << " 1. Agregar Niveles" << endl;
-    cout << " 2. Editar Nivel" << endl;
-    cout << " 3. Eliminar Nivel" << endl;
-    cout << " 4. Eliminar Proyecto" << endl;
-    cout << " 5. Buscar Proyecto" << endl;
-    cout << " 6. Regresar " << endl;
-    cout << " >> Elige una opción: ";
     int opcion_editar;
     int proyecto;
     int num_niveles_nuevos;
@@ -506,6 +499,19 @@ void mostrarMenuNiveles()
     // Objeto a agregar
     int id, x, y, x_, y_;
     string letra, color;
+    // Rotar objetos
+    int grados;
+
+    cout << "\n\t:: MENU DE EDICION DE PROYECTOS \n"
+         << endl;
+    cout << " 1. Agregar Niveles" << endl;
+    cout << " 2. Editar Nivel" << endl;
+    cout << " 3. Eliminar Nivel" << endl;
+    cout << " 4. Eliminar Proyecto" << endl;
+    cout << " 5. Buscar Proyecto" << endl;
+    cout << " 6. Regresar " << endl;
+    cout << " >> Elige una opción: ";
+
     cin >> opcion_editar;
     switch (opcion_editar)
     {
@@ -540,7 +546,7 @@ void mostrarMenuNiveles()
         cin >> proyecto;
         //std::cout << "** Lista de niveles **"<<endl;
         getListaNivelesNodo(proyecto);
-        cout << " >> Elige un nivel";
+        cout << " >> Elige un nivel: ";
         cin >> nivel_matriz;
         cin.get();
         cout << " >> ¿Que deseas hacer? " << endl;
@@ -550,6 +556,8 @@ void mostrarMenuNiveles()
         cout << " >> 4. Agregar Ventanas " << endl;
         cout << " >> 5. Agregar Paredes " << endl;
         cout << " >> 6. Agregar objetos en masa " << endl;
+        cout << " >> 7. Rotar objetos " << endl;
+        cout << " >> 8. Regresar " << endl;
         cout << " >> Elige una opcion: ";
         cin >> sub_opcion;
 
@@ -584,6 +592,7 @@ void mostrarMenuNiveles()
             avl->insertarEnMatriz(proyecto, nivel_matriz, id, letra, color, x, y);
 
             cout << " >> Objeto agregado. " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
         }
         // Mover objeto
         else if (sub_opcion == 2)
@@ -600,6 +609,9 @@ void mostrarMenuNiveles()
             cin >> y_;
 
             avl->moverenMatriz(proyecto, nivel_matriz, x, y, x_, y_);
+            cout << " >> Cambios realizados. " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
+            
         }
         // eliminar
         else if (sub_opcion == 3)
@@ -611,6 +623,8 @@ void mostrarMenuNiveles()
             cout << " >> Ingresa coordenada en y: ";
             cin >> y;
             avl->eliminarDeMatriz(proyecto, nivel_matriz, x, y);
+            cout << " >> Objeto eliminado de matriz " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
         }
         // Agregar ventanas
         else if (sub_opcion == 4)
@@ -643,6 +657,9 @@ void mostrarMenuNiveles()
                     //avl->insertarnodoABB(id, n_nivel, j, "pared", "p", color, x, y);
                 }
             }
+
+            cout << " >> Ventanas agregadas. " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
         }
         // Agregar paredes
         else if (sub_opcion == 5)
@@ -675,6 +692,9 @@ void mostrarMenuNiveles()
                     //avl->insertarnodoABB(id, n_nivel, j, "pared", "p", color, x, y);
                 }
             }
+
+            cout << " >> Paredes agregadas. " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
         }
         // Agregar en masa
         else if (sub_opcion == 6)
@@ -724,6 +744,32 @@ void mostrarMenuNiveles()
                     //avl->insertarnodoABB(id, n_nivel, j, "pared", "p", color, x, y);
                 }
             }
+
+            // Imprime el nivel con los cambios hechos
+            cout << " >> Objetos agregados." << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
+        }
+        // Rotar objetos
+        else if (sub_opcion == 7)
+        {
+            cout << " >> Rotar objeto... " << endl;
+            cout << " >> Selecciona las posiciones del nodo pivote " << endl;
+            cout << " >> Ingresa coordenada en x: ";
+            cin >> x;
+            cout << " >> Ingresa coordenada en y: ";
+            cin >> y;
+            cout << " ¿Cuantos grados los deseas rotar ? " << endl;
+            cin >> grados;
+
+            avl->rotarObjeto(proyecto, nivel_matriz, x, y, grados);
+            cout << " Objetos rotados " << endl;
+            avl->imprimirNivel(proyecto, nivel_matriz);
+        }
+        // Regresar
+        else if (sub_opcion == 8)
+        {
+            system("clear");
+            mostrarMenuNiveles();
         }
 
         break;
