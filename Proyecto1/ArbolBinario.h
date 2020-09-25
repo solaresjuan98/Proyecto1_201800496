@@ -171,6 +171,7 @@ public:
             }
         }
 
+        // Es un nodo hoja
         if (aux->izq == NULL && aux->der == NULL)
         {
             //Es un nodo hoja
@@ -202,7 +203,6 @@ public:
             }
             else
             {
-
                 padre->der = aux->izq;
             }
         }
@@ -215,11 +215,11 @@ public:
             }
             else if (Hijoizq)
             {
-                padre->izq = aux->der;
+                padre->der = aux->der;
             }
             else
             {
-                padre->der = aux->der;
+                padre->izq = aux->der;
             }
         }
         else

@@ -90,7 +90,7 @@ int NodoAVL::getID()
 
 NodoAVL *NodoAVL::getIzq()
 {
-    return this->izq;
+    return this->izq;// Truena aqui al borrar dos veces raiz
 }
 
 NodoAVL *NodoAVL::getDer()

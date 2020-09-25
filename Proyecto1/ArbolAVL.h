@@ -48,6 +48,7 @@ public:
 
     //Eliminación de nodoAVL
     bool eliminar(int idProyecto);
+    
 
     // Listas en nodo AVL
     void crearListaNiveles(int id);
@@ -93,10 +94,12 @@ public:
     // PARA REPORTES:
     void genListaNivelesPorObjeto(int id_proyecto);
     void imprimirListaNivelesPorObjeto(int id_proyecto);
-
     void genListaMasEspacio(int id_proyecto);
     void imprimirListaMasEspacio(int id_proyecto);
-
+    void genListaParedes(int id_proyecto);
+    void imprimirListaParedes(int id_proyecto);
+    void genListaParedesA(int id_proyecto);
+    void imprimirListaParedesA(int id_proyecto);
     void generar();
     void Delete(NodoAVL *raiz);
 };
@@ -455,6 +458,8 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
 //Eliminando nodo de AVL
 bool ArbolAVL::eliminar(int idProyecto)
 {
+
+
     NodoAVL *aux = this->raiz;
     NodoAVL *padre = this->raiz;
 
@@ -521,11 +526,13 @@ bool ArbolAVL::eliminar(int idProyecto)
         }
         else if (h_izq)
         {
-            padre->setIzq(aux->getDer());
+            //padre->setIzq(aux->getDer());
+            padre->setDer(aux->getDer());
         }
         else
         {
-            padre->setDer(aux->getDer());
+            padre->setDer(aux->getIzq());
+            //padre->setDer(aux->getDer());
         }
     }
     else
@@ -550,13 +557,14 @@ bool ArbolAVL::eliminar(int idProyecto)
     }
 
     return true;
+    
 }
 
 NodoAVL *ArbolAVL::getReemplazo(NodoAVL *nodoReemplazo)
 {
     NodoAVL *reemplazo_padre = nodoReemplazo;
     NodoAVL *reemplazo = nodoReemplazo;
-    NodoAVL *aux = nodoReemplazo->getDer();
+    NodoAVL *aux = nodoReemplazo->getIzq();
 
     while (aux != NULL)
     {
@@ -688,7 +696,7 @@ void ArbolAVL::obtenerListaNodo(NodoAVL *nodo, int id)
     if (busquedaNodo(nodo, id))
     {
         tmp = this->raiz;
-        cout << nodo->getLista() << endl;
+        //cout << nodo->getLista() << endl;
         busquedaNodo(tmp, id)->getLista()->imprimirLista();
     }
     else
@@ -1014,3 +1022,66 @@ void ArbolAVL::imprimirListaMasEspacio(int id_proyecto)
         cout << " >> Proyecto no encontrado. " << endl;
     }
 }
+
+void ArbolAVL::genListaParedes(int id_proyecto)
+{
+
+    NodoAVL *temp = this->raiz;
+
+    if (busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->insertarNumParedes();
+        
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+void ArbolAVL::imprimirListaParedes(int id_proyecto)
+{
+    NodoAVL *temp = this->raiz;
+
+    if (busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaParedes();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+void ArbolAVL::genListaParedesA(int id_proyecto)
+{
+
+    NodoAVL *temp = this->raiz;
+
+    if (busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->insertarNumParedes();
+        
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+void ArbolAVL::imprimirListaParedesA(int id_proyecto)
+{
+    NodoAVL *temp = this->raiz;
+
+    if (busquedaNodo(temp, id_proyecto))
+    {
+        busquedaNodo(temp, id_proyecto)->getLista()->imprimirListaParedesA();
+    }
+    else
+    {
+        cout << " >> Proyecto no encontrado. " << endl;
+    }
+}
+
+
+

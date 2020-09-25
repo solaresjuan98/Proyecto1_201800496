@@ -10,8 +10,12 @@ public:
     NodoNivel *cabeza;
     //lista que tiene la cantidad de objetos de cada matriz
     ListaProyectos *lista_objetos = new ListaProyectos();
-    //lista que tiene la cantidad de objetos de cada matriz
+    //lista que tiene la cantidad de espacio de cada matriz
     ListaProyectos *lista_espacio = new ListaProyectos();
+    //lista que tiene la cantidad de paredes de cada matriz (Descendente)
+    ListaProyectos *lista_paredes = new ListaProyectos();
+    //lista que tiene la cantidad de paredes de cada matriz (Ascendente)
+    ListaProyectos *lista_paredes_asc = new ListaProyectos();
 
     ListaNiveles()
     {
@@ -571,9 +575,65 @@ public:
         }
     }
 
+    void insertarNumParedes()
+    {
+        int num_nivel;
+        int cant_paredes;
+        if (cabeza == NULL)
+        {
+            
+        }
+        else
+        {
+            NodoNivel *actual = cabeza;
+
+            while (actual != NULL)
+            {
+
+                num_nivel = actual->id;
+                cant_paredes = actual->getMatriz()->obtenerParedes();
+                lista_paredes->agregarDatoDesc(new NodoProyecto(num_nivel, cant_paredes));
+                actual = actual->siguiente;
+            }
+        }
+    }
+
+    void insertarNumParedesAsc()
+    {
+        int num_nivel;
+        int cant_paredes;
+        if (cabeza == NULL)
+        {
+            
+        }
+        else
+        {
+            NodoNivel *actual = cabeza;
+
+            while (actual != NULL)
+            {
+
+                num_nivel = actual->id;
+                cant_paredes = actual->getMatriz()->obtenerParedes();
+                lista_paredes->agregarDato(new NodoProyecto(num_nivel, cant_paredes));
+                actual = actual->siguiente;
+            }
+        }
+    }
+
     void imprimirListaCantEspacios()
     {
         lista_espacio->imprimirLista();
+    }
+
+    void imprimirListaParedes()
+    {
+        lista_paredes->imprimirLista();
+    }
+
+    void imprimirListaParedesA()
+    {
+        lista_paredes->imprimirLista();
     }
 };
 /*

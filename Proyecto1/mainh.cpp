@@ -76,33 +76,28 @@ int eleccion_p = 0;
 
 int main()
 {
-    /*
-    for (int i = 0; i < 51; i++)
-    {
-        avl->insertar(i);
 
-        for (int j = 0; j < 6; j++)
-        {
-            avl->insertarNivel(i, j);
+    /*abbGlobal->insertarNodo(new NodoArbol(4));
+    abbGlobal->insertarNodo(new NodoArbol(2));
+    abbGlobal->insertarNodo(new NodoArbol(1));
+    abbGlobal->insertarNodo(new NodoArbol(3));
+    abbGlobal->insertarNodo(new NodoArbol(5));
+    abbGlobal->insertarNodo(new NodoArbol(6));
+    abbGlobal->insertarNodo(new NodoArbol(7));
 
-            for (int k = 0; k < 20; k++)
-            {
-                for (int l = 0; l < 18; l++)
-                {
-                    avl->insertarEnMatriz(i, j, 1, "l", "gray", k + 1, l + 1);
-                }
-            }
-        }
-    }*/
+    abbGlobal->eliminar(2);
+    abbGlobal->GraficarABB();*/
 
-    /*
-    avl->insertar(convertirASCII("JuanSolares"));
-    avl->insertar(convertirASCII("Proyecto1"));
-    avl->insertar(convertirASCII("Compiladores"));
-    avl->insertar(convertirASCII("Guatemala"));
-    avl->insertar(convertirASCII("VillaNueva"));
-    avl->imprimir(avl->getRaiz(), 0);
-    */
+    
+    /*avl->insertar(1);
+    avl->insertarNivel(1, 1);
+    avl->insertarNivel(1, 2);
+
+    avl->insertar(2);
+    avl->insertarNivel(2, 1);
+    avl->insertarNivel(2, 2);
+
+    avl->insertar(3);*/
 
     /*
     Matrix *prueba = new Matrix();
@@ -128,8 +123,8 @@ int main()
     //cargarArchivo("Archivos/prueba2.json");
     //cout << convertirASCII("febrero") << endl;
 
-    mostrarDatos();
-    mostrarMenu();
+    //mostrarDatos();
+    //mostrarMenu();
 
     cin.get();
     return 0;
@@ -357,13 +352,14 @@ void mostrarMenu()
                 else
                 {
                     cin.get();
-                    cout << " :: Resultado " << endl;
-                    cout << " >> Id. " << abbGlobal->busqueda(nodo, id_objeto_lib)->id << endl;
-                    cout << " >> Nombre: " << abbGlobal->busqueda(nodo, id_objeto_lib)->nombre << endl;
-                    cout << " >> Color: " << abbGlobal->busqueda(nodo, id_objeto_lib)->color << endl;
-                    cout << " >> Letra: " << abbGlobal->busqueda(nodo, id_objeto_lib)->letra << endl;
-                    cout << " >> Pos. en x: " << abbGlobal->busqueda(nodo, id_objeto_lib)->x << endl;
-                    cout << " >> Pos. en y; " << abbGlobal->busqueda(nodo, id_objeto_lib)->y << endl;
+                    cout << " \n\n :: Resultado de la busqueda: \n"
+                         << endl;
+                    cout << "      >> Id. " << abbGlobal->busqueda(nodo, id_objeto_lib)->id << endl;
+                    cout << "      >> Nombre: " << abbGlobal->busqueda(nodo, id_objeto_lib)->nombre << endl;
+                    cout << "      >> Color: " << abbGlobal->busqueda(nodo, id_objeto_lib)->color << endl;
+                    cout << "      >> Letra: " << abbGlobal->busqueda(nodo, id_objeto_lib)->letra << endl;
+                    cout << "      >> Pos. en x: " << abbGlobal->busqueda(nodo, id_objeto_lib)->x << endl;
+                    cout << "      >> Pos. en y; " << abbGlobal->busqueda(nodo, id_objeto_lib)->y << endl;
                 }
             }
             // Regresando al menu
@@ -471,6 +467,36 @@ void mostrarMenuReportes()
             cin.get();
             avl->genListaMasEspacio(opc_reporte);
             avl->imprimirListaMasEspacio(opc_reporte);
+            cin.get();
+            system("clear");
+            mostrarMenuReportes();
+
+        case 7:
+            // Nivel con menos paredes
+            cin.get();
+            avl->inOrden(avl->getRaiz());
+            cout << " >> Selecciona un proyecto: ";
+            cin >> opc_reporte;
+            cin.get();
+            cout << "\t :: NIVEL CON MENOS PAREDES :: \n";
+            avl->genListaParedesA(opc_reporte);
+            avl->imprimirListaParedesA(opc_reporte);
+            cin.get();
+            system("clear");
+            mostrarMenuReportes();
+
+            break;
+
+        case 8:
+            // Nivel con mas paredes
+            cin.get();
+            avl->inOrden(avl->getRaiz());
+            cout << " >> Selecciona un proyecto: ";
+            cin >> opc_reporte;
+            cin.get();
+            cout << "\t :: NIVEL CON MAS PAREDES :: \n";
+            avl->genListaParedes(opc_reporte);
+            avl->imprimirListaParedes(opc_reporte);
             cin.get();
             system("clear");
             mostrarMenuReportes();
@@ -611,7 +637,6 @@ void mostrarMenuNiveles()
             avl->moverenMatriz(proyecto, nivel_matriz, x, y, x_, y_);
             cout << " >> Cambios realizados. " << endl;
             avl->imprimirNivel(proyecto, nivel_matriz);
-            
         }
         // eliminar
         else if (sub_opcion == 3)
@@ -800,10 +825,11 @@ void mostrarMenuNiveles()
         avl->inOrden(avl->getRaiz());
         cout << endl;
         cin.get();
-        cout << "Elige un poryecto (por id): ";
+        cout << "Elige un proyecto (por id): ";
         cin >> proyecto;
 
         avl->eliminar(proyecto);
+        avl->Graficar();
         avl->inOrden(avl->getRaiz());
 
         break;

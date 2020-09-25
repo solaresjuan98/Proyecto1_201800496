@@ -29,6 +29,13 @@ public:
     }
     */
 
+   NodoArbol(int n)
+   {
+       id = n;
+       izq = NULL;
+       der = NULL;
+   }
+
     NodoArbol(int n, string nombre_, string letra_, string color_, int x, int y)
     {
         id = n;
