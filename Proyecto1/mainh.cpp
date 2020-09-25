@@ -63,6 +63,8 @@ int id = 0;
 //funciones para mostrar los datos del archivoJSON
 void cargarArchivo(string ruta);
 void cargarLibrerias(string ruta);
+void cargarNiveles(int id_proyecto, string ruta);
+
 // obtener el equivalente en ascii
 int convertirASCII(string cadena);
 
@@ -88,7 +90,6 @@ int main()
     abbGlobal->eliminar(2);
     abbGlobal->GraficarABB();*/
 
-    
     /*avl->insertar(1);
     avl->insertarNivel(1, 1);
     avl->insertarNivel(1, 2);
@@ -118,13 +119,15 @@ int main()
 
     */
 
-    //cargarArchivo("ejemplo1.json");
+    //cargarNiveles("Archivos/niveles.json");
+    //cargarArchivo("Archivos/prueba2.json");
+    //avl->Graficar();
     //cargarArchivo("Archivos/prueba.json");
     //cargarArchivo("Archivos/prueba2.json");
     //cout << convertirASCII("febrero") << endl;
 
-    //mostrarDatos();
-    //mostrarMenu();
+    mostrarDatos();
+    mostrarMenu();
 
     cin.get();
     return 0;
@@ -535,7 +538,8 @@ void mostrarMenuNiveles()
     cout << " 3. Eliminar Nivel" << endl;
     cout << " 4. Eliminar Proyecto" << endl;
     cout << " 5. Buscar Proyecto" << endl;
-    cout << " 6. Regresar " << endl;
+    cout << " 6. Cargar Niveles (JSON) " << endl;
+    cout << " 7. Regresar " << endl;
     cout << " >> Elige una opción: ";
 
     cin >> opcion_editar;
@@ -846,11 +850,26 @@ void mostrarMenuNiveles()
         }
         else
         {
-            cout << " >> No encontrado " << endl;
+            cout << " >> Proyecto no encontrado " << endl;
         }
         break;
 
     case 6:
+
+        cout << "\t :: CARGAR NIVEL VIA JSON \n";
+        cout << " >> Selecciona el proyecto " << endl;
+        cout << "\n\t .: Listado de proyectos :. " << endl;
+        avl->inOrden(avl->getRaiz());
+        cout << " >> Elige un proyecto: ";
+        cin >> proyecto;
+        cout << " >> Ingresa la ruta del nivel: ";
+        cin.get();
+        getline(cin, ruta);
+        cargarNiveles(proyecto, ruta);
+        cin.get();
+
+        break;
+    case 7:
         system("clear");
         mostrarMenu();
         break;
@@ -897,25 +916,25 @@ void cargarArchivo(string ruta)
             {
                 nombreP = pos["nombre"];
                 id = convertirASCII(nombreP);
-                //avl->insertar(id);
-                cout << " Valor ascii: " << convertirASCII(nombreP) << endl;
                 avl->insertar(id);
-
+                cout << " Valor ascii: " << convertirASCII(nombreP) << endl;
+                //avl->insertar(id);
+                /*
                 if (pos["niveles"] != NULL)
                 {
                     for (const auto niv : pos["niveles"])
                     {
-                        avl->insertar(id);
-                        cout << niv["nivel"] << endl;
-                        n_nivel = niv["nivel"];
-                        avl->insertarNivel(id, n_nivel);
+                        //avl->insertar(id);
+                        //cout << niv["nivel"] << endl;
+                        //n_nivel = niv["nivel"];
+                        //avl->insertarNivel(id, n_nivel);
 
                         //cout << niv["paredes"] << endl;
                         if (niv["paredes"] != NULL)
                         {
                             for (const auto pared : niv["paredes"])
                             {
-                                cout << pared["inicio"] << endl;
+                                //cout << pared["inicio"] << endl;
 
                                 x_inicial = pared["inicio"][0];
                                 y_inicial = pared["inicio"][1];
@@ -928,7 +947,7 @@ void cargarArchivo(string ruta)
                                 {
                                     for (int i = x_inicial; i <= x_final; i++)
                                     {
-                                        avl->insertarEnMatriz(id, n_nivel, i, "p", "#726D66", i + 1, y_inicial + 1);
+                                        //avl->insertarEnMatriz(id, n_nivel, i, "p", "#726D66", i + 1, y_inicial + 1);
                                         //avl->insertarnodoABB(id, n_nivel, i, "pared", "p", color, x, y);
                                     }
                                 }
@@ -937,7 +956,7 @@ void cargarArchivo(string ruta)
                                 {
                                     for (int j = y_inicial; j <= y_final; j++)
                                     {
-                                        avl->insertarEnMatriz(id, n_nivel, j, "p", "#726D66", x_inicial + 1, j + 1);
+                                        //avl->insertarEnMatriz(id, n_nivel, j, "p", "#726D66", x_inicial + 1, j + 1);
                                         //avl->insertarnodoABB(id, n_nivel, j, "pared", "p", color, x, y);
                                     }
                                 }
@@ -948,7 +967,7 @@ void cargarArchivo(string ruta)
                         {
                             for (const auto ventana : niv["ventanas"])
                             {
-                                cout << ventana["inicio"] << endl;
+                                //cout << ventana["inicio"] << endl;
 
                                 x_inicial_v = ventana["inicio"][0];
                                 y_inicial_v = ventana["inicio"][1];
@@ -961,7 +980,7 @@ void cargarArchivo(string ruta)
                                 {
                                     for (int i = x_inicial_v; i <= x_final_v; i++)
                                     {
-                                        avl->insertarEnMatriz(id, n_nivel, i, "v", "#0BDFD6", i + 1, y_inicial_v + 1);
+                                        //avl->insertarEnMatriz(id, n_nivel, i, "v", "#0BDFD6", i + 1, y_inicial_v + 1);
                                     }
                                 }
                                 // CRECE EN Y
@@ -969,7 +988,7 @@ void cargarArchivo(string ruta)
                                 {
                                     for (int j = y_inicial_v; j <= y_final_v; j++)
                                     {
-                                        avl->insertarEnMatriz(id, n_nivel, j, "p", "#0BDFD6", x_inicial_v + 1, j + 1);
+                                        //avl->insertarEnMatriz(id, n_nivel, j, "p", "#0BDFD6", x_inicial_v + 1, j + 1);
                                     }
                                 }
                             }
@@ -979,7 +998,7 @@ void cargarArchivo(string ruta)
                         {
                             for (const auto obj : niv["objetos"])
                             {
-                                cout << obj["identificador"] << endl;
+                                /*cout << obj["identificador"] << endl;
                                 cout << obj["nombre"].get<std::string>() << endl;
                                 cout << obj["letra"].get<std::string>() << endl;
                                 cout << obj["color"].get<std::string>() << endl;
@@ -993,18 +1012,19 @@ void cargarArchivo(string ruta)
                                 {
                                     for (const auto punto : obj["puntos"])
                                     {
-                                        cout << punto["x"] << endl;
+                                        /*cout << punto["x"] << endl;
                                         cout << punto["y"] << endl;
                                         x = punto["x"];
                                         y = punto["y"];
 
-                                        avl->insertarEnMatriz(id, n_nivel, obj["identificador"], obj["letra"].get<std::string>(), obj["color"].get<std::string>(), x + 1, y + 1);
+                                        //avl->insertarEnMatriz(id, n_nivel, obj["identificador"], obj["letra"].get<std::string>(), obj["color"].get<std::string>(), x + 1, y + 1);
                                     }
                                 }
                             }
                         }
                     }
                 }
+                */
             }
         }
     }
@@ -1054,6 +1074,145 @@ void cargarLibrerias(string ruta)
 
     libreria.close();
     //abbGlobal->imprimirArbol(abbGlobal->raiz, 0);
+}
+
+void cargarNiveles(int id_proyecto, string ruta)
+{
+    int id, id_objeto, x, y, nivel;
+
+    // Coordenadas de las paredes
+    int x_inicial, x_final;
+    int y_inicial, y_final;
+
+    // Coordenadas de las ventanas
+    int x_inicial_v, x_final_v;
+    int y_inicial_v, y_final_v;
+
+    string nombre, letra, color;
+    json niveles_Json;
+    //json nivel;
+    //json
+
+    ifstream niveles(ruta);
+
+    if (niveles.fail())
+    {
+        cout << "\n El nivel no existe " << endl;
+    }
+    else
+    {
+        niveles >> niveles_Json;
+
+        if (niveles_Json["niveles"] != NULL)
+        {
+            for (const auto pos : niveles_Json["niveles"])
+            {
+
+                if (pos["nivel"] != NULL)
+                {
+                    nivel = pos["nivel"];
+                    cout << nivel << endl;
+                    avl->insertarNivel(id_proyecto, nivel);
+                }
+
+                if (pos["paredes"] != NULL)
+                {
+                    for (const auto pared : pos["paredes"])
+                    {
+                        x_inicial = pared["inicio"][0];
+                        y_inicial = pared["inicio"][1];
+
+                        x_final = pared["final"][0];
+                        y_final = pared["final"][1];
+
+                        // CRECE EN X
+                        if ((x_final > x_inicial) && (y_inicial = y_final))
+                        {
+                            for (int i = x_inicial; i <= x_final; i++)
+                            {
+                                avl->insertarEnMatriz(id_proyecto, nivel, i, "p", "#726D66", i + 1, y_inicial + 1);
+                                //avl->insertarnodoABB(id, n_nivel, i, "pared", "p", color, x, y);
+                            }
+                        }
+                        // CRECE EN Y
+                        else if ((y_final > y_inicial) && (x_inicial == x_final))
+                        {
+                            for (int j = y_inicial; j <= y_final; j++)
+                            {
+                                avl->insertarEnMatriz(id_proyecto, nivel, j, "p", "#726D66", x_inicial + 1, j + 1);
+                                //avl->insertarnodoABB(id, n_nivel, j, "pared", "p", color, x, y);
+                            }
+                        }
+                    }
+                }
+
+                if (pos["ventanas"] != NULL)
+                {
+                    for (const auto ventana : pos["ventanas"])
+                    {
+                        x_inicial_v = ventana["inicio"][0];
+                        y_inicial_v = ventana["inicio"][1];
+
+                        x_final_v = ventana["final"][0];
+                        y_final_v = ventana["final"][1];
+
+                        // CRECE EN X
+                        if ((x_final_v > x_inicial_v) && (y_inicial_v == y_final_v))
+                        {
+                            for (int i = x_inicial_v; i <= x_final_v; i++)
+                            {
+                                avl->insertarEnMatriz(id_proyecto, nivel, i, "v", "#0BDFD6", i + 1, y_inicial_v + 1);
+                            }
+                        }
+                        // CRECE EN Y
+                        else if ((y_final_v > y_inicial_v) && (x_inicial_v == x_final_v))
+                        {
+                            for (int j = y_inicial_v; j <= y_final_v; j++)
+                            {
+                                avl->insertarEnMatriz(id_proyecto, nivel, j, "p", "#0BDFD6", x_inicial_v + 1, j + 1);
+                            }
+                        }
+                    }
+                }
+
+                if (pos["objetos"] != NULL)
+                {
+                    for (const auto obj : pos["objetos"])
+                    {
+                        cout << obj["identificador"] << endl;
+                        cout << obj["nombre"].get<std::string>() << endl;
+                        cout << obj["letra"].get<std::string>() << endl;
+                        cout << obj["color"].get<std::string>() << endl;
+
+                        id_objeto = obj["identificador"];
+                        nombre = obj["nombre"];
+                        letra = obj["letra"];
+                        color = obj["color"];
+
+                        if (obj["puntos"] != NULL)
+                        {
+                            for (const auto punto : obj["puntos"])
+                            {
+                                cout << punto["x"] << endl;
+                                cout << punto["y"] << endl;
+                                x = punto["x"];
+                                y = punto["y"];
+
+                                avl->insertarEnMatriz(id_proyecto, nivel, obj["identificador"], obj["letra"].get<std::string>(), obj["color"].get<std::string>(), x + 1, y + 1);
+                            }
+                        }
+                    }
+                }
+            
+            }
+        }
+        else
+        {
+            cout << " >> No hay nada que leer. "<< endl;
+        }
+    }
+
+    niveles.close();
 }
 
 int convertirASCII(string s)
