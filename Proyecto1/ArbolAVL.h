@@ -4,6 +4,7 @@
 #include "NodoAVL.h"
 #include "ListaProyectos.h"
 #include "NodoProyecto.h"
+#include "Matrix.h"
 #pragma once
 using namespace std;
 
@@ -48,7 +49,6 @@ public:
 
     //Eliminación de nodoAVL
     bool eliminar(int idProyecto);
-    
 
     // Listas en nodo AVL
     void crearListaNiveles(int id);
@@ -459,7 +459,6 @@ bool ArbolAVL::busqueda(NodoAVL *nodo, int id)
 bool ArbolAVL::eliminar(int idProyecto)
 {
 
-
     NodoAVL *aux = this->raiz;
     NodoAVL *padre = this->raiz;
 
@@ -557,7 +556,6 @@ bool ArbolAVL::eliminar(int idProyecto)
     }
 
     return true;
-    
 }
 
 NodoAVL *ArbolAVL::getReemplazo(NodoAVL *nodoReemplazo)
@@ -752,20 +750,19 @@ void ArbolAVL::crearPisos(int id, int numeroNiveles)
 void ArbolAVL::copiarNivel(int id, int nivelCopia, int nivelDestino)
 {
     NodoAVL *nodo = this->raiz;
+    //Matrix *mat_original;
+    Matrix *mat_copia;
+    NodoNivel *temp;
 
-    NodoNivel *temp = NULL;
-    NodoNivel *destino = NULL;
+    NodoNivel *destino;
 
     if (busquedaNodo(nodo, id))
     {
-        // Llamar los metodos ValidarSiNodoExiste que retornan algo
+        // Llamar los metodos ValidarSiNodoExiste que retornan nodo
         temp = busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelCopia);
-        destino = busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelDestino);
-        cout << "Copiando nivel " << busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelCopia)->id << endl;
-        cout << "a nivel: " << busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelDestino)->id << endl;
-
         destino = temp;
-        // usar metodo en la clase lista para hacer el algoritmo
+        destino = busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelDestino);
+        destino->setMatriz(busquedaNodo(nodo, id)->getLista()->validarSiNodoExiste(nivelCopia)->getMatriz());
     }
     else
     {
@@ -962,9 +959,6 @@ void ArbolAVL::rotarObjeto(int id, int nivel, int x, int y, int grados)
 
 // REPORTES
 
-/*
-    (id_p)
-*/
 void ArbolAVL::genListaNivelesPorObjeto(int id_proyecto)
 {
 
@@ -1031,7 +1025,6 @@ void ArbolAVL::genListaParedes(int id_proyecto)
     if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->insertarNumParedes();
-        
     }
     else
     {
@@ -1061,7 +1054,6 @@ void ArbolAVL::genListaParedesA(int id_proyecto)
     if (busquedaNodo(temp, id_proyecto))
     {
         busquedaNodo(temp, id_proyecto)->getLista()->insertarNumParedes();
-        
     }
     else
     {
@@ -1082,6 +1074,3 @@ void ArbolAVL::imprimirListaParedesA(int id_proyecto)
         cout << " >> Proyecto no encontrado. " << endl;
     }
 }
-
-
-

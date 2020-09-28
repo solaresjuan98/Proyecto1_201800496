@@ -365,17 +365,17 @@ public:
 
     void graficarRecursivo(NodoArbol *r)
     {
-        //stringstream cad;
+
         if (r != NULL)
         {
 
             if (r->izq == NULL && r->der == NULL)
             {
-                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"" + r->nombre + "\" color=\"" + r->color + "\" style=filled];\n";
+                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"{" + r->nombre + "|" + to_string(r->id) + "|" + r->color + "|(" + to_string(r->x) + ", " + to_string(r->y) + ")}  \" color=\"" + r->color + "\" style=filled];\n";
             }
             else
             {
-                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"<A0>|" + r->nombre + "|<A1>\" color=\"" + r->color + "\" style=filled];\n";
+                this->contenido_grafico += "nodo" + to_string(r->id) + "[label=\"<A0>|{" + r->nombre + "|" + to_string(r->id) + "|" + r->color + "|(" + to_string(r->x) + ", " + to_string(r->y) + ")}|<A1>\" color=\"" + r->color + "\" style=filled];\n";
             }
 
             if (r->izq != NULL)

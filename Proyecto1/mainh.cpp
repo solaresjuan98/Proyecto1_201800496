@@ -258,6 +258,16 @@ void mostrarMenu()
             mostrarMenu();
             break;
         case 5:
+            cout << "\t :: GUARDAR PROYECTO :: \n";
+            cout << "\n Proyectos existentes:" << endl;
+            avl->inOrden(avl->getRaiz());
+            cout << "\n\n";
+            cin.get();
+            cout << " >> Selecciona un proyecto para guardar sus niveles: ";
+            cin >> eleccion_p;
+
+            //avl->imprimirMatricesEnMasa(eleccion_p);
+            mostrarMenu();
 
             break;
         case 6:
@@ -524,6 +534,7 @@ void mostrarMenuNiveles()
     int nivel_eliminar;
     int nivel_matriz;
     int sub_opcion;
+    int nivel_original, nivel_copia;
 
     // Objeto a agregar
     int id, x, y, x_, y_;
@@ -539,7 +550,8 @@ void mostrarMenuNiveles()
     cout << " 4. Eliminar Proyecto" << endl;
     cout << " 5. Buscar Proyecto" << endl;
     cout << " 6. Cargar Niveles (JSON) " << endl;
-    cout << " 7. Regresar " << endl;
+    cout << " 7. Copiar Niveles " << endl;
+    cout << " 8. Regresar " << endl;
     cout << " >> Elige una opción: ";
 
     cin >> opcion_editar;
@@ -869,7 +881,24 @@ void mostrarMenuNiveles()
         cin.get();
 
         break;
+
     case 7:
+        cout << "\t :: COPIAR NIVEL ::" << endl;
+        cout << " >> Selecciona el proyecto " << endl;
+        cout << "\n\t .: Listado de proyectos :. " << endl;
+        avl->inOrden(avl->getRaiz());
+        cout << " >> Elige un proyecto: ";
+        cin >> proyecto;
+        getListaNivelesNodo(proyecto);
+        cout << " >> Elige el nivel que deseas copiar: ";
+        cin >> nivel_original;
+        cout << " >> Elige a que nivel que deseas copiar: ";
+        getListaNivelesNodo(proyecto);
+        cout << " >> Elige el nivel a donde quieres copiar el nodo: ";
+        cin >> nivel_copia;
+        avl->copiarNivel(proyecto, nivel_original, nivel_copia);
+
+    case 8:
         system("clear");
         mostrarMenu();
         break;
@@ -1203,12 +1232,11 @@ void cargarNiveles(int id_proyecto, string ruta)
                         }
                     }
                 }
-            
             }
         }
         else
         {
-            cout << " >> No hay nada que leer. "<< endl;
+            cout << " >> No hay nada que leer. " << endl;
         }
     }
 
